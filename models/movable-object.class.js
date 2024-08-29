@@ -36,13 +36,15 @@ class MovableObject extends DrawableObject {
       this.energiy = 0;
     } else {
       this.lastHit = new Date().getTime();
+      console.log(this.energiy);
+      
     }
   }
 
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit; // Difference in ms
     timepassed = timepassed / 1000; // Difference in seconds
-    return timepassed < 0.5;
+    return timepassed < 1;
   }
 
   isDead() {
