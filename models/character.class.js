@@ -48,7 +48,7 @@ class Character extends MovableObject {
       }
       this.world.camera_x = -this.x + 100; // Horizontal camera wor
       
-      if (this.world.keyboard.UP || this.world.keyboard.SPACE && !this.isAboveGround()) {
+      if (this.world.keyboard.UP && !this.isAboveGround()) {
         this.jump();
       }
     }, 1000 / 25);
