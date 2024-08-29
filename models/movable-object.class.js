@@ -42,12 +42,14 @@ class MovableObject {
     });
   }
 
-  moveRight() {}
+  moveRight() {
+    this.x += this.speed;
+    this.otherDirection = false;
+  }
 
   moveLeft() {
-    setInterval(() => {
       this.x -= this.speed;
-    }, 1000 / 120);
+      this.otherDirection = false;
   }
 
   playAnimation(images) {
@@ -55,5 +57,9 @@ class MovableObject {
     let path = images[i];
     this.img = this.imageCache[path];
     this.currentImage++;
+  }
+
+  jump() {
+    this.speedY = 30;
   }
 }
