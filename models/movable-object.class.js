@@ -44,6 +44,17 @@ class MovableObject {
     }
   }
 
+
+  // character.isColliding(chicken)
+  isColliding(om) {
+    return (
+      this.x + this.width > om.x &&
+      this.y + this.height > om.y &&
+      this.x < om.x + om.width &&
+      this.y < om.y + om.height
+    );
+  }
+
   /**
    *
    * @param {Array} arr - IMG/Image1.png ...
