@@ -10,6 +10,8 @@ class MovableObject {
   otherDirection = false;
   speedY = 0;
   acceleration = 2;
+  energiy = 100;
+  lastHit = 0;
 
   applyGravity() {
     // Schwergraft
@@ -44,7 +46,6 @@ class MovableObject {
     }
   }
 
-
   // character.isColliding(chicken)
   isColliding(om) {
     return (
@@ -53,6 +54,25 @@ class MovableObject {
       this.x < om.x + om.width &&
       this.y < om.y + om.height
     );
+  }
+
+  hit() {
+    this.energiy -= 20;
+    if (this.energiy < 0) {
+      this.energiy = 0;
+    } else {
+      // this.lastHit = new Date().getTime();
+    }
+  }
+
+  isHurt() {
+    let timepassed = new Date().getTime() - this.lastHit; // Difference in ms
+    timepassed = timepassed / 1000; // Difference in seconds
+    return timepassed < 0,5;
+  }
+
+  isDead() {
+    return this.energiy == 0;
   }
 
   /**
@@ -78,7 +98,7 @@ class MovableObject {
   }
 
   playAnimation(images) {
-    let i = this.currentImage % this.IMAGES_WALKING.length;
+    let i = this.currentImage % images.length;
     let path = images[i];
     this.img = this.imageCache[path];
     this.currentImage++;
