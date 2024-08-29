@@ -49,7 +49,11 @@ class Character extends MovableObject {
         this.otherDirection = true;
         this.walking_sound.play();
       }
-      this.world.camera_x = -this.x + 100; // Horizontal camera work
+      this.world.camera_x = -this.x + 100; // Horizontal camera wor
+      
+      if (this.world.keyboard.UP){
+        this.speedY = 20;
+      }
     }, 1000 / 25);
 
     setInterval(() => {
