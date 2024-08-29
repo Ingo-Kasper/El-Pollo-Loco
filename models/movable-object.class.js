@@ -61,14 +61,14 @@ class MovableObject {
     if (this.energiy < 0) {
       this.energiy = 0;
     } else {
-      // this.lastHit = new Date().getTime();
+      this.lastHit = new Date().getTime();
     }
   }
 
   isHurt() {
     let timepassed = new Date().getTime() - this.lastHit; // Difference in ms
     timepassed = timepassed / 1000; // Difference in seconds
-    return timepassed < 0,5;
+    return timepassed < 0.5;
   }
 
   isDead() {
