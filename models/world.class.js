@@ -6,6 +6,7 @@ class World {
   keyboard;
   camera_x = 0;
   statusBar = new StatusBar();
+  throwableObjects = [];
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -14,6 +15,7 @@ class World {
     this.draw();
     this.setWorld();
     this.checkCollisions();
+    this.run()
   }
 
   setWorld() {
@@ -21,15 +23,27 @@ class World {
   }
 
   // Abfrage der Collison mit den Feind
-  checkCollisions() {
+  run() {
     setInterval(() => {
-      this.level.enemies.forEach((enemy) => {
-        if (this.character.isColliding(enemy)) {
-          this.character.hit();
-          this.statusBar.setHealthBar(this.character.energiy);
-        }
-      });
-    }, 1000);
+      this.checkCollisions();
+      this.checkThrowableObjects();
+    }, 200);
+  }
+
+  checkCollisions() {
+    this.level.enemies.forEach((enemy) => {
+      if (this.character.isColliding(enemy)) {
+        this.character.hit();
+        this.statusBar.setHealthBar(this.character.energiy);
+      }
+    });
+  }
+
+  checkThrowableObjects() {
+    if (this.keyboard.R) {
+      let bottle = new ThrowbaleObject(this.character.x + 100, this.character.y + 100);
+      this.throwableObjects.push(bottle);
+    }
   }
 
   draw() {
@@ -38,6 +52,7 @@ class World {
     this.addObjectsToMap(this.level.backgroundObjects);
     this.addObjectsToMap(this.level.clouds);
     this.addObjectsToMap(this.level.enemies); // big Chicken
+    this.addObjectsToMap(this.throwableObjects);
 
     this.ctx.translate(-this.camera_x, 0); // Back
     this.addToMap(this.statusBar);
