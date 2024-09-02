@@ -25,11 +25,21 @@ class Character extends MovableObject {
     "img/2_character_pepe/2_walk/W-25.png",
     "img/2_character_pepe/2_walk/W-26.png",
   ];
-  IMAGES_JUMPING = [
+  IMAGES_JUMPING_UP = [
     "img/2_character_pepe/3_jump/J-31.png",
     "img/2_character_pepe/3_jump/J-32.png",
     "img/2_character_pepe/3_jump/J-34.png",
     "img/2_character_pepe/3_jump/J-34.png",
+    "img/2_character_pepe/3_jump/J-34.png",
+    "img/2_character_pepe/3_jump/J-34.png",
+    "img/2_character_pepe/3_jump/J-34.png",
+    "img/2_character_pepe/3_jump/J-34.png",
+    "img/2_character_pepe/3_jump/J-34.png",
+    "img/2_character_pepe/3_jump/J-34.png",
+    "img/2_character_pepe/3_jump/J-34.png",
+    "img/2_character_pepe/3_jump/J-34.png",
+  ];
+  IMAGES_JUMPING_DOWN = [
     "img/2_character_pepe/3_jump/J-35.png",
     "img/2_character_pepe/3_jump/J-36.png",
     "img/2_character_pepe/3_jump/J-37.png",
@@ -69,7 +79,10 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_DEAD);
     this.loadImages(this.IMAGE_HURT);
     this.loadImages(this.IMAGES_WALKING);
-    this.loadImages(this.IMAGES_JUMPING);
+    this.loadImages(this.IMAGES_JUMPING_UP);
+    this.loadImages(this.IMAGES_JUMPING_DOWN);
+    this.loadImages(this.IMAGES_WAIT);
+    this.loadImages(this.IMAGES_LONG_WAIT);
     this.animate();
     this.applyGravity();
   }
@@ -92,25 +105,29 @@ class Character extends MovableObject {
       if (this.world.keyboard.UP && !this.isAboveGround()) {
         this.jump();
       }
-    }, 1000 / 25);
+    }, 1000 / 40);
 
     setInterval(() => {
       // Die Animation werden geändert
       this.whichAnimaton();
-    }, 110);
+    }, 100);
   }
 
   whichAnimaton() {
     if (this.isDead()) {
       this.playAnimation(this.IMAGES_DEAD); // Dead animation
     } else if (this.isHurt()) {
-      this.playAnimation(this.IMAGE_HURT); // Hurt animation
+      this.playAnimation(this.IMAGE_HURT); // Hurt animation muss noch beim schaden ein ruckwurf geben
     } else if (this.isAboveGround()) {
-      this.playAnimation(this.IMAGES_JUMPING); // Jumpung animation
+      if (this.speedY > 0) {
+        this.playAnimation(this.IMAGES_JUMPING_UP);
+      } else {
+        this.playAnimation(this.IMAGES_JUMPING_DOWN);
+      }
     } else if (this.whichDirctionDoes()) {
       this.playAnimation(this.IMAGES_WALKING); // Walking animation
-    } else if (this.whichDirctionDoes()) {
-      this.playAnimation(this.IMAGES_WAIT); // Walking animation
+    } else {
+      this.playAnimation(this.IMAGES_WAIT); // Waiting animation
     }
   }
 

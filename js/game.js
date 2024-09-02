@@ -7,9 +7,7 @@ function init() {
   world = new World(canvas, keyboard);
 }
 
-window.addEventListener('keydown', (e) => {
-  console.log(e.keyCode);
-  
+window.addEventListener('keydown', (e) => {  
   if (e.keyCode == 39 || e.keyCode == 68) {
     keyboard.RIGHT = true;
   }
