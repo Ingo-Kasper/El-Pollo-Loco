@@ -55,6 +55,10 @@ class MovableObject extends DrawableObject {
     return this.energiy == 0;
   }
 
+  whichDirctionDoes()  {
+    return this.world.keyboard.RIGHT || this.world.keyboard.LEFT
+  }
+
   moveRight() {
     this.x += this.speed;
     this.otherDirection = false;
