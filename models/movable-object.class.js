@@ -53,6 +53,9 @@ constructor() {
       this.lastHit = new Date().getTime();
       console.log(this.energy);
     }
+    if (this.healBar) {
+      this.healBar.setHealthBar(this.energy);
+    }
   }
 
   isHurt() {
