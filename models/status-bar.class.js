@@ -34,52 +34,56 @@ class StatusBar extends DrawableObject {
     super();
     this.loadImages(this.IMAGES_COIN);
     this.loadImages(this.IMAGES_HEALTH);
-    this.setHealthBar(100);
     this.loadImages(this.IMAGES_BOTTLE);
-    this.x = 20;
-    this.y = 20;
+    this.setHealthBar(100);
+    this.setCoinBar(0);
+    this.setBottleBar(0);
     this.height = 50;
-    this.width = 100;
+    this.width = 200;
+    this.x = 20;
   }
 
-  setCoinBar(coinBar) {
-    this.coinBar = coinBar;
-    let path = this.IMAGES_COIN[this.resolveCoinImageIndex()];
+  setHealthBar(health) {
+    this.y = 10;
+    this.healthBar = health;
+    let path = this.IMAGES_HEALTH[this.resolveBarIndex(this.healthBar)];
     this.img = this.imageCache[path];
+    
   }
 
-  resolveCoinImageIndex() {
-    if (this.coinBar == 100) {
-      return 1;
-    } else if (this.coinBar > 80) {
-      return 1;
-    } else if (this.coinBar > 60) {
-      return 2;
-    } else if (this.coinBar > 40) {
-      return 3;
-    } else if (this.coinBar > 20) {
-      return 4;
-    } else {
+  resulveHealthBar() {
+    if (this.healthBar == 100) {
       return 5;
+    }else if (this.healthBar == 80) {
+      return 4;
+    } else if (this.healthBar == 60) {
+      return 3;
+    } else if (this.healthBar == 40) {
+      return 2;
+    } else if (this.healthBar == 20) {
+      this.healthBar = 1;
+    } else {
+      return 0;
     }
   }
 
-  setHealthBar(healthBar) {
-    this.healthBar = healthBar;
-    let path = this.IMAGES_HEALTH[this.resolveHealthImageIndex()];
+  setCoinBar(coin) {
+    this.coinBar = coin;
+    this.y = 60;
+    let path = this.IMAGES_COIN[this.resolveBarIndex(this.coinBar)];
     this.img = this.imageCache[path];
   }
 
-  resolveHealthImageIndex() {
-    if (this.healthBar == 100) {
+  resulvCionBar() {
+    if (this.coinBar == 100) {
       return 5;
-    } else if (this.healthBar > 80) {
-      return 4;
-    } else if (this.healthBar > 60) {
+    }else if (this.coinBar == 80) {
+      this.coinBar = 4;
+    } else if (this.coinBar == 60) {
       return 3;
-    } else if (this.healthBar > 40) {
+    } else if (this.coinBar == 40) {
       return 2;
-    } else if (this.healthBar > 20) {
+    } else if (this.coinBar == 20) {
       return 1;
     } else {
       return 0;
@@ -87,24 +91,26 @@ class StatusBar extends DrawableObject {
   }
 
   setBottleBar(bottleBar) {
+    this.y = 110;
     this.bottleBar = bottleBar;
-    let path = this.IMAGES_BOTTLE[this.resolveBottleImageIndex()];
+    let path = this.IMAGES_BOTTLE[this.resolveBarIndex(this.bottleBar)];
     this.img = this.imageCache[path];
   }
 
-  resolveBottleImageIndex() {
-    if (this.bottleBar == 100) {
-      return 1;
-    } else if (this.bottleBar > 80) {
-      return 1;
-    } else if (this.bottleBar > 60) {
-      return 2;
-    } else if (this.bottleBar > 40) {
-      return 3;
-    } else if (this.bottleBar > 20) {
-      return 4;
-    } else {
+  resolveBarIndex(statusBar) {
+    if (this.statusBar == 100) {
       return 5;
+    }else if (this.statusBar == 80) {
+      return 4;
+    } else if (this.statusBar == 60) {
+      return 3;
+    } else if (this.statusBar == 40) {
+      return 2;
+    } else if (this.bottleBar == 20) {
+      return 1;
+    } else {
+      return 0;
     }
   }
+  
 }
