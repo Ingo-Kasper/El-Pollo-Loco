@@ -3,12 +3,14 @@ class Character extends MovableObject {
   width = 100;
   height = 200;
   speed = 10;
+
   offset = {
     top: 120,
-    bottom: 50,
+    bottom: 30,
     left: 30,
-    right: 30,
-  }
+    right: 40,
+  };
+
   IMAGES_DEAD = [
     "img/2_character_pepe/5_dead/D-51.png",
     "img/2_character_pepe/5_dead/D-52.png",
@@ -146,7 +148,7 @@ class Character extends MovableObject {
       }
     } else if (this.y === 230) {
       this.playAnimation(this.IMAGES_LANDING); // Landing animation
-    } else if (this.whichDirctionDoes()) {
+    } else if (this.isMovingHorizontal()) {
       this.playAnimation(this.IMAGES_WALKING); // Walking animation
     } else {
       this.playAnimation(this.IMAGES_WAIT); // Waiting animation

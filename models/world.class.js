@@ -34,13 +34,13 @@ class World {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy)) {
         this.character.hit();
-        this.statusBar.setHealthBar(this.character.energiy);
+        this.statusBar.setHealthBar(this.character.energy);
       }
     });
   }
 
   checkThrowableObjects() {
-    if (this.keyboard.R) {
+    if (this.keyboard.SPACE) {
       let bottle = new ThrowbaleObject(this.character.x + 100, this.character.y + 100);
       this.throwableObjects.push(bottle);
     }
@@ -76,7 +76,10 @@ class World {
     if (mo.otherDirection) {
       this.flipImage(mo);
     }
-
+    
+    mo.draw(this.ctx);
+    mo.drawFrame(this.ctx);
+  
     this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
     if (mo.otherDirection) {
       this.flipImageBack(mo);

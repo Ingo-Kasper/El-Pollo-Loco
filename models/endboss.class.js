@@ -3,6 +3,13 @@ class Endboss extends MovableObject {
   width = 350;
   y = 100;
 
+  offset = {
+    top: 80,
+    left: 70,
+    right: 50,
+    bottom: 80,
+  };
+
   IMAGES_WALK = [
     "img/4_enemie_boss_chicken/1_walk/G1.png",
     "img/4_enemie_boss_chicken/1_walk/G2.png",
@@ -62,7 +69,8 @@ class Endboss extends MovableObject {
   ];
 
   constructor() {
-    super().loadImage(this.IMAGES_WAIT[0]);
+    super();
+    this.loadImage(this.IMAGES_WAIT[0]);
     this.loadImages(this.IMAGES_WAIT);
 
     this.x = 200; // die Startposition des Endbosses

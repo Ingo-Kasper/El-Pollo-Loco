@@ -3,6 +3,13 @@ class SalsaBottle extends MovableObject {
   width = 70;
   height = 70;
 
+  offset = {
+    top: 10,
+    left: 20,
+    right: 10,
+    bottom: 0,
+  };
+
   IMAGES_TURN = [
     "img/6_salsa_bottle/1_salsa_bottle_on_ground.png",
     "img/6_salsa_bottle/2_salsa_bottle_on_ground.png",

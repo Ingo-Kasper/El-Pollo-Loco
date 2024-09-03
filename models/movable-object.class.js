@@ -3,8 +3,19 @@ class MovableObject extends DrawableObject {
   otherDirection = false;
   speedY = 0;
   acceleration = 2;
-  energiy = 100;
+  energy = 100;
   lastHit = 0;
+
+  offset = {
+    top: 0,
+    right: 0,
+    left: 0,
+    bottom: 0,
+};
+
+constructor() {
+  super();
+}
 
   applyGravity() {
     // Schwergraft
@@ -25,38 +36,35 @@ class MovableObject extends DrawableObject {
   }
 
   // character.isColliding(chicken)
-  isColliding(om) {
+  isColliding(mo) {
     return (
-      this.x + this.width > om.x &&
-      this.y + this.height > om.y &&
-      this.x < om.x + om.width &&
-      this.y < om.y + om.height
+      this.x + this.offset.left + this.width - this.offset.right > mo.x + mo.offset.left &&
+      this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
+      this.y + this.offset.top + this.height - this.offset.bottom > mo.y + mo.offset.top &&
+      this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom
     );
   }
 
-  
-
   hit() {
-    this.energiy -= 20;
-    if (this.energiy < 0) {
-      this.energiy = 0;
+    this.energy -= 20;
+    if (this.energy < 0) {
+      this.energy = 0;
     } else {
       this.lastHit = new Date().getTime();
-      console.log(this.energiy);
+      console.log(this.energy);
     }
   }
 
   isHurt() {
-    let timepassed = new Date().getTime() - this.lastHit; // Difference in ms
-    timepassed = timepassed / 1000; // Difference in seconds
+    let timepassed = new Date().getTime() - this.lastHit / 1000; // Difference in seconds
     return timepassed < 1;
   }
 
   isDead() {
-    return this.energiy == 0;
+    return this.energy == 0;
   }
 
-  whichDirctionDoes() {
+  isMovingHorizontal() {
     return this.world.keyboard.RIGHT || this.world.keyboard.LEFT;
   }
 
