@@ -27,6 +27,8 @@ class Character extends MovableObject {
   ];
   IMAGES_JUMPING_UP = [
     "img/2_character_pepe/3_jump/J-31.png",
+    "img/2_character_pepe/3_jump/J-31.png",
+    "img/2_character_pepe/3_jump/J-32.png",
     "img/2_character_pepe/3_jump/J-32.png",
     "img/2_character_pepe/3_jump/J-34.png",
     "img/2_character_pepe/3_jump/J-34.png",
@@ -41,9 +43,20 @@ class Character extends MovableObject {
   ];
   IMAGES_JUMPING_DOWN = [
     "img/2_character_pepe/3_jump/J-35.png",
+    "img/2_character_pepe/3_jump/J-35.png",
+    "img/2_character_pepe/3_jump/J-36.png",
     "img/2_character_pepe/3_jump/J-36.png",
     "img/2_character_pepe/3_jump/J-37.png",
+    "img/2_character_pepe/3_jump/J-37.png",
+    "img/2_character_pepe/3_jump/J-37.png",
+    "img/2_character_pepe/3_jump/J-37.png",
+    "img/2_character_pepe/3_jump/J-37.png",
+    "img/2_character_pepe/3_jump/J-37.png",
+  ];
+  IMAGES_LANDING = [
     "img/2_character_pepe/3_jump/J-38.png",
+    "img/2_character_pepe/3_jump/J-38.png",
+    "img/2_character_pepe/3_jump/J-39.png",
     "img/2_character_pepe/3_jump/J-39.png",
   ];
   IMAGES_WAIT = [
@@ -81,6 +94,7 @@ class Character extends MovableObject {
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_JUMPING_UP);
     this.loadImages(this.IMAGES_JUMPING_DOWN);
+    this.loadImages(this.IMAGES_LANDING);
     this.loadImages(this.IMAGES_WAIT);
     this.loadImages(this.IMAGES_LONG_WAIT);
     this.animate();
@@ -110,7 +124,7 @@ class Character extends MovableObject {
     setInterval(() => {
       // Die Animation werden geändert
       this.whichAnimaton();
-    }, 100);
+    }, 80);
   }
 
   whichAnimaton() {
@@ -124,6 +138,8 @@ class Character extends MovableObject {
       } else {
         this.playAnimation(this.IMAGES_JUMPING_DOWN);
       }
+    } else if (this.y === 230) {
+      this.playAnimation(this.IMAGES_LANDING); // Landing animation
     } else if (this.whichDirctionDoes()) {
       this.playAnimation(this.IMAGES_WALKING); // Walking animation
     } else {

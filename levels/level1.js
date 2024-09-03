@@ -1,5 +1,8 @@
 const level1 = new Level(
-  [],
+  [ new Chicken(),
+    new Coin(),
+    new SalsaBottle(),
+  ],
 
   [ new Cloud()],
   
