@@ -3,10 +3,7 @@ class Coin extends MovableObject {
   width = 90;
   height = 90;
 
-  IMAGES_TURN = [
-    "img/8_coin/coin_1.png", 
-    "img/8_coin/coin_2.png"
-  ];
+  IMAGES_TURN = ["img/8_coin/coin_1.png", "img/8_coin/coin_2.png"];
 
   constructor() {
     super().loadImage("img/8_coin/coin_1.png");
@@ -16,8 +13,7 @@ class Coin extends MovableObject {
   }
 
   animate() {
-    setInterval(() => {
-    }, 1000 / 60);
+    setInterval(() => {}, 1000 / 60);
 
     setInterval(() => {
       this.playAnimation(this.IMAGES_TURN);

@@ -19,10 +19,9 @@ class MovableObject extends DrawableObject {
   isAboveGround() {
     if (this instanceof ThrowbaleObject) {
       return true;
-      
     } else {
-    return this.y < 230; 
-    } 
+      return this.y < 230;
+    }
   }
 
   // character.isColliding(chicken)
@@ -35,6 +34,8 @@ class MovableObject extends DrawableObject {
     );
   }
 
+  
+
   hit() {
     this.energiy -= 20;
     if (this.energiy < 0) {
@@ -42,7 +43,6 @@ class MovableObject extends DrawableObject {
     } else {
       this.lastHit = new Date().getTime();
       console.log(this.energiy);
-      
     }
   }
 
@@ -56,8 +56,8 @@ class MovableObject extends DrawableObject {
     return this.energiy == 0;
   }
 
-  whichDirctionDoes()  {
-    return this.world.keyboard.RIGHT || this.world.keyboard.LEFT
+  whichDirctionDoes() {
+    return this.world.keyboard.RIGHT || this.world.keyboard.LEFT;
   }
 
   moveRight() {

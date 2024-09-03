@@ -3,6 +3,12 @@ class Character extends MovableObject {
   width = 100;
   height = 200;
   speed = 10;
+  offset = {
+    top: 120,
+    bottom: 50,
+    left: 30,
+    right: 30,
+  }
   IMAGES_DEAD = [
     "img/2_character_pepe/5_dead/D-51.png",
     "img/2_character_pepe/5_dead/D-52.png",

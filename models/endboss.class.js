@@ -8,7 +8,7 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/1_walk/G2.png",
     "img/4_enemie_boss_chicken/1_walk/G3.png",
     "img/4_enemie_boss_chicken/1_walk/G4.png",
-  ]
+  ];
   IMAGES_WAIT = [
     "img/4_enemie_boss_chicken/2_alert/G5.png",
     "img/4_enemie_boss_chicken/2_alert/G6.png",
@@ -59,7 +59,7 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/5_dead/G24.png",
     "img/4_enemie_boss_chicken/5_dead/G25.png",
     "img/4_enemie_boss_chicken/5_dead/G26.png",
-  ]
+  ];
 
   constructor() {
     super().loadImage(this.IMAGES_WAIT[0]);
