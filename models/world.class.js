@@ -41,7 +41,9 @@ class World {
     });
   }
 
-  checkThrowableObjects() {
+
+
+  checkThrowableObjects() { // Abfrage der Collison des Flaschenwurfs
     if (this.keyboard.SPACE) {
       let bottle = new ThrowbaleObject(this.character.x + 100, this.character.y + 100);
       this.throwableObjects.push(bottle);
@@ -86,7 +88,7 @@ class World {
     mo.draw(this.ctx);
   
     this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
-    mo.drawFrame(this.ctx);
+    mo.drawFrame(this.ctx); // für deppug, Hitbox anzeigen
     if (mo.otherDirection) {
       this.flipImageBack(mo);
     }

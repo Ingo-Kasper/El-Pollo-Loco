@@ -5,10 +5,10 @@ class Character extends MovableObject {
   speed = 10;
 
   offset = {
-    top: 120,
+    top: 100,
+    left: 25,
+    right: 35,
     bottom: 30,
-    left: 30,
-    right: 40,
   };
 
   IMAGES_DEAD = [
