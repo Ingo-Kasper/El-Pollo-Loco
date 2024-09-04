@@ -13,7 +13,7 @@ class HealBar extends DrawableObject {
   constructor() {
     super();
     this.loadImages(this.IMAGES_HEALTH);
-    this.setHealthBar(100);
+    this.setHealthBar(this.energy);
     this.height = 50;
     this.width = 200;
     this.x = 40;
@@ -27,18 +27,22 @@ class HealBar extends DrawableObject {
   }
 
   resolveBarIndex() {
-    if (this.statusBar == 100) {
+    if (this.isHealBar() == 100) {
       return 5;
-    } else if (this.statusBar == 80) {
+    } else if (this.isHealBar() == 80) {
       return 4;
-    } else if (this.statusBar == 60) {
+    } else if (this.isHealBar() == 60) {
       return 3;
-    } else if (this.statusBar == 40) {
+    } else if (this.isHealBar() == 40) {
       return 2;
-    } else if (this.bottleBar == 20) {
+    } else if (this.isHealBar() == 20) {
       return 1;
     } else {
       return 0;
     }
+  }
+  
+  isHealBar() {
+    return this.healthBar
   }
 }

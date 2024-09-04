@@ -6,7 +6,8 @@ class DrawableObject {
   y = 340;
   height = 100;
   width = 100;
-
+  energy = 100;
+  
   loadImage(path) {
     this.img = new Image();
     this.img.src = path;
@@ -42,4 +43,5 @@ class DrawableObject {
       this.imageCache[path] = img;
     });
   }
+
 }

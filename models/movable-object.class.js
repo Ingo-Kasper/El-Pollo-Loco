@@ -3,7 +3,6 @@ class MovableObject extends DrawableObject {
   otherDirection = false;
   speedY = 0;
   acceleration = 2;
-  energy = 100;
   lastHit = 0;
 
   offset = {
@@ -52,9 +51,6 @@ constructor() {
     } else {
       this.lastHit = new Date().getTime();
       console.log(this.energy);
-    }
-    if (this.healBar) {
-      this.healBar.setHealthBar(this.energy);
     }
   }
 
