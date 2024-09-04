@@ -1,5 +1,5 @@
 const level1 = new Level(
-  [ new Coin()],
+  [ new Endboss()],
 
   [ new Coin(),],
 

@@ -17,6 +17,7 @@ class DrawableObject {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 
+  // Um die Hitbox anzuzeigen
   drawFrame(ctx) {
     if (this instanceof Character || this instanceof Chicken || this instanceof SmallChicken || this instanceof Endboss || this instanceof Coin || this instanceof SalsaBottle) {
     ctx.beginPath();
