@@ -27,18 +27,29 @@ class CoinBar extends DrawableObject {
   }
 
   resolveBarIndex() {
-    if (this.statusBar == 100) {
+    if (this.isCoinBar() == 100) {
       return 5;
-    } else if (this.statusBar == 80) {
+    } else if (this.isCoinBar() == 80) {
       return 4;
-    } else if (this.statusBar == 60) {
+    } else if (this.isCoinBar() == 60) {
       return 3;
-    } else if (this.statusBar == 40) {
+    } else if (this.isCoinBar() == 40) {
       return 2;
-    } else if (this.bottleBar == 20) {
+    } else if (this.isCoinBar() == 20) {
       return 1;
     } else {
       return 0;
+    }
+  }
+
+  isCoinBar() {
+    return this.coinBar;
+  }
+
+  collectCoin() {
+    if (this.coinBar < 100) {
+      this.coinBar += 20;
+      this.setCoinBar(this.coinBar);
     }
   }
 }

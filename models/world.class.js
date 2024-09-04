@@ -32,16 +32,41 @@ class World {
     }, 200);
   }
 
+  /**
+   * Collisions abfragen
+   * 1. Check collision with enemies (Bis jetzt wird nur das Leben des Charakters reduziert, aus bauen)
+   * 2. Check collision with coins 
+   * 3. Check collision with salsa bottles
+   */
   checkCollisions() {
+    // Check collision with enemies
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
+      if (this.isCharacterCollidingWith(enemy)) {
         this.character.hit();
         this.healBar.setHealthBar(this.character.energy);
       }
     });
+  
+    // Check collision with coins
+    this.level.coins.forEach((coin, index) => {
+      if (this.isCharacterCollidingWith(coin)) {
+        this.level.coins.splice(index, 1); // Coin entfernen
+        this.coinBar.collectCoin(); // Coin-Zähler erhöhen
+      }
+    });
+  
+    // Check collision with salsa bottles
+    this.level.salsaBottles.forEach((bottle, index) => {
+      if (this.isCharacterCollidingWith(bottle)) {
+        this.level.salsaBottles.splice(index, 1); // Bottle entfernen
+        this.bottleBar.collectBottle(); // Bottle-Zähler erhöhen
+      }
+    });
   }
 
-
+  isCharacterCollidingWith(Item) {
+    return this.character.isColliding(Item);
+  }
 
   checkThrowableObjects() { // Abfrage der Collison des Flaschenwurfs
     if (this.keyboard.SPACE) {
