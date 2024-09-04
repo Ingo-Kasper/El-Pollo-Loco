@@ -82,14 +82,6 @@ class World {
       this.bottleBar.throwPullOff();
       this.throwableObjects.push(bottle);
     }
-
-    this.throwableObjects.forEach((bottle) => {
-      this.level.enemies.forEach((enemy) => {
-        if (bottle.isColliding(enemy)) {
-
-        }
-      })
-    })
   }
 
   isThrown() {

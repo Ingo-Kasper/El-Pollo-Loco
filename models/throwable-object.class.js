@@ -1,5 +1,4 @@
 class ThrowbaleObject extends MovableObject {
-
   offset = {
     top: 5,
     left: 5,
@@ -25,10 +24,10 @@ class ThrowbaleObject extends MovableObject {
 
   constructor(x, y) {
     super();
-    this.loadImage("img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png")
+    this.loadImage("");
     this.loadImages(this.IMAGES_BOTTLE_ROTATION);
     this.loadImages(this.IMAGES_BOTTLE_SPLASH);
-    this.x = x -60;
+    this.x = x - 60;
     this.y = y;
     this.height = 60;
     this.width = 60;
@@ -39,10 +38,22 @@ class ThrowbaleObject extends MovableObject {
     this.speedY = 30;
     this.applyGravity();
     setInterval(() => {
-      this.x += 10
+      this.x += 10;
     }, 50);
     setInterval(() => {
       this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
+    }, 100);
+  }
+
+  throwHits() {
+    this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
+    let i = 0;
+    const interval = setInterval(() => {
+      this.img = this.imageCache[images[i]];
+      i++;
+      if (i >= images.length) {
+        clearInterval(interval);
+      }
     }, 100);
   }
 }
