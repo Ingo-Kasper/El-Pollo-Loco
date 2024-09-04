@@ -8,11 +8,11 @@ const level1 = new Level(
     new Coin(),
   ],
 
-  [ new SalsaBottle(),
-    new SalsaBottle(),
-    new SalsaBottle(),
-    new SalsaBottle(),
-    new SalsaBottle(),
+  [ new SalsaBottle(100),
+    new SalsaBottle(400),
+    new SalsaBottle(600),
+    new SalsaBottle(800),
+    new SalsaBottle(1000),
   ],
 
   [ new Cloud()],

@@ -68,11 +68,23 @@ class World {
     return this.character.isColliding(Item);
   }
 
-  checkThrowableObjects() { // Abfrage der Collison des Flaschenwurfs
-    if (this.keyboard.SPACE) {
+  /**
+   * Abfrage der Collison des Flaschenwurfs
+   */
+  checkThrowableObjects() {
+    if (this.isThrown() && this.isThroingThere()) {
       let bottle = new ThrowbaleObject(this.character.x + 100, this.character.y + 100);
+      this.bottleBar.throwPullOff();
       this.throwableObjects.push(bottle);
     }
+  }
+
+  isThrown() {
+    return this.keyboard.SPACE;
+  }
+
+  isThroingThere() {
+    return this.bottleBar.isBottleBar() > 0
   }
 
   draw() {

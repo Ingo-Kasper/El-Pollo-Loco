@@ -53,4 +53,14 @@ collectBottle() {
       this.setBottleBar(this.bottleBar);
     }
   }
+
+  throwPullOff() {
+    if (this.bottleBar >= 20) {
+      this.bottleBar -= 20;
+      this.setBottleBar(this.bottleBar);
+    } else {
+      this.bottleBar = 0;
+      this.setBottleBar(this.bottleBar);
+    }
+  }
 }
