@@ -10,7 +10,10 @@ class Coin extends MovableObject {
     bottom: 30,
   };
 
-  IMAGES_TURN = ["img/8_coin/coin_1.png", "img/8_coin/coin_2.png"];
+  IMAGES_TURN = [
+    "img/8_coin/coin_1.png",
+    "img/8_coin/coin_2.png",
+  ];
 
   constructor() {
     super();
