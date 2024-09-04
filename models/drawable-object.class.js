@@ -19,7 +19,7 @@ class DrawableObject {
 
   // Um die Hitbox anzuzeigen
   drawFrame(ctx) {
-    if (this instanceof Character || this instanceof Chicken || this instanceof SmallChicken || this instanceof Endboss || this instanceof Coin || this instanceof SalsaBottle) {
+    if (this instanceof Character || this instanceof Chicken || this instanceof SmallChicken || this instanceof Endboss || this instanceof Coin || this instanceof SalsaBottle || this instanceof ThrowbaleObject) {
     ctx.beginPath();
     ctx.lineWidth = "3";
     ctx.strokeStyle = "red";

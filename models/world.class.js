@@ -32,14 +32,11 @@ class World {
     }, 200);
   }
 
-  /**
-   * Collisions abfragen
-   * 1. Check collision with enemies (Bis jetzt wird nur das Leben des Charakters reduziert, aus bauen)
-   * 2. Check collision with coins 
-   * 3. Check collision with salsa bottles
-   */
   checkCollisions() {
-    // Check collision with enemies
+    /**
+     * 1. Check collision with enemies
+     * 2. with hit the character will lose energy
+     */
     this.level.enemies.forEach((enemy) => {
       if (this.isCharacterCollidingWith(enemy)) {
         this.character.hit();
@@ -47,19 +44,25 @@ class World {
       }
     });
   
-    // Check collision with coins
+    /**
+     * 1. Check collision with coins
+     * 2. with collect Coin the coin counter will increase
+     */
     this.level.coins.forEach((coin, index) => {
       if (this.isCharacterCollidingWith(coin)) {
-        this.level.coins.splice(index, 1); // Coin entfernen
-        this.coinBar.collectCoin(); // Coin-Zähler erhöhen
+        this.level.coins.splice(index, 1); 
+        this.coinBar.collectCoin();
       }
     });
   
-    // Check collision with salsa bottles
+    /**
+     * 1. Check collision with salsa bottles
+     * 2. with collect Bottle the bottle counter will increase
+     */
     this.level.salsaBottles.forEach((bottle, index) => {
       if (this.isCharacterCollidingWith(bottle)) {
-        this.level.salsaBottles.splice(index, 1); // Bottle entfernen
-        this.bottleBar.collectBottle(); // Bottle-Zähler erhöhen
+        this.level.salsaBottles.splice(index, 1); 
+        this.bottleBar.collectBottle(); 
       }
     });
   }
@@ -69,7 +72,9 @@ class World {
   }
 
   /**
-   * Abfrage der Collison des Flaschenwurfs
+   * Query the collision of the bottle throw
+   * 1. this.isThrown() - throw button
+   * 2. this.isThroingThere() - whether there are enough bottles
    */
   checkThrowableObjects() {
     if (this.isThrown() && this.isThroingThere()) {
@@ -77,6 +82,14 @@ class World {
       this.bottleBar.throwPullOff();
       this.throwableObjects.push(bottle);
     }
+
+    this.throwableObjects.forEach((bottle) => {
+      this.level.enemies.forEach((enemy) => {
+        if (bottle.isColliding(enemy)) {
+
+        }
+      })
+    })
   }
 
   isThrown() {
