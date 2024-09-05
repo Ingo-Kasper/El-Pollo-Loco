@@ -29,36 +29,59 @@ class World {
     setInterval(() => {
       this.checkCollisions();
       this.checkThrowableObjects();
-    },  160);
+    }, 10);
   }
 
   checkCollisions() {
-    /**
-     * 1. Check collision with enemies
-     * 2. with hit the character will lose energy
-     */
-    this.level.enemies.forEach((enemy) => {
+    this.collidingWihtEnemy();
+    this.collidingWihtCion();
+    this.collidingWihtBottle();
+  }
+
+  collidingWihtEnemy() {
+    this.level.enemies.forEach((enemy, index) => {
       if (this.isCharacterCollidingWith(enemy)) {
-        this.character.hit();
-        this.healBar.setHealthBar(this.character.energy);
+        if (this.isCharacterLandingOnEnemy(enemy)) {
+          // Entferne den Gegner, wenn der Charakter landet
+          this.level.enemies.splice(index, 1);
+        } else {
+          // Der Charakter wird verletzt, wenn nicht gelandet
+          this.character.hit();
+          this.healBar.setHealthBar(this.character.energy);
+        }
       }
     });
+  }
+  
+  /**
+   * Prüfe, ob der Charakter über dem Gegner steht und nach unten fällt
+   */
+  isCharacterLandingOnEnemy(enemy) {
+    return (
+      this.character.y + this.character.height <= enemy.y + enemy.height &&
+      this.character.y + this.character.height >= enemy.y &&
+      this.character.speedY < 0
+    );
+  }
 
-    /**
-     * 1. Check collision with coins
-     * 2. with collect Coin the coin counter will increase
-     */
+  /**
+   * 1. Check collision with coins
+   * 2. with collect Coin the coin counter will increase
+   */
+  collidingWihtCion() {
     this.level.coins.forEach((coin, index) => {
       if (this.isCharacterCollidingWith(coin)) {
         this.level.coins.splice(index, 1);
         this.coinBar.collectCoin();
       }
     });
+  }
 
-    /**
-     * 1. Check collision with salsa bottles
-     * 2. with collect Bottle the bottle counter will increase
-     */
+  /**
+   * 1. Check collision with salsa bottles
+   * 2. with collect Bottle the bottle counter will increase
+   */
+  collidingWihtBottle() {
     this.level.salsaBottles.forEach((bottle, index) => {
       if (this.isCharacterCollidingWith(bottle)) {
         this.level.salsaBottles.splice(index, 1);
@@ -82,7 +105,7 @@ class World {
     if (this.isThrown() && this.isThroingThere()) {
       let bottle = new ThrowbaleObject(
         this.character.x + 100,
-        this.character.y + 100,
+        this.character.y + 100
       );
       this.bottleBar.throwPullOff();
       this.throwableObjects.push(bottle);
@@ -91,10 +114,7 @@ class World {
     this.throwableObjects.forEach((bottle, bottleIndex) => {
       this.level.enemies.forEach((enemy, enemyIndex) => {
         if (bottle.isColliding(enemy)) {
-          console.log(
-            "Treffer erkannt zwischen Flasche und Feind:",
-            enemy
-          );
+          console.log("Treffer erkannt zwischen Flasche und Feind:", enemy);
           bottle.throwHits();
           setTimeout(() => {
             this.level.enemies.splice(enemyIndex, 1);

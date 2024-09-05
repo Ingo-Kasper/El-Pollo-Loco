@@ -7,10 +7,13 @@ class DrawableObject {
   height = 100;
   width = 100;
   energy = 100;
-  
+
   loadImage(path) {
     this.img = new Image();
     this.img.src = path;
+    this.img.onload = () => {
+      console.log(`Bild geladen: ${path}`);
+    };
   }
 
   draw(ctx) {
@@ -19,18 +22,26 @@ class DrawableObject {
 
   // Um die Hitbox anzuzeigen
   drawFrame(ctx) {
-    if (this instanceof Character || this instanceof Chicken || this instanceof SmallChicken || this instanceof Endboss || this instanceof Coin || this instanceof SalsaBottle || this instanceof ThrowbaleObject) {
-    ctx.beginPath();
-    ctx.lineWidth = "3";
-    ctx.strokeStyle = "red";
-    ctx.rect(
-      this.x + this.offset.left,
-      this.y + this.offset.top,
-      this.width - this.offset.left - this.offset.right,
-      this.height - this.offset.top - this.offset.bottom
-    );
-    ctx.stroke();
-  }
+    if (
+      this instanceof Character ||
+      this instanceof Chicken ||
+      this instanceof SmallChicken ||
+      this instanceof Endboss ||
+      this instanceof Coin ||
+      this instanceof SalsaBottle ||
+      this instanceof ThrowbaleObject
+    ) {
+      ctx.beginPath();
+      ctx.lineWidth = "3";
+      ctx.strokeStyle = "red";
+      ctx.rect(
+        this.x + this.offset.left,
+        this.y + this.offset.top,
+        this.width - this.offset.left - this.offset.right,
+        this.height - this.offset.top - this.offset.bottom
+      );
+      ctx.stroke();
+    }
   }
 
   /**
@@ -44,5 +55,4 @@ class DrawableObject {
       this.imageCache[path] = img;
     });
   }
-
 }

@@ -8,7 +8,7 @@ class Character extends MovableObject {
     top: 100,
     left: 25,
     right: 35,
-    bottom: 30,
+    bottom: 20,
   };
 
   IMAGES_DEAD = [

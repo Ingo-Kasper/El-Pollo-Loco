@@ -10,11 +10,11 @@ class MovableObject extends DrawableObject {
     right: 0,
     left: 0,
     bottom: 0,
-};
+  };
 
-constructor() {
-  super();
-}
+  constructor() {
+    super();
+  }
 
   applyGravity() {
     // Schwergraft

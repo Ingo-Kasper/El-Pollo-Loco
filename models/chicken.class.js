@@ -2,6 +2,7 @@ class Chicken extends MovableObject {
   y = 350;
   width = 80;
   height = 80;
+  isDead = false; // Neue Variable, um den Zustand des Feindes zu verfolgen
 
   offset = {
     top: 20,
@@ -22,7 +23,6 @@ class Chicken extends MovableObject {
     super();
     this.loadImage("img/3_enemies_chicken/chicken_normal/1_walk/1_w.png")
     this.loadImages(this.IMAGES_WALKING);
-
     this.x = 200 + Math.random() * 500;
     this.speed = 0.1 + Math.random() * 0.25;
     this.animate();
@@ -31,7 +31,18 @@ class Chicken extends MovableObject {
 
   animate() {
     setInterval(() => {
-      this.moveLeft();
+      if (!this.isDead) {
+        this.moveLeft();
+      }
     }, 1000 / 60);
+  }
+
+  playDeathAnimation() {
+    if (!this.isDead) {
+      this.isDead = true; // Setze isDead auf true, um sicherzustellen, dass die Animation nur einmal abgespielt wird
+      this.speed = 0; // Feind hört auf sich zu bewegen
+      this.y += 20; // Verschiebe den Feind nach unten
+      this.playAnimation(this.IMAGES_DEAD); // Todesanimation abspielen
+    }
   }
 }
