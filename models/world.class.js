@@ -8,6 +8,7 @@ class World {
   healBar = new HealBar();
   coinBar = new CoinBar();
   bottleBar = new BottleBar();
+  bossBar = new BossBar();
   throwableObjects = [];
 
   constructor(canvas, keyboard) {
@@ -151,6 +152,7 @@ class World {
     this.addToMap(this.healBar);
     this.addToMap(this.coinBar);
     this.addToMap(this.bottleBar);
+    this.addToMap(this.bossBar);
     this.ctx.translate(this.camera_x, 0); // Forward
 
     this.addToMap(this.character);

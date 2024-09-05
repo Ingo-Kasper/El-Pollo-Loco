@@ -7,6 +7,7 @@ class DrawableObject {
   height = 100;
   width = 100;
   energy = 100;
+  bossEnergy = 100;
 
   loadImage(path) {
     this.img = new Image();
