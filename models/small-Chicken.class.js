@@ -17,12 +17,6 @@ class SmallChicken extends MovableObject {
     "img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
   ];
 
-  IMAGES_DEAD = [
-    "img/3_enemies_chicken/chicken_small/2_dead/dead.png",
-    "img/3_enemies_chicken/chicken_small/2_dead/dead.png",
-    "img/3_enemies_chicken/chicken_small/2_dead/dead.png",
-  ];
-
   constructor() {
     super().loadImage("img/3_enemies_chicken/chicken_small/1_walk/1_w.png");
     this.loadImages(this.IMAGES_WALKING);
@@ -44,7 +38,12 @@ class SmallChicken extends MovableObject {
   }
 
   playDeathAnimation() {
-    this.speed = 0; // Feind hört auf sich zu bewegen
-    this.playAnimation(this.IMAGES_DEAD); // Todesanimation abspielen
+    clearInterval(this.moveInterval);
+    clearInterval(this.animationInterval);
+  
+    // Change to the death image
+    this.loadImage("img/3_enemies_chicken/chicken_small/2_dead/dead.png");
+
+    this.y = 400;
   }
 }

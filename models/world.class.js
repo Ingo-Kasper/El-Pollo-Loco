@@ -29,7 +29,7 @@ class World {
     setInterval(() => {
       this.checkCollisions();
       this.checkThrowableObjects();
-    }, 10);
+    }, 50);
   }
 
   checkCollisions() {
@@ -40,19 +40,21 @@ class World {
 
   collidingWihtEnemy() {
     this.level.enemies.forEach((enemy, index) => {
-      if (this.isCharacterCollidingWith(enemy)) {
-        if (this.isCharacterLandingOnEnemy(enemy)) {
-          // Entferne den Gegner, wenn der Charakter landet
-          this.level.enemies.splice(index, 1);
+      if (this.isCharacterCollidingWith(enemy, index)) {
+        if (this.isCharacterLandingOnEnemy(enemy, index)) {
+          enemy.playDeathAnimation();
+
+          setTimeout(() => {
+            this.level.enemies = this.level.enemies.filter(e => e !== enemy);
+          }, 400);
         } else {
-          // Der Charakter wird verletzt, wenn nicht gelandet
           this.character.hit();
           this.healBar.setHealthBar(this.character.energy);
         }
       }
     });
   }
-  
+
   /**
    * Prüfe, ob der Charakter über dem Gegner steht und nach unten fällt
    */

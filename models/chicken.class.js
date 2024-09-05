@@ -38,11 +38,12 @@ class Chicken extends MovableObject {
   }
 
   playDeathAnimation() {
-    if (!this.isDead) {
-      this.isDead = true; // Setze isDead auf true, um sicherzustellen, dass die Animation nur einmal abgespielt wird
-      this.speed = 0; // Feind hört auf sich zu bewegen
-      this.y += 20; // Verschiebe den Feind nach unten
-      this.playAnimation(this.IMAGES_DEAD); // Todesanimation abspielen
-    }
+    clearInterval(this.moveInterval);
+    clearInterval(this.animationInterval);
+
+    this.loadImage("img/3_enemies_chicken/chicken_normal/2_dead/dead.png");
+
+    this.y = 400;
   }
+  
 }
