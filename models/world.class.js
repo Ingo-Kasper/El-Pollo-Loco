@@ -17,7 +17,7 @@ class World {
     this.draw();
     this.setWorld();
     this.checkCollisions();
-    this.run()
+    this.run();
   }
 
   setWorld() {
@@ -29,7 +29,7 @@ class World {
     setInterval(() => {
       this.checkCollisions();
       this.checkThrowableObjects();
-    }, 200);
+    },  160);
   }
 
   checkCollisions() {
@@ -43,26 +43,26 @@ class World {
         this.healBar.setHealthBar(this.character.energy);
       }
     });
-  
+
     /**
      * 1. Check collision with coins
      * 2. with collect Coin the coin counter will increase
      */
     this.level.coins.forEach((coin, index) => {
       if (this.isCharacterCollidingWith(coin)) {
-        this.level.coins.splice(index, 1); 
+        this.level.coins.splice(index, 1);
         this.coinBar.collectCoin();
       }
     });
-  
+
     /**
      * 1. Check collision with salsa bottles
      * 2. with collect Bottle the bottle counter will increase
      */
     this.level.salsaBottles.forEach((bottle, index) => {
       if (this.isCharacterCollidingWith(bottle)) {
-        this.level.salsaBottles.splice(index, 1); 
-        this.bottleBar.collectBottle(); 
+        this.level.salsaBottles.splice(index, 1);
+        this.bottleBar.collectBottle();
       }
     });
   }
@@ -75,13 +75,36 @@ class World {
    * Query the collision of the bottle throw
    * 1. this.isThrown() - throw button
    * 2. this.isThroingThere() - whether there are enough bottles
+   * 3. bottle.isColliding(enemy) - check if the bottle hits the enemy
+   * 4. bottle.throwHits() - bottle hit animation
    */
   checkThrowableObjects() {
     if (this.isThrown() && this.isThroingThere()) {
-      let bottle = new ThrowbaleObject(this.character.x + 100, this.character.y + 100);
+      let bottle = new ThrowbaleObject(
+        this.character.x + 100,
+        this.character.y + 100,
+      );
       this.bottleBar.throwPullOff();
       this.throwableObjects.push(bottle);
     }
+
+    this.throwableObjects.forEach((bottle, bottleIndex) => {
+      this.level.enemies.forEach((enemy, enemyIndex) => {
+        if (bottle.isColliding(enemy)) {
+          console.log(
+            "Treffer erkannt zwischen Flasche und Feind:",
+            enemy
+          );
+          bottle.throwHits();
+          setTimeout(() => {
+            this.level.enemies.splice(enemyIndex, 1);
+            this.throwableObjects.splice(bottleIndex, 1);
+          }, 400);
+          console.log(`Flasche Position: x=${bottle.x}, y=${bottle.y}`);
+          console.log(`Feind Position: x=${enemy.x}, y=${enemy.y}`);
+        }
+      });
+    });
   }
 
   isThrown() {
@@ -89,7 +112,7 @@ class World {
   }
 
   isThroingThere() {
-    return this.bottleBar.isBottleBar() > 0
+    return this.bottleBar.isBottleBar() > 0;
   }
 
   draw() {
@@ -126,15 +149,14 @@ class World {
     if (mo.otherDirection) {
       this.flipImage(mo);
     }
-    
+
     mo.draw(this.ctx);
-  
+
     this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
     mo.drawFrame(this.ctx); // für deppug, Hitbox anzeigen
     if (mo.otherDirection) {
       this.flipImageBack(mo);
     }
-
   }
 
   flipImage(mo) {

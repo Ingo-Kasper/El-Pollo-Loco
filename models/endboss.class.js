@@ -73,7 +73,7 @@ class Endboss extends MovableObject {
     this.loadImage(this.IMAGES_WAIT[0]);
     this.loadImages(this.IMAGES_WAIT);
 
-    this.x = 200; // die Startposition des Endbosses
+    this.x = 700; // die Startposition des Endbosses
     this.speed = 0.3;
 
     this.animate();
