@@ -34,7 +34,7 @@ class SmallChicken extends MovableObject {
 
     setInterval(() => {
       this.playAnimation(this.IMAGES_WALKING);
-    }, 380);
+    }, 300);
   }
 
   playDeathAnimation() {

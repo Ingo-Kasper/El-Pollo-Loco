@@ -84,4 +84,14 @@ class Endboss extends MovableObject {
       this.playAnimation(this.IMAGES_WAIT);
     }, 200);
   }
+
+  whichAnimaton() {
+    if (this.isDead()) {
+      this.playAnimation(this.IMAGES_DEAD); // Dead animation
+    } else if (this.isHurt()) {
+      this.playAnimation(this.IMAGES_HURT); // Hurt animation muss noch beim schaden ein ruckwurf geben
+    } else {
+      this.playAnimation(this.IMAGES_WAIT); // Waiting animation
+    }
+  }
 }

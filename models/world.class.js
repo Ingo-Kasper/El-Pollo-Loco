@@ -46,7 +46,7 @@ class World {
           enemy.playDeathAnimation();
 
           setTimeout(() => {
-            this.level.enemies = this.level.enemies.filter(e => e !== enemy);
+            this.level.enemies = this.level.enemies.filter((e) => e !== enemy);
           }, 400);
         } else {
           this.character.hit();
@@ -113,18 +113,30 @@ class World {
       this.bottleBar.throwPullOff();
       this.throwableObjects.push(bottle);
     }
-
+  
     this.throwableObjects.forEach((bottle, bottleIndex) => {
       this.level.enemies.forEach((enemy, enemyIndex) => {
         if (bottle.isColliding(enemy)) {
-          console.log("Treffer erkannt zwischen Flasche und Feind:", enemy);
-          bottle.throwHits();
-          setTimeout(() => {
-            this.level.enemies.splice(enemyIndex, 1);
-            this.throwableObjects.splice(bottleIndex, 1);
-          }, 400);
-          console.log(`Flasche Position: x=${bottle.x}, y=${bottle.y}`);
-          console.log(`Feind Position: x=${enemy.x}, y=${enemy.y}`);
+          if (!bottle.hasHit) { // Prüfen, ob die Flasche bereits getroffen hat
+            if (enemy instanceof Endboss) {
+              if (enemy.bossEnergy > 0) {
+                enemy.bossEnergy -= 20;
+                this.bossBar.setBosshBar(enemy.bossEnergy);
+              } else {
+                bottle.throwHits();
+                setTimeout(() => {
+                  this.level.enemies.splice(enemyIndex, 1);
+                  this.throwableObjects.splice(bottleIndex, 1);
+                }, 400);
+              }
+            } else {
+              bottle.throwHits();
+              setTimeout(() => {
+                this.level.enemies.splice(enemyIndex, 1);
+                this.throwableObjects.splice(bottleIndex, 1);
+              }, 400);
+            }
+          }
         }
       });
     });
