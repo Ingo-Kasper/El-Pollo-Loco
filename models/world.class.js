@@ -115,42 +115,37 @@ class World {
    */
   checkThrowableObjects() {
     if (this.isThrown() && this.isThroingThere()) {
-      let bottle = new ThrowbaleObject(
-        this.character.x + 100,
-        this.character.y + 100
-      );
-      this.bottleBar.throwPullOff();
-      this.throwableObjects.push(bottle);
+        let bottle = new ThrowbaleObject(this.character.x + 100, this.character.y + 100);
+        this.bottleBar.throwPullOff();
+        this.throwableObjects.push(bottle);
     }
 
     this.throwableObjects.forEach((bottle, bottleIndex) => {
-      this.level.enemies.forEach((enemy, enemyIndex) => {
-        if (bottle.isColliding(enemy)) {
-          if (!bottle.hasHit) {
-            // Prüfen, ob die Flasche bereits getroffen hat
-            if (enemy instanceof Endboss) {
-              if (enemy.bossEnergy > 0) {
-                enemy.bossEnergy -= 20;
-                this.bossBar.setBosshBar(enemy.bossEnergy);
-              } else {
-                bottle.throwHits();
-                setTimeout(() => {
-                  this.level.enemies.splice(enemyIndex, 1);
-                  this.throwableObjects.splice(bottleIndex, 1);
-                }, 400);
-              }
-            } else {
-              bottle.throwHits();
-              setTimeout(() => {
-                this.level.enemies.splice(enemyIndex, 1);
-                this.throwableObjects.splice(bottleIndex, 1);
-              }, 400);
+        this.level.enemies.forEach((enemy, enemyIndex) => {
+            if (bottle.isColliding(enemy) && !bottle.hasHit) { // Prüfen, ob die Flasche bereits getroffen hat
+                if (enemy instanceof Endboss) {
+                    if (enemy.bossEnergy > 0) {
+                        enemy.bossEnergy -= 20;
+                        this.bossBar.setBosshBar(enemy.bossEnergy);
+                    } 
+                    if (enemy.bossEnergy <= 0) {
+                        bottle.throwHits();
+                        setTimeout(() => {
+                            this.level.enemies.splice(enemyIndex, 1);
+                        }, 400);
+                    }
+                } else if (enemy instanceof SmallChicken || enemy instanceof Chicken) {
+                    bottle.throwHits();
+                    setTimeout(() => {
+                        this.level.enemies.splice(enemyIndex, 1);
+                    }, 400);
+                }
+                this.throwableObjects.splice(bottleIndex, 1); // Flasche nach Treffer entfernen
+                bottle.hasHit = true; // Verhindert mehrfachen Treffer
             }
-          }
-        }
-      });
+        });
     });
-  }
+}
 
   isThrown() {
     return this.keyboard.SPACE;

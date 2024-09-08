@@ -94,4 +94,13 @@ class Endboss extends MovableObject {
       this.playAnimation(this.IMAGES_WAIT); // Waiting animation
     }
   }
+
+  playDeathAnimation() {
+    clearInterval(this.moveInterval);
+    clearInterval(this.animationInterval);
+
+    this.loadImage("img/4_enemie_boss_chicken/4_hurt/G21.png");
+
+    this.y = 400;
+  }
 }
