@@ -39,10 +39,10 @@ class ThrowbaleObject extends MovableObject {
     this.applyGravity();
     setInterval(() => {
       this.x += 10;
-    }, 50);
+    }, 1000 / 25);
     setInterval(() => {
       this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
-    }, 100);
+    }, 1000 / 10);
   }
 
   throwHits() {
@@ -55,6 +55,6 @@ class ThrowbaleObject extends MovableObject {
         if (i >= images.length) {
             clearInterval(interval);
         }
-    }, 100);
+    }, 1000 / 120);
 }
 }

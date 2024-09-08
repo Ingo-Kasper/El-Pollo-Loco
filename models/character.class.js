@@ -132,7 +132,7 @@ class Character extends MovableObject {
     setInterval(() => {
       // Die Animation werden geändert
       this.whichAnimaton();
-    }, 80);
+    }, 1000 / 10);
   }
 
   whichAnimaton() {

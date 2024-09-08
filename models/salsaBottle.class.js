@@ -23,10 +23,8 @@ class SalsaBottle extends MovableObject {
   }
 
   animate() {
-    setInterval(() => {}, 1000 / 60);
-
     setInterval(() => {
       this.playAnimation(this.IMAGES_TURN);
-    }, 380);
+    }, 1000/ 3);
   }
 }

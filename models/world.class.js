@@ -30,7 +30,7 @@ class World {
     setInterval(() => {
       this.checkCollisions();
       this.checkThrowableObjects();
-    }, 50);
+    }, 1000 / 120);
   }
 
   checkCollisions() {
@@ -40,19 +40,28 @@ class World {
   }
 
   collidingWihtEnemy() {
-    this.level.enemies.forEach((enemy, index) => {
+    this.level.enemies = this.level.enemies.filter((enemy, index) => {
       if (this.isCharacterCollidingWith(enemy, index)) {
         if (this.isCharacterLandingOnEnemy(enemy, index)) {
-          enemy.playDeathAnimation();
+          if (
+            enemy instanceof SmallChicken ||
+            enemy instanceof Chicken ||
+            enemy instanceof Endboss
+          ) {
+            enemy.playDeathAnimation();
 
-          setTimeout(() => {
-            this.level.enemies = this.level.enemies.filter((e) => e !== enemy);
-          }, 400);
+            setTimeout(() => {
+              this.level.enemies = this.level.enemies.filter(
+                (e) => e !== enemy
+              );
+            }, 400);
+          }
         } else {
           this.character.hit();
           this.healBar.setHealthBar(this.character.energy);
         }
       }
+      return enemy.energy > 0; // Entfernt tote Feinde
     });
   }
 
@@ -113,11 +122,12 @@ class World {
       this.bottleBar.throwPullOff();
       this.throwableObjects.push(bottle);
     }
-  
+
     this.throwableObjects.forEach((bottle, bottleIndex) => {
       this.level.enemies.forEach((enemy, enemyIndex) => {
         if (bottle.isColliding(enemy)) {
-          if (!bottle.hasHit) { // Prüfen, ob die Flasche bereits getroffen hat
+          if (!bottle.hasHit) {
+            // Prüfen, ob die Flasche bereits getroffen hat
             if (enemy instanceof Endboss) {
               if (enemy.bossEnergy > 0) {
                 enemy.bossEnergy -= 20;

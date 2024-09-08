@@ -82,7 +82,7 @@ class Endboss extends MovableObject {
   animate() {
     setInterval(() => {
       this.playAnimation(this.IMAGES_WAIT);
-    }, 200);
+    }, 1000 / 5);
   }
 
   whichAnimaton() {
