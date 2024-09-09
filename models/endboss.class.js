@@ -3,6 +3,9 @@ class Endboss extends MovableObject {
   width = 350;
   y = 100;
 
+  alerted = false;
+  angry = false;
+
   offset = {
     top: 80,
     left: 70,
@@ -10,7 +13,7 @@ class Endboss extends MovableObject {
     bottom: 10,
   };
 
-  IMAGES_WALK = [
+  IMAGES_WALKING = [
     "img/4_enemie_boss_chicken/1_walk/G1.png",
     "img/4_enemie_boss_chicken/1_walk/G2.png",
     "img/4_enemie_boss_chicken/1_walk/G3.png",
@@ -72,35 +75,80 @@ class Endboss extends MovableObject {
     super();
     this.loadImage(this.IMAGES_WAIT[0]);
     this.loadImages(this.IMAGES_WAIT);
+    this.loadImages(this.IMAGES_WALKING);
+    this.loadImages(this.IMAGES_ALERT);
+    this.loadImages(this.IMAGES_ATTACK);
+    this.loadImages(this.IMAGES_HURT);
+    this.loadImages(this.IMAGES_DEAD);
 
-    this.x = 700; // die Startposition des Endbosses
+    this.x = 500; // die Startposition des Endbosses
     this.speed = 0.3;
 
     this.animate();
   }
 
   animate() {
-    setInterval(() => {
-      this.playAnimation(this.IMAGES_WAIT);
-    }, 1000 / 5);
+    this.animationInterval = setInterval(() => {
+      this.endbossWalk();
+    }, 1000 / 10);
   }
 
-  whichAnimaton() {
-    if (this.isDead()) {
-      this.playAnimation(this.IMAGES_DEAD); // Dead animation
-    } else if (this.isHurt()) {
-      this.playAnimation(this.IMAGES_HURT); // Hurt animation muss noch beim schaden ein ruckwurf geben
-    } else {
-      this.playAnimation(this.IMAGES_WAIT); // Waiting animation
+  /**
+   * This moves the endboss to the left closer to the character and plays images accordingly
+   */
+  endbossWalk() {
+    this.movingAnimations = setInterval(() => {
+      this.playAnimation(this.IMAGES_WALKING);
+      this.moveLeft();
+    }, 1000 / 10);
+  }
+
+  /**
+   * If the endboss is hurt then an animation plays.
+   */
+  endbossHurt() {
+    this.hurtAnimations = setInterval(() => {
+      if (this.isHurt()) {
+        this.playAnimation(this.IMAGES_HURT);
+      }
+    }, 1000 / 10);
+  }
+
+  /**
+   * This method checks if the endboss is dead or angry and calls methods on each state.
+   */
+  endbossDeadCheck() {
+    this.deadAnimations = setInterval(() => {
+      if (this.isDead()) {
+        this.endbossDead();
+      } else if (this.alerted && !this.angry) {
+        this.endbossAngry();
+      }
+    }, 1000 / 25);
+  }
+
+    /**
+   * This method runs when endboss is angry, shows differnet images and increase the speed of the endboss
+   */
+    endbossAngry() {
+      setTimeout(() => {
+        this.playAnimation(this.IMAGES_ALERT);
+        this.angry = true;
+        this.speed = 12;
+      }, 1000 / 20);
     }
-  }
 
-  playDeathAnimation() {
-    clearInterval(this.moveInterval);
-    clearInterval(this.animationInterval);
-
-    this.loadImage("img/4_enemie_boss_chicken/4_hurt/G21.png");
-
-    this.y = 400;
+  /**
+   * This method runs when the endboss is dead and the game/level is finished and game won.
+   */
+  endbossDead() {
+    if (audio) {
+      this.gamewon_sound.play();
+    }
+    this.playAnimation(this.IMAGES_DEAD);
+    this.removeObject();
+    // END OF THE GAME
+    world.gameEnd = true;
+    world.gameWon = true;
   }
 }
