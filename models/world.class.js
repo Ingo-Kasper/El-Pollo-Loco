@@ -5,6 +5,7 @@ class World {
   ctx;
   keyboard;
   camera_x = 0;
+  autio = new Audio();
   healBar = new HealBar();
   coinBar = new CoinBar();
   bottleBar = new BottleBar();
