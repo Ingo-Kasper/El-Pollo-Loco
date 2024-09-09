@@ -71,7 +71,7 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
 
-  constructor() {
+  constructor(x) {
     super();
     this.loadImage(this.IMAGES_WAIT[0]);
     this.loadImages(this.IMAGES_WAIT);
@@ -81,7 +81,7 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEAD);
 
-    this.x = 500; // die Startposition des Endbosses
+    this.x = 1400; // die Startposition des Endbosses
     this.speed = 0.3;
 
     this.animate();
