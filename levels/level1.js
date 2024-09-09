@@ -18,9 +18,7 @@ const level1 = new Level(
     new Coin(450 , 240),
   ],
 
-  [
-    
-    new SalsaBottle(0),
+  [ new SalsaBottle(0),
     new SalsaBottle(100),
     new SalsaBottle(200),
     new SalsaBottle(300),
@@ -33,7 +31,12 @@ const level1 = new Level(
     new SalsaBottle(1000),
   ],
 
-  [ new Cloud()],
+  [ new Cloud(0),
+    new Cloud(300),
+    new Cloud(600),
+    new Cloud(900),
+    new Cloud(1200),
+  ],
   
   [ new BackgroundObject("img/5_background/layers/air.png", -719),
     new BackgroundObject("img/5_background/layers/3_third_layer/2.png", -719),

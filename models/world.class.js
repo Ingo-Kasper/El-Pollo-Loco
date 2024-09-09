@@ -15,10 +15,9 @@ class World {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
+    this.run();
     this.draw();
     this.setWorld();
-    this.checkCollisions();
-    this.run();
   }
 
   setWorld() {
@@ -134,11 +133,13 @@ class World {
             if (enemy.bossEnergy > 0) {
               enemy.bossEnergy -= 20;
               this.bossBar.setBosshBar(enemy.bossEnergy);
+              
             }
             if (enemy.bossEnergy <= 0) {
               bottle.throwHits();
               setTimeout(() => {
                 this.level.enemies.splice(enemyIndex, 1);
+                enemy.playDeathAnimation();
               }, 400);
             }
           } if (
@@ -149,6 +150,7 @@ class World {
                 bottle.throwHits();
                 setTimeout(() => {
                   this.level.enemies.splice(enemyIndex, 1);
+                  enemy.playDeathAnimation();
                 }, 400);
               }
             }
@@ -160,11 +162,13 @@ class World {
                 bottle.throwHits();
                 setTimeout(() => {
                   this.level.enemies.splice(enemyIndex, 1);
+                  enemy.playDeathAnimation();
                 }, 400);
               }
             }
           }
           this.throwableObjects.splice(bottleIndex, 1);
+          enemy.playDeathAnimation();
           bottle.hasHit = true;
         }
       });

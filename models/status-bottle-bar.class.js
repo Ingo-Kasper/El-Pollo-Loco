@@ -10,6 +10,9 @@ class BottleBar extends DrawableObject {
     "img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/100.png",
   ];
 
+  bottle_Break_sound = new Audio("../audio/el-Pollo-Koco-Classig/bottleBreak.mp3")
+  bottle_Throwing_sound = new Audio("../audio/el-Pollo-Koco-Classig/bottleThrowing.mp3")
+
   constructor() {
     super();
     this.loadImages(this.IMAGES_BOTTLE);
@@ -50,6 +53,7 @@ class BottleBar extends DrawableObject {
     if (this.bottleBar < 100) {
       this.bottleBar += 20;
       this.setBottleBar(this.bottleBar);
+      this.bottle_Break_sound.play();
     }
   }
 
@@ -57,9 +61,11 @@ class BottleBar extends DrawableObject {
     if (this.bottleBar >= 20) {
       this.bottleBar -= 20;
       this.setBottleBar(this.bottleBar);
+      this.bottle_Throwing_sound.play();
     } else {
       this.bottleBar = 0;
       this.setBottleBar(this.bottleBar);
+      this.bottle_Throwing_sound.play();
     }
   }
 }

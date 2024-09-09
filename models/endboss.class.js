@@ -13,6 +13,8 @@ class Endboss extends MovableObject {
     bottom: 10,
   };
 
+  gameWin_sound = new Audio("audio/level_win.mp3");
+
   IMAGES_WALKING = [
     "img/4_enemie_boss_chicken/1_walk/G1.png",
     "img/4_enemie_boss_chicken/1_walk/G2.png",
@@ -70,6 +72,8 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/5_dead/G25.png",
     "img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
+  
+  chicken_Hit_sound = new Audio("../audio/el-Pollo-Koco-Classig/chickenHit.mp3")
 
   constructor(x) {
     super();
@@ -77,7 +81,6 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_WAIT);
     this.loadImages(this.IMAGES_WALKING);
     this.loadImages(this.IMAGES_ALERT);
-    this.loadImages(this.IMAGES_ATTACK);
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEAD);
 
@@ -88,9 +91,8 @@ class Endboss extends MovableObject {
   }
 
   animate() {
-    this.animationInterval = setInterval(() => {
-      this.endbossWalk();
-    }, 1000 / 10);
+    this.endbossWalk();
+    this.endbossHurt();
   }
 
   /**
@@ -109,46 +111,10 @@ class Endboss extends MovableObject {
   endbossHurt() {
     this.hurtAnimations = setInterval(() => {
       if (this.isHurt()) {
+        this.chicken_Hit_sound.play();
         this.playAnimation(this.IMAGES_HURT);
+
       }
     }, 1000 / 10);
-  }
-
-  /**
-   * This method checks if the endboss is dead or angry and calls methods on each state.
-   */
-  endbossDeadCheck() {
-    this.deadAnimations = setInterval(() => {
-      if (this.isDead()) {
-        this.endbossDead();
-      } else if (this.alerted && !this.angry) {
-        this.endbossAngry();
-      }
-    }, 1000 / 25);
-  }
-
-    /**
-   * This method runs when endboss is angry, shows differnet images and increase the speed of the endboss
-   */
-    endbossAngry() {
-      setTimeout(() => {
-        this.playAnimation(this.IMAGES_ALERT);
-        this.angry = true;
-        this.speed = 12;
-      }, 1000 / 20);
-    }
-
-  /**
-   * This method runs when the endboss is dead and the game/level is finished and game won.
-   */
-  endbossDead() {
-    if (audio) {
-      this.gamewon_sound.play();
-    }
-    this.playAnimation(this.IMAGES_DEAD);
-    this.removeObject();
-    // END OF THE GAME
-    world.gameEnd = true;
-    world.gameWon = true;
   }
 }
