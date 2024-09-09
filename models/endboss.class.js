@@ -56,13 +56,6 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/4_hurt/G21.png",
     "img/4_enemie_boss_chicken/4_hurt/G22.png",
     "img/4_enemie_boss_chicken/4_hurt/G23.png",
-    "img/4_enemie_boss_chicken/4_hurt/G21.png",
-    "img/4_enemie_boss_chicken/4_hurt/G22.png",
-    "img/4_enemie_boss_chicken/4_hurt/G23.png",
-    "img/4_enemie_boss_chicken/4_hurt/G21.png",
-    "img/4_enemie_boss_chicken/4_hurt/G22.png",
-    "img/4_enemie_boss_chicken/4_hurt/G23.png",
-    "img/4_enemie_boss_chicken/2_alert/G12.png",
   ];
   IMAGES_DEAD = [
     "img/4_enemie_boss_chicken/4_hurt/G21.png",
@@ -72,8 +65,10 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/5_dead/G25.png",
     "img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
-  
-  chicken_Hit_sound = new Audio("../audio/el-Pollo-Koco-Classig/chickenHit.mp3")
+
+  chicken_Hit_sound = new Audio(
+    "../audio/el-Pollo-Koco-Classig/chickenHit.mp3"
+  );
 
   constructor(x) {
     super();
@@ -85,9 +80,10 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_DEAD);
 
     this.x = 1400; // die Startposition des Endbosses
-    this.speed = 0.3;
+    this.speed = 0.1 + Math.random() * 0.25;
 
     this.animate();
+    this.hurtAnimationPlaying = false;
   }
 
   animate() {
@@ -99,22 +95,51 @@ class Endboss extends MovableObject {
    * This moves the endboss to the left closer to the character and plays images accordingly
    */
   endbossWalk() {
+    setInterval(() => {
+      this.moveLeft();
+    }, 1000 / 100);
+
     this.movingAnimations = setInterval(() => {
       this.playAnimation(this.IMAGES_WALKING);
-      this.moveLeft();
     }, 1000 / 10);
   }
 
-  /**
-   * If the endboss is hurt then an animation plays.
-   */
   endbossHurt() {
-    this.hurtAnimations = setInterval(() => {
-      if (this.isHurt()) {
-        this.chicken_Hit_sound.play();
+    // Überprüfen, ob das Intervall bereits läuft
+    if (!this.hurtAnimationPlaying) {
+      this.hurtAnimationPlaying = true;
+      this.hurtAnimationInterval = setInterval(() => {
         this.playAnimation(this.IMAGES_HURT);
+      }, 1000 / 10);
 
-      }
-    }, 1000 / 10);
+      setTimeout(() => {
+        clearInterval(this.hurtAnimationInterval);
+        this.hurtAnimationPlaying = false;
+      }, 1000);
+    }
+  }
+  /**
+   * This method runs when the endboss is dead and the game/level is finished and game won.
+   */
+  endbossDead() {
+    if (audio) {
+      this.gamewon_sound.play();
+    }
+    this.playAnimation(this.IMAGES_DEAD);
+    this.removeObject();
+    // END OF THE GAME
+    world.gameEnd = true;
+    world.gameWon = true;
+  }
+
+  /**
+   * This method runs when endboss is angry, shows differnet images and increase the speed of the endboss
+   */
+  endbossAngry() {
+    setTimeout(() => {
+      this.playAnimation(this.IMAGES_ALERTED);
+      this.angry = true;
+      this.speed = 12;
+    }, 1200);
   }
 }

@@ -28,7 +28,6 @@ class World {
   run() {
     setInterval(() => {
       this.checkCollisions();
-      this.checkThrowableObjects();
     }, 1000 / 120);
   }
 
@@ -36,6 +35,7 @@ class World {
     this.collidingWihtEnemy();
     this.collidingWihtCion();
     this.collidingWihtBottle();
+    this.checkThrowableObjects();
   }
 
   collidingWihtEnemy() {
@@ -133,7 +133,7 @@ class World {
             if (enemy.bossEnergy > 0) {
               enemy.bossEnergy -= 20;
               this.bossBar.setBosshBar(enemy.bossEnergy);
-              
+              enemy.endbossHurt();
             }
             if (enemy.bossEnergy <= 0) {
               bottle.throwHits();

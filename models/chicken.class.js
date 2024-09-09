@@ -49,4 +49,8 @@ class Chicken extends MovableObject {
     this.y = 400;
   }
   
+  stopMoving() {
+    this.speed = 0;
+    this.acceleration = 0;
+  }
 }
