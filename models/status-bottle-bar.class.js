@@ -1,5 +1,4 @@
 class BottleBar extends DrawableObject {
-
   bottleBar = 0;
 
   IMAGES_BOTTLE = [
@@ -47,7 +46,7 @@ class BottleBar extends DrawableObject {
     return this.bottleBar;
   }
 
-collectBottle() {
+  collectBottle() {
     if (this.bottleBar < 100) {
       this.bottleBar += 20;
       this.setBottleBar(this.bottleBar);

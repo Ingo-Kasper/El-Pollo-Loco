@@ -114,38 +114,81 @@ class World {
    * 4. bottle.throwHits() - bottle hit animation
    */
   checkThrowableObjects() {
-    if (this.isThrown() && this.isThroingThere()) {
-        let bottle = new ThrowbaleObject(this.character.x + 100, this.character.y + 100);
-        this.bottleBar.throwPullOff();
-        this.throwableObjects.push(bottle);
+    if (this.isThrown() && this.isThroingThere() && !this.isBottleThrown) {
+      let bottle = new ThrowbaleObject(
+        this.character.x + 100,
+        this.character.y + 100
+      );
+      this.bottleBar.throwPullOff();
+      this.throwableObjects.push(bottle);
+      this.isBottleThrown = true;
+    }
+    if (!this.isThrown()) {
+      this.isBottleThrown = false;
     }
 
     this.throwableObjects.forEach((bottle, bottleIndex) => {
-        this.level.enemies.forEach((enemy, enemyIndex) => {
-            if (bottle.isColliding(enemy) && !bottle.hasHit) { // Prüfen, ob die Flasche bereits getroffen hat
-                if (enemy instanceof Endboss) {
-                    if (enemy.bossEnergy > 0) {
-                        enemy.bossEnergy -= 20;
-                        this.bossBar.setBosshBar(enemy.bossEnergy);
-                    } 
-                    if (enemy.bossEnergy <= 0) {
-                        bottle.throwHits();
-                        setTimeout(() => {
-                            this.level.enemies.splice(enemyIndex, 1);
-                        }, 400);
-                    }
-                } else if (enemy instanceof SmallChicken || enemy instanceof Chicken) {
-                    bottle.throwHits();
-                    setTimeout(() => {
-                        this.level.enemies.splice(enemyIndex, 1);
-                    }, 400);
-                }
-                this.throwableObjects.splice(bottleIndex, 1); // Flasche nach Treffer entfernen
-                bottle.hasHit = true; // Verhindert mehrfachen Treffer
+      this.level.enemies.forEach((enemy, enemyIndex) => {
+        if (this.isCollidingWith(bottle, enemy) && !bottle.hasHit) {
+          if (enemy instanceof Endboss) {
+            if (enemy.bossEnergy > 0) {
+              enemy.bossEnergy -= 20;
+              this.bossBar.setBosshBar(enemy.bossEnergy);
             }
-        });
+            if (enemy.bossEnergy <= 0) {
+              bottle.throwHits();
+              setTimeout(() => {
+                this.level.enemies.splice(enemyIndex, 1);
+              }, 400);
+            }
+          } if (
+            enemy instanceof Chicken) {
+            if (enemy.energy > 0) {
+              enemy.energy -= 100;
+              if (enemy.energy <= 0) {
+                bottle.throwHits();
+                setTimeout(() => {
+                  this.level.enemies.splice(enemyIndex, 1);
+                }, 400);
+              }
+            }
+          } if (
+            enemy instanceof SmallChicken) {
+            if (enemy.energy > 0) {
+              enemy.energy -= 100;
+              if (enemy.energy <= 0) {
+                bottle.throwHits();
+                setTimeout(() => {
+                  this.level.enemies.splice(enemyIndex, 1);
+                }, 400);
+              }
+            }
+          }
+          this.throwableObjects.splice(bottleIndex, 1);
+          bottle.hasHit = true;
+        }
+      });
     });
-}
+  }
+
+  /**
+   * Prüft die Kollision zwischen einem Wurfobjekt und einem Feind.
+   * @param {ThrowbaleObject} bottle - Das Wurfobjekt.
+   * @param {Enemy} enemy - Der Feind.
+   * @returns {boolean} - True, wenn eine Kollision stattfindet, sonst false.
+   */
+  isCollidingWith(bottle, enemy) {
+    return (
+      bottle.x + bottle.width - bottle.offset.right >
+        enemy.x + enemy.offset.left &&
+      bottle.y + bottle.height - bottle.offset.bottom >
+        enemy.y + enemy.offset.top &&
+      bottle.x + bottle.offset.left <
+        enemy.x + enemy.width - enemy.offset.right &&
+      bottle.y + bottle.offset.top <
+        enemy.y + enemy.height - enemy.offset.bottom
+    );
+  }
 
   isThrown() {
     return this.keyboard.SPACE;
