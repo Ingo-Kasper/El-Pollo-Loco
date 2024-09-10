@@ -54,9 +54,6 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/4_hurt/G23.png",
   ];
   IMAGES_DEAD = [
-    "img/4_enemie_boss_chicken/4_hurt/G21.png",
-    "img/4_enemie_boss_chicken/4_hurt/G22.png",
-    "img/4_enemie_boss_chicken/4_hurt/G23.png",
     "img/4_enemie_boss_chicken/5_dead/G24.png",
     "img/4_enemie_boss_chicken/5_dead/G25.png",
     "img/4_enemie_boss_chicken/5_dead/G26.png",
@@ -74,13 +71,8 @@ class Endboss extends MovableObject {
     this.x = x; // die Startposition des Endbosses
     this.speed = 0.1;
 
-    this.animate();
+    this. endbossWalk();
     this.hurtAnimationPlaying = false;
-  }
-
-  animate() {
-    this.endbossWalk();
-    this.endbossHurt();
   }
 
   /**
@@ -105,12 +97,12 @@ class Endboss extends MovableObject {
       this.hurtAnimationPlaying = true;
       this.hurtAnimationInterval = setInterval(() => {
         this.playAnimation(this.IMAGES_HURT);
-      }, 1000 / 10);
+      }, 1000 / 3);
 
       setTimeout(() => {
         clearInterval(this.hurtAnimationInterval);
         this.hurtAnimationPlaying = false;
-      }, 1000);
+      }, 1000 / 10);
     }
   }
 
@@ -134,5 +126,14 @@ class Endboss extends MovableObject {
         this.speed = 2;
       }, 1000);
     }
+  }
+
+  endbossDead() {
+    if (this.isMuteOn()) {
+      allSounds[2].play();
+      allSounds[6].play();
+    }
+    this.speed = 0;
+    this.playAnimation(this.IMAGES_DEAD);
   }
 }

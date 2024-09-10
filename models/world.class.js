@@ -44,8 +44,7 @@ class World {
         if (this.isCharacterLandingOnEnemy(enemy, index)) {
           if (
             enemy instanceof SmallChicken ||
-            enemy instanceof Chicken ||
-            enemy instanceof Endboss
+            enemy instanceof Chicken
           ) {
             setTimeout(() => {
               this.level.enemies = this.level.enemies.filter(
@@ -139,10 +138,10 @@ class World {
             }
             if (enemy.bossEnergy <= 0) {
               bottle.throwHits();
-              setTimeout(() => {
-                this.level.enemies.splice(index, 1);
-                enemy.playDeathAnimation();
-              }, 400);
+              enemy.endbossDead();
+              document.getElementById("canvas").classList.add("d-none");
+              document.getElementById("startPage").classList.remove("d-none");
+              document.getElementById("startPage").classList.add("victoryPage");
             }
           } if (
             enemy instanceof Chicken || enemy instanceof SmallChicken) {

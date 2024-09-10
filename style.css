@@ -33,6 +33,25 @@ canvas {
     no-repeat 0 0 / 100% 100%;
 }
 
+.victoryPage {
+
+  width: 720px;
+  height: 480px;
+  background: url(../img/9_intro_outro_screens/win/win_2.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+}
+
+.lostPage {
+  width: 720px;
+  height: 480px;
+  background: url(../img/9_intro_outro_screens/game_over/game_over.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+}
+
 .startButton {
   font-size: 3em;
   margin-top: 60px;

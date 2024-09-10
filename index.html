@@ -36,48 +36,37 @@
 
     <div id="fullscreen">
         <canvas id="canvas" class="d-none" width="720px" height="480px"></canvas>
-            <div class="overlayObject">
-        <div id="muteValume" onclick="toggleMute()">
-            <img id="volumeOff" class="overlayObjectIcon" src="img/11_icons/volume_off.png"
-                alt="Volume Off">
-            <img id="volumeOn" class="overlayObjectIcon d-none" src="img/11_icons/volume_up.png"
-                alt="Volume Up">
+        <div class="overlayObject">
+            <div id="muteValume" onclick="toggleMute()">
+                <img id="volumeOff" class="overlayObjectIcon" src="img/11_icons/volume_off.png" alt="Volume Off">
+                <img id="volumeOn" class="overlayObjectIcon d-none" src="img/11_icons/volume_up.png" alt="Volume Up">
+            </div>
+            <img class="overlayObjectIcon" onclick="fullscreen()" src="img/11_icons/fullscreen.png" alt="Fullscreen">
         </div>
-        <img class="overlayObjectIcon" onclick="fullscreen()" src="img/11_icons/fullscreen.png" alt="Fullscreen">
-    </div>
-    </div>
-
-    <div id="startPage" class="startPage" onclick="startGame()">
-        <div class="startButton">Start Game</div>
-    </div>
-
-    <div id="helpBox" class="helpBox">
-        <div class="keyContener">
-            <span class="keyDescription">Move Left</span>
-            <span class="key">A</span>
+        <div id="victory" class="victoryPage d-none"></div>
+        <div id="lost" class="lostPage d-none"></div>
+        <div id="startPage" class="startPage" onclick="startGame()">
+            <div class="startButton">Start Game</div>
         </div>
-        <div class="keyContener">
-            <span class="keyDescription">Move Right</span>
-            <span class="key">D</span>
+    
+        <div id="helpBox" class="helpBox">
+            <div class="keyContener">
+                <span class="keyDescription">Move Left</span>
+                <span class="key">A</span>
+            </div>
+            <div class="keyContener">
+                <span class="keyDescription">Move Right</span>
+                <span class="key">D</span>
+            </div>
+            <div class="keyContener">
+                <span class="keyDescription">Jump</span>
+                <span class="key">W</span>
+            </div>
+            <div class="keyContener">
+                <span class="keyDescription">Throw</span>
+                <span class="key">Space</span>
+            </div>
         </div>
-        <div class="keyContener">
-            <span class="keyDescription">Jump</span>
-            <span class="key">W</span>
-        </div>
-        <div class="keyContener">
-            <span class="keyDescription">Throw</span>
-            <span class="key">Space</span>
-        </div>
-    </div>
-
-    <div class="overlayObject">
-        <div id="muteValume" onclick="toggleMute()">
-            <img id="volumeOff" class="overlayObjectIcon" src="img/11_icons/volume_off.png"
-                alt="Volume Off">
-            <img id="volumeOn" class="overlayObjectIcon d-none" src="img/11_icons/volume_up.png"
-                alt="Volume Up">
-        </div>
-        <img class="overlayObjectIcon" onclick="fullscreen()" src="img/11_icons/fullscreen.png" alt="Fullscreen">
     </div>
 
 </body>
