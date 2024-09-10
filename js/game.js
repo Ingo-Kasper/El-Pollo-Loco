@@ -47,15 +47,32 @@ function toggleMute() {
   }
 }
 
-/**
- * Save Sounds in an Array and then stop them.
- */
-function handleMute() {
-  allSounds.forEach((sound) => {
-    sound.muted = isMuted;
-    // sound.pause();
-  });
+function fullscreen(){
+  let fullscreen = document.getElementById("fullscreen");
+  enterFullscreen(fullscreen);
+  exitFullscreen(fullscreen);
 }
+
+function enterFullscreen(element) {
+  if (element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if (element.msRequestFullscreen) {
+    // for IE11 (remove June 15, 2022)
+    element.msRequestFullscreen();
+  } else if (element.webkitRequestFullscreen) {
+    // iOS Safari
+    element.webkitRequestFullscreen();
+  }
+}
+
+function exitFullscreen() {
+  if(document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if(document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  }
+}
+
 
 window.addEventListener("keydown", (e) => {
   if (e.code === "ArrowRight" || e.keyCode === 68) {
