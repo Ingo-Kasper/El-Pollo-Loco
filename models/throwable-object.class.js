@@ -50,7 +50,6 @@ class ThrowbaleObject extends MovableObject {
     clearInterval(this.bottleRotation);
     this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
     this.bottleSplash = setTimeout(() => {
-      this.y = 1000;
     }, 1000 / 10);
     clearInterval(this.bottleSplash);
   }
