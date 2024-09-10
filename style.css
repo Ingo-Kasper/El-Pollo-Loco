@@ -41,6 +41,23 @@ canvas {
   text-shadow: 5px 2px 2px #9f3b18;
 }
 
+.helpBox {
+  display: flex;
+  margin-top: 12px;
+}
+
+.key {
+  font-size: 1.5em;
+  text-shadow: 5px 2px 2px #9f3b18;
+}
+
+.keyDescription {
+  font-size: 1.5em;
+  color: #ffd70b;
+  text-shadow: 5px 2px 2px #9f3b18;
+  margin: 0 4px 0 23px;
+}
+
 @font-face {
   font-family: "ambystomaMexicanum";
   src: url("fonts/ambystomaMexicanum-VR7V.ttf") format("truetype");
