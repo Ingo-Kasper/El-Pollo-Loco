@@ -1,7 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let isMuted = true;
+let isMuted = false;
 
 let allSounds = [
   new Audio("audio/el-Pollo-Koco-Classig/bottleBreak.mp3"), // Flasche zerbricht
@@ -36,14 +36,12 @@ function initGame() {
  */
 function toggleMute() {
   const audioMute = document.getElementById("muteValume");
-  if (!audio) {
-    audio = true;
-    audioMute.src = "img/img/sound.png";
+  if (!isMuted) {
+    isMuted = true;
     document.getElementById("volumeOff").classList.add("d-none");
     document.getElementById("volumeOn").classList.remove("d-none");
   } else {
-    audio = false;
-    audioMute.src = "img/no-sound.png";
+    isMuted = false;
     document.getElementById("volumeOff").classList.remove("d-none");
     document.getElementById("volumeOn").classList.add("d-none");
   }
