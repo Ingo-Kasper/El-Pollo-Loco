@@ -2,8 +2,21 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 
-function init() {
-  canvas = document.getElementById("canvas");
+/**
+ * Start the game
+ */
+function startGame() {
+  document.getElementById("startPage").classList.add("d-none");
+  document.getElementById("canvas").classList.remove("d-none");
+  inetLevel();
+  initGame();
+}
+
+/**
+ * This method inits the game by creating a new World Onject and define the canvas.
+ */
+function initGame() {
+  canvas = document.getElementById('canvas');
   world = new World(canvas, keyboard);
 }
 
