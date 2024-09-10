@@ -130,10 +130,13 @@ class World {
       this.level.enemies.forEach((enemy, enemyIndex) => {
         if (this.isCollidingWith(bottle, enemy) && !bottle.hasHit) {
           if (enemy instanceof Endboss) {
-            if (enemy.bossEnergy > 0) {
+            if (enemy.bossEnergy > 0 && enemy.angry == true) {
               enemy.bossEnergy -= 20;
               this.bossBar.setBosshBar(enemy.bossEnergy);
               enemy.endbossHurt();
+            }
+            if (enemy.angry == false) {
+              enemy.endbossAngry();
             }
             if (enemy.bossEnergy <= 0) {
               bottle.throwHits();

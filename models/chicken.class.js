@@ -11,7 +11,9 @@ class Chicken extends MovableObject {
     bottom: 20,
   };
 
-  chicken_Hit_sound = new Audio("../audio/el-Pollo-Koco-Classig/chickenHit.mp3")
+  chicken_Hit_sound = new Audio(
+    "../audio/el-Pollo-Koco-Classig/chickenHit.mp3"
+  );
 
   IMAGES_WALKING = [
     "img/3_enemies_chicken/chicken_normal/1_walk/1_w.png",
@@ -23,7 +25,7 @@ class Chicken extends MovableObject {
 
   constructor(x) {
     super();
-    this.loadImage("img/3_enemies_chicken/chicken_normal/1_walk/1_w.png")
+    this.loadImage("img/3_enemies_chicken/chicken_normal/1_walk/1_w.png");
     this.loadImages(this.IMAGES_WALKING);
     this.x = x + Math.random() * 1000;
     this.speed = 0.1 + Math.random() * 0.25;
@@ -48,7 +50,7 @@ class Chicken extends MovableObject {
     this.loadImage("img/3_enemies_chicken/chicken_normal/2_dead/dead.png");
     this.y = 400;
   }
-  
+
   stopMoving() {
     this.speed = 0;
     this.acceleration = 0;

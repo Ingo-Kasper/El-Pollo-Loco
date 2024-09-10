@@ -13,8 +13,6 @@ class Endboss extends MovableObject {
     bottom: 10,
   };
 
-  gameWin_sound = new Audio("audio/level_win.mp3");
-
   IMAGES_WALKING = [
     "img/4_enemie_boss_chicken/1_walk/G1.png",
     "img/4_enemie_boss_chicken/1_walk/G2.png",
@@ -29,11 +27,9 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/2_alert/G9.png",
   ];
   IMAGES_ALERT = [
-    "img/4_enemie_boss_chicken/2_alert/G5.png",
-    "img/4_enemie_boss_chicken/2_alert/G6.png",
-    "img/4_enemie_boss_chicken/2_alert/G7.png",
-    "img/4_enemie_boss_chicken/2_alert/G8.png",
-    "img/4_enemie_boss_chicken/2_alert/G9.png",
+    "img/4_enemie_boss_chicken/4_hurt/G21.png",
+    "img/4_enemie_boss_chicken/4_hurt/G22.png",
+    "img/4_enemie_boss_chicken/4_hurt/G23.png",
     "img/4_enemie_boss_chicken/2_alert/G10.png",
     "img/4_enemie_boss_chicken/2_alert/G11.png",
     "img/4_enemie_boss_chicken/2_alert/G12.png",
@@ -79,8 +75,8 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEAD);
 
-    this.x = 1400; // die Startposition des Endbosses
-    this.speed = 0.1 + Math.random() * 0.25;
+    this.x = x; // die Startposition des Endbosses
+    this.speed = 0.1;
 
     this.animate();
     this.hurtAnimationPlaying = false;
@@ -101,12 +97,13 @@ class Endboss extends MovableObject {
 
     this.movingAnimations = setInterval(() => {
       this.playAnimation(this.IMAGES_WALKING);
-    }, 1000 / 10);
+    }, 1000 / 2);
   }
 
   endbossHurt() {
     // Überprüfen, ob das Intervall bereits läuft
     if (!this.hurtAnimationPlaying) {
+      this.chicken_Hit_sound.play();
       this.hurtAnimationPlaying = true;
       this.hurtAnimationInterval = setInterval(() => {
         this.playAnimation(this.IMAGES_HURT);
@@ -118,6 +115,27 @@ class Endboss extends MovableObject {
       }, 1000);
     }
   }
+
+  /**
+   * This method runs when endboss is angry, shows differnet images and increase the speed of the endboss
+   */
+  endbossAngry() {
+    if (!this.alertAnimationPlaying) {
+      this.chicken_Hit_sound.play();
+      this.alertAnimationPlaying = true;
+      this.alertAnimationPlaying = setInterval(() => {
+        this.playAnimation(this.IMAGES_ALERT);
+      }, 1000 / 5);
+
+      setTimeout(() => {
+        clearInterval(this.alertAnimationPlaying);
+        this.alertAnimationPlaying = false;
+        this.angry = true;
+        this.speed = 2;
+      }, 1000);
+    }
+  }
+
   /**
    * This method runs when the endboss is dead and the game/level is finished and game won.
    */
@@ -130,16 +148,5 @@ class Endboss extends MovableObject {
     // END OF THE GAME
     world.gameEnd = true;
     world.gameWon = true;
-  }
-
-  /**
-   * This method runs when endboss is angry, shows differnet images and increase the speed of the endboss
-   */
-  endbossAngry() {
-    setTimeout(() => {
-      this.playAnimation(this.IMAGES_ALERTED);
-      this.angry = true;
-      this.speed = 12;
-    }, 1200);
   }
 }
