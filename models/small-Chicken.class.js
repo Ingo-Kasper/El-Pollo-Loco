@@ -10,8 +10,6 @@ class SmallChicken extends MovableObject {
     bottom: 0,
   };
 
-  chicken_Hit_sound = new Audio("../audio/el-Pollo-Koco-Classig/chickenHit.mp3")
-
   IMAGES_WALKING = [
     "img/3_enemies_chicken/chicken_small/1_walk/1_w.png",
     "img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
@@ -19,7 +17,6 @@ class SmallChicken extends MovableObject {
     "img/3_enemies_chicken/chicken_small/1_walk/2_w.png",
   ];
   IMAGE_DEAD = "img/3_enemies_chicken/chicken_small/2_dead/dead.png";
-
 
   constructor(x) {
     super().loadImage("img/3_enemies_chicken/chicken_small/1_walk/1_w.png");
@@ -41,10 +38,12 @@ class SmallChicken extends MovableObject {
   }
 
   playDeathAnimation() {
-    this.chicken_Hit_sound.play();
     clearInterval(this.moveInterval);
     clearInterval(this.moveAnimtionInterval);
     this.loadImage("img/3_enemies_chicken/chicken_small/2_dead/dead.png");
     this.y = 400;
+    if (this.isMuteOn()) {
+      allSounds[2].play();
+    }
   }
 }

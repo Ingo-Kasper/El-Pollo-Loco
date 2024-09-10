@@ -62,10 +62,6 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
 
-  chicken_Hit_sound = new Audio(
-    "../audio/el-Pollo-Koco-Classig/chickenHit.mp3"
-  );
-
   constructor(x) {
     super();
     this.loadImage(this.IMAGES_WAIT[0]);
@@ -103,7 +99,9 @@ class Endboss extends MovableObject {
   endbossHurt() {
     // Überprüfen, ob das Intervall bereits läuft
     if (!this.hurtAnimationPlaying) {
-      this.chicken_Hit_sound.play();
+      if (this.isMuteOn()) {
+        allSounds[2].play();
+      }
       this.hurtAnimationPlaying = true;
       this.hurtAnimationInterval = setInterval(() => {
         this.playAnimation(this.IMAGES_HURT);
@@ -121,7 +119,9 @@ class Endboss extends MovableObject {
    */
   endbossAngry() {
     if (!this.alertAnimationPlaying) {
-      this.chicken_Hit_sound.play();
+      if (this.isMuteOn()) {
+        allSounds[2].play();
+      }
       this.alertAnimationPlaying = true;
       this.alertAnimationPlaying = setInterval(() => {
         this.playAnimation(this.IMAGES_ALERT);

@@ -53,4 +53,8 @@ class DrawableObject {
       this.imageCache[path] = img;
     });
   }
+
+  isMuteOn() {
+    return isMuted == true;
+  }
 }

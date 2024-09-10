@@ -10,7 +10,7 @@ class CoinBar extends DrawableObject {
     "img/7_statusbars/1_statusbar/1_statusbar_coin/blue/100.png",
   ];
 
-  coin_sound = new Audio("../audio/el-Pollo-Koco-Classig/collectCoin.mp3")
+
 
   constructor() {
     super();
@@ -52,7 +52,9 @@ class CoinBar extends DrawableObject {
     if (this.coinBar < 100) {
       this.coinBar += 20;
       this.setCoinBar(this.coinBar);
-      this.coin_sound.play();
+    }
+    if (this.isMuteOn()) {
+      allSounds[3].play();
     }
   }
 }

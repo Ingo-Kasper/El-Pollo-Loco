@@ -19,7 +19,7 @@ h1 {
 }
 
 canvas {
-  display:block;
+  display: block;
 }
 
 .d-none {
@@ -55,6 +55,29 @@ canvas {
   font-size: 1.5em;
   color: #ffd70b;
   text-shadow: 5px 2px 2px #9f3b18;
+}
+
+.overlayObject {
+  position: absolute;
+  right: 130px;
+  top: 54px;
+  display: flex;
+  gap: 16px;
+}
+
+.overlayObjectIcon {
+  height: 30px;
+  width: 30px;
+}
+
+.overlayObjectIcon:hover {
+  cursor: pointer;
+}
+
+.keyContener {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 0 4px 0 23px;
 }
 

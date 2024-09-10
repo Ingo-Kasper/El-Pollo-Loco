@@ -53,7 +53,9 @@ class BottleBar extends DrawableObject {
     if (this.bottleBar < 100) {
       this.bottleBar += 20;
       this.setBottleBar(this.bottleBar);
-      this.bottle_Break_sound.play();
+      if (this.isMuteOn()) {
+        allSounds[0].play();
+      }
     }
   }
 
@@ -61,11 +63,15 @@ class BottleBar extends DrawableObject {
     if (this.bottleBar >= 20) {
       this.bottleBar -= 20;
       this.setBottleBar(this.bottleBar);
-      this.bottle_Throwing_sound.play();
+      if (this.isMuteOn()) {
+        allSounds[1].play();
+      }
     } else {
       this.bottleBar = 0;
       this.setBottleBar(this.bottleBar);
-      this.bottle_Throwing_sound.play();
+      if (this.isMuteOn()) {
+        allSounds[1].play();
+      }
     }
   }
 }

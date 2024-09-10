@@ -41,22 +41,32 @@
     </div>
 
     <div id="helpBox" class="helpBox">
-        <div>
+        <div class="keyContener">
             <span class="keyDescription">Move Left</span>
             <span class="key">A</span>
         </div>
-        <div>
+        <div class="keyContener">
             <span class="keyDescription">Move Right</span>
             <span class="key">D</span>
         </div>
-        <div>
+        <div class="keyContener">
             <span class="keyDescription">Jump</span>
             <span class="key">W</span>
         </div>
-        <div>
+        <div class="keyContener">
             <span class="keyDescription">Throw</span>
             <span class="key">Space</span>
         </div>
+    </div>
+
+    <div class="overlayObject">
+        <div id="muteValume">
+            <img id="volumeOff" class="overlayObjectIcon" onclick="toggleMute()" src="img/11_icons/volume_off.png"
+                alt="Volume Off">
+            <img id="volumeOn" class="overlayObjectIcon d-none" onclick="toggleMute()" src="img/11_icons/volume_up.png"
+                alt="Volume Up">
+        </div>
+        <img id="fullscreen" class="overlayObjectIcon" onclick="" src="img/11_icons/fullscreen.png" alt="Fullscreen">
     </div>
 
 </body>

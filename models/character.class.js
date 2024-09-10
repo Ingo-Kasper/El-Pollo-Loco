@@ -1,4 +1,5 @@
 class Character extends MovableObject {
+  world;
   y = 240;
   width = 100;
   height = 200;
@@ -92,10 +93,6 @@ class Character extends MovableObject {
     "img/2_character_pepe/1_idle/long_idle/I-20.png",
   ];
 
-  world;
-  walking_sound = new Audio("../audio/el-Pollo-Koco-Classig/running.mp3");
-  jump_sound = new Audio("../audio/el-Pollo-Koco-Classig/jump.mp3")
-
   constructor() {
     super().loadImage("img/2_character_pepe/2_walk/W-21.png");
     this.loadImages(this.IMAGES_DEAD);
@@ -112,16 +109,20 @@ class Character extends MovableObject {
 
   animate() {
     setInterval(() => {
-      this.walking_sound.pause();
+      allSounds[5].pause();
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
         this.moveRight();
-        this.walking_sound.play();
+        if (this.isMuteOn()) {
+          allSounds[5].play();
+        }
       }
 
       if (this.world.keyboard.LEFT && this.x > -500) {
         this.moveLeft();
-        this.walking_sound.play();
         this.otherDirection = true;
+        if (this.isMuteOn()) {
+          allSounds[5].play();
+        }
       }
       this.world.camera_x = -this.x + 100; // Horizontal camera wor
 
@@ -158,6 +159,8 @@ class Character extends MovableObject {
 
   jump() {
     this.speedY = 25;
-    this.jump_sound.play()
+    if (this.isMuteOn()) {
+      allSounds[4].play();
+    }
   }
 }
