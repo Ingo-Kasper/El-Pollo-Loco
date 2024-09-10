@@ -47,20 +47,19 @@ class World {
             enemy instanceof Chicken ||
             enemy instanceof Endboss
           ) {
-            enemy.playDeathAnimation();
-
             setTimeout(() => {
               this.level.enemies = this.level.enemies.filter(
                 (e) => e !== enemy
               );
             }, 400);
+            enemy.playDeathAnimation();
           }
         } else {
           this.character.hit();
           this.healBar.setHealthBar(this.character.energy);
         }
       }
-      return enemy.energy > 0; // Entfernt tote Feinde
+      return enemy.energy > 0;
     });
   }
 

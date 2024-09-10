@@ -31,11 +31,11 @@ class SmallChicken extends MovableObject {
   }
 
   animate() {
-    setInterval(() => {
+    this.moveInterval = setInterval(() => {
       this.moveLeft();
     }, 1000 / 110);
 
-    setInterval(() => {
+    this.moveAnimtionInterval = setInterval(() => {
       this.playAnimation(this.IMAGES_WALKING);
     }, 1000 / 10);
   }
@@ -43,7 +43,7 @@ class SmallChicken extends MovableObject {
   playDeathAnimation() {
     this.chicken_Hit_sound.play();
     clearInterval(this.moveInterval);
-    clearInterval(this.animationInterval);
+    clearInterval(this.moveAnimtionInterval);
     this.loadImage("img/3_enemies_chicken/chicken_small/2_dead/dead.png");
     this.y = 400;
   }

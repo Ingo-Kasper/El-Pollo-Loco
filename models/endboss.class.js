@@ -135,18 +135,4 @@ class Endboss extends MovableObject {
       }, 1000);
     }
   }
-
-  /**
-   * This method runs when the endboss is dead and the game/level is finished and game won.
-   */
-  endbossDead() {
-    if (audio) {
-      this.gamewon_sound.play();
-    }
-    this.playAnimation(this.IMAGES_DEAD);
-    this.removeObject();
-    // END OF THE GAME
-    world.gameEnd = true;
-    world.gameWon = true;
-  }
 }
