@@ -126,7 +126,7 @@ class World {
     }
 
     this.throwableObjects.forEach((bottle, bottleIndex) => {
-      this.level.enemies.forEach((enemy, enemyIndex) => {
+      this.level.enemies.forEach((enemy, index) => {
         if (this.isCollidingWith(bottle, enemy) && !bottle.hasHit) {
           if (enemy instanceof Endboss) {
             if (enemy.bossEnergy > 0 && enemy.angry == true) {
@@ -140,38 +140,21 @@ class World {
             if (enemy.bossEnergy <= 0) {
               bottle.throwHits();
               setTimeout(() => {
-                this.level.enemies.splice(enemyIndex, 1);
+                this.level.enemies.splice(index, 1);
                 enemy.playDeathAnimation();
               }, 400);
             }
           } if (
-            enemy instanceof Chicken) {
+            enemy instanceof Chicken || enemy instanceof SmallChicken) {
             if (enemy.energy > 0) {
               enemy.energy -= 100;
               if (enemy.energy <= 0) {
                 bottle.throwHits();
-                setTimeout(() => {
-                  this.level.enemies.splice(enemyIndex, 1);
+                  this.level.enemies.splice(index, 1);
                   enemy.playDeathAnimation();
-                }, 400);
               }
             }
-          } if (
-            enemy instanceof SmallChicken) {
-            if (enemy.energy > 0) {
-              enemy.energy -= 100;
-              if (enemy.energy <= 0) {
-                bottle.throwHits();
-                setTimeout(() => {
-                  this.level.enemies.splice(enemyIndex, 1);
-                  enemy.playDeathAnimation();
-                }, 400);
-              }
-            }
-          }
-          this.throwableObjects.splice(bottleIndex, 1);
-          enemy.playDeathAnimation();
-          bottle.hasHit = true;
+          } 
         }
       });
     });

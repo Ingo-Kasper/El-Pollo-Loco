@@ -37,24 +37,21 @@ class ThrowbaleObject extends MovableObject {
   throw() {
     this.speedY = 30;
     this.applyGravity();
-    setInterval(() => {
+    this.bottleThrowing = setInterval(() => {
       this.x += 10;
     }, 1000 / 25);
-    setInterval(() => {
+    this.bottleRotation = setInterval(() => {
       this.playAnimation(this.IMAGES_BOTTLE_ROTATION);
     }, 1000 / 10);
   }
 
   throwHits() {
+    clearInterval(this.bottleThrowing);
+    clearInterval(this.bottleRotation);
     this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
-    let i = 0;
-    const images = this.IMAGES_BOTTLE_SPLASH;
-    const interval = setInterval(() => {
-        this.img = this.imageCache[images[i]];
-        i++;
-        if (i >= images.length) {
-            clearInterval(interval);
-        }
-    }, 1000 / 120);
-}
+    this.bottleSplash = setTimeout(() => {
+      this.y = 1000;
+    }, 1000 / 10);
+    clearInterval(this.bottleSplash);
+  }
 }
