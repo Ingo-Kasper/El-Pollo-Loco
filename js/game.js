@@ -3,7 +3,6 @@ let world;
 let keyboard = new Keyboard();
 let isMuted = false;
 
-
 let allSounds = [
   new Audio("audio/el-Pollo-Koco-Classig/bottleBreak.mp3"), // Flasche zerbricht
   new Audio("audio/el-Pollo-Koco-Classig/bottleThrowing.mp3"), // Flaschen Wurf
@@ -30,6 +29,7 @@ function startGame() {
 function initGame() {
   canvas = document.getElementById("canvas");
   world = new World(canvas, keyboard);
+  toutchControl();
 }
 
 /**
@@ -74,6 +74,49 @@ function exitFullscreen() {
   }
 }
 
+function toutchControl() {
+document.getElementById("touchLeft").addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  keyboard.LEFT = true;
+  console.log("touchLeft");
+});
+
+document.getElementById("touchLeft").addEventListener("touchend", (e) => {
+  e.preventDefault();
+  keyboard.LEFT = false;
+});
+
+document.getElementById("touchRight").addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  RIGHT = true;
+});
+
+document.getElementById("touchRight").addEventListener("touchend", (e) => {
+  e.preventDefault();
+  keyboard.RIGHT = false;
+});
+
+document.getElementById("touchJump").addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  keyboard.UP = true;
+});
+
+document.getElementById("touchJump").addEventListener("touchend", (e) => {
+  e.preventDefault();
+  keyboard.UP = false;
+});
+
+document.getElementById("touchThrow").addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  keyboard.SPACE = true;
+});
+
+document.getElementById("touchThrow").addEventListener("touchend", (e) => {
+  e.preventDefault();
+  keyboard.SPACE = false;
+});
+}
+
 window.addEventListener("keydown", (e) => {
   if (e.code === "ArrowRight" || e.keyCode === 68) {
     keyboard.RIGHT = true;
@@ -84,14 +127,8 @@ window.addEventListener("keydown", (e) => {
   if (e.code === "ArrowUp" || e.keyCode === 87) {
     keyboard.UP = true;
   }
-  if (e.code === "ArrowDown" || e.keyCode === 83) {
-    keyboard.DOWN = true;
-  }
   if (e.code === "Space") {
     keyboard.SPACE = true;
-  }
-  if (e.code === "KeyR") {
-    keyboard.R = true;
   }
 });
 
@@ -105,13 +142,7 @@ window.addEventListener("keyup", (e) => {
   if (e.code === "ArrowUp" || e.keyCode === 87) {
     keyboard.UP = false;
   }
-  if (e.code === "ArrowDown" || e.keyCode === 83) {
-    keyboard.DOWN = false;
-  }
   if (e.code === "Space") {
     keyboard.SPACE = false;
-  }
-  if (e.code === "KeyR") {
-    keyboard.R = false;
   }
 });
