@@ -10,6 +10,8 @@ class World {
   bottleBar = new BottleBar();
   bossBar = new BossBar();
   throwableObjects = [];
+  lastHitTime = 0;
+
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -39,6 +41,7 @@ class World {
   }
 
   collidingWihtEnemy() {
+    const currentTime = new Date().getTime();
     this.level.enemies = this.level.enemies.filter((enemy, index) => {
       if (this.isCharacterCollidingWith(enemy, index)) {
         if (this.isCharacterLandingOnEnemy(enemy, index)) {
@@ -48,10 +51,13 @@ class World {
             }, 400);
             enemy.playDeathAnimation();
           }
-        } else {
+        } else if (currentTime - this.lastHitTime >= 1000){
           this.character.hit();
           this.healBar.setHealthBar(this.character.energy);
           allSounds[7].play();
+          this.lastHitTime = currentTime;
+          console.log(this.lastHitTime);
+          
         }
       }
       return enemy.energy > 0;
