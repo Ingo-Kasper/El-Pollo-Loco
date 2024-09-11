@@ -13,13 +13,9 @@ body {
 
 h1 {
   font-size: 5em;
-  color: rgb(0 0 0 / 70%);
+  color: hwb(0 25% 75% / 0.99);
   text-align: center;
   text-shadow: 7px 6px 9px #0000005e;
-}
-
-canvas {
-  display: block;
 }
 
 .d-none {
@@ -70,7 +66,8 @@ canvas {
 
 .key {
   font-size: 1.5em;
-  text-shadow: 5px 2px 2px #9f3b18;
+  color: #3f3f3f;
+  text-shadow: 5px 2px 2px #9f3b18a8;
 }
 
 .keyDescription {
@@ -103,6 +100,36 @@ canvas {
   margin: 0 4px 0 23px;
 }
 
+.Mobile-Touch-Button {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  padding-left: 32px;
+}
+
+.Mobile-Touch-Button-Move {
+  height: 6vh;
+  width: 4vw;
+  object-fit: cover;
+}
+
+.Mobile-Touch-Button-Move:hover {
+  cursor: pointer;
+}
+
+.Mobile-Touch-Button-space {
+  height: 6vh;
+  width: 4vw;
+  margin-left: 500px;
+  filter: invert(1);
+  object-fit: cover;
+}
+
+.Mobile-Touch-Button-space:hover {
+  cursor: pointer;
+}
+
+
 @font-face {
   font-family: "ambystomaMexicanum";
   src: url("fonts/ambystomaMexicanum-VR7V.ttf") format("truetype");
@@ -122,8 +149,20 @@ canvas {
   }
 }
 
-@media (max-height: 700px) {
+@media (max-height: 810px) {
   h1 {
     display: none;
+  }
+}
+
+@media (max-height: 610px) {
+  .helpBox {
+    display: none;
+  }
+
+  .Mobile-Touch-Button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
   }
 }
