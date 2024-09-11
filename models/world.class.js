@@ -44,15 +44,14 @@ class World {
         if (this.isCharacterLandingOnEnemy(enemy, index)) {
           if (enemy instanceof SmallChicken || enemy instanceof Chicken) {
             setTimeout(() => {
-              this.level.enemies = this.level.enemies.filter(
-                (e) => e !== enemy
-              );
+              this.level.enemies = this.level.enemies.filter((e) => e !== enemy);
             }, 400);
             enemy.playDeathAnimation();
           }
         } else {
           this.character.hit();
           this.healBar.setHealthBar(this.character.energy);
+          allSounds[7].play();
         }
       }
       return enemy.energy > 0;
