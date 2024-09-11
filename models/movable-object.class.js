@@ -87,6 +87,11 @@ class MovableObject extends DrawableObject {
     this.otherDirection = false;
   }
 
+  /**
+   * Die länge der Animation wird an den Bilder aus gelegt
+   * wird für animate() Methode benutzt
+   * @param {Die bilder der IMAGE} images 
+   */
   playAnimation(images) {
     let i = this.currentImage % images.length;
     let path = images[i];

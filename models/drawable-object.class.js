@@ -14,6 +14,9 @@ class DrawableObject {
     this.img.src = path;
   }
 
+  /**
+   * In der Draw Methode wird das Bild auf den Canvas gezeichnet
+   */
   draw(ctx) {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }

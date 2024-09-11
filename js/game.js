@@ -3,6 +3,7 @@ let world;
 let keyboard = new Keyboard();
 let isMuted = false;
 
+
 let allSounds = [
   new Audio("audio/el-Pollo-Koco-Classig/bottleBreak.mp3"), // Flasche zerbricht
   new Audio("audio/el-Pollo-Koco-Classig/bottleThrowing.mp3"), // Flaschen Wurf
@@ -47,7 +48,7 @@ function toggleMute() {
   }
 }
 
-function fullscreen(){
+function fullscreen() {
   let fullscreen = document.getElementById("fullscreen");
   enterFullscreen(fullscreen);
   exitFullscreen(fullscreen);
@@ -66,13 +67,12 @@ function enterFullscreen(element) {
 }
 
 function exitFullscreen() {
-  if(document.exitFullscreen) {
+  if (document.exitFullscreen) {
     document.exitFullscreen();
-  } else if(document.webkitExitFullscreen) {
+  } else if (document.webkitExitFullscreen) {
     document.webkitExitFullscreen();
   }
 }
-
 
 window.addEventListener("keydown", (e) => {
   if (e.code === "ArrowRight" || e.keyCode === 68) {

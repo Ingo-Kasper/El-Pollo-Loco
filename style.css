@@ -34,22 +34,25 @@ canvas {
 }
 
 .victoryPage {
-
-  width: 720px;
-  height: 480px;
+  width: 100vw;
+  height: 100vh;
   background: url(../img/9_intro_outro_screens/win/win_2.png);
+  background-size: contain;
   background-repeat: no-repeat;
-  background-size: cover;
-  position: fixed;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .lostPage {
-  width: 720px;
-  height: 480px;
-  background: url(../img/9_intro_outro_screens/game_over/game_over.png);
-  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+  background: url(../img/9_intro_outro_screens/game_over/you_lost.png);
   background-size: cover;
-  position: fixed;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .startButton {

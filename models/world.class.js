@@ -1,10 +1,10 @@
 class World {
-  character = new Character();
   level = level1;
   canvas;
   ctx;
   keyboard;
   camera_x = 0;
+  character = new Character();
   healBar = new HealBar();
   coinBar = new CoinBar();
   bottleBar = new BottleBar();
@@ -42,10 +42,7 @@ class World {
     this.level.enemies = this.level.enemies.filter((enemy, index) => {
       if (this.isCharacterCollidingWith(enemy, index)) {
         if (this.isCharacterLandingOnEnemy(enemy, index)) {
-          if (
-            enemy instanceof SmallChicken ||
-            enemy instanceof Chicken
-          ) {
+          if (enemy instanceof SmallChicken || enemy instanceof Chicken) {
             setTimeout(() => {
               this.level.enemies = this.level.enemies.filter(
                 (e) => e !== enemy
@@ -139,21 +136,20 @@ class World {
             if (enemy.bossEnergy <= 0) {
               bottle.throwHits();
               enemy.endbossDead();
-              document.getElementById("canvas").classList.add("d-none");
-              document.getElementById("startPage").classList.remove("d-none");
-              document.getElementById("startPage").classList.add("victoryPage");
+              clearAllIntervals();
+              document.getElementById("victory").classList.remove("d-none");
             }
-          } if (
-            enemy instanceof Chicken || enemy instanceof SmallChicken) {
+          }
+          if (enemy instanceof Chicken || enemy instanceof SmallChicken) {
             if (enemy.energy > 0) {
               enemy.energy -= 100;
               if (enemy.energy <= 0) {
                 bottle.throwHits();
-                  this.level.enemies.splice(index, 1);
-                  enemy.playDeathAnimation();
+                this.level.enemies.splice(index, 1);
+                enemy.playDeathAnimation();
               }
             }
-          } 
+          }
         }
       });
     });
