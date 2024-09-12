@@ -11,7 +11,7 @@ class World {
   bossBar = new BossBar();
   throwableObjects = [];
   lastHitTime = 0;
-
+  LastBossHitTime = 0;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -47,15 +47,17 @@ class World {
         if (this.isCharacterLandingOnEnemy(enemy, index)) {
           if (enemy instanceof SmallChicken || enemy instanceof Chicken) {
             setTimeout(() => {
-              this.level.enemies = this.level.enemies.filter((e) => e !== enemy);
+              this.level.enemies = this.level.enemies.filter(
+                (e) => e !== enemy
+              );
             }, 400);
             enemy.playDeathAnimation();
           }
-        } else if (currentTime - this.lastHitTime >= 1000){
+        } else if (currentTime - this.lastHitTime >= 1000) {
           this.character.hit();
           this.healBar.setHealthBar(this.character.energy);
           allSounds[7].play();
-          this.lastHitTime = currentTime;          
+          this.lastHitTime = currentTime;
         }
       }
       return enemy.energy > 0;
@@ -111,6 +113,7 @@ class World {
    * 4. bottle.throwHits() - bottle hit animation
    */
   checkThrowableObjects() {
+    const currentTime = new Date().getTime();
     if (this.isThrown() && this.isThroingThere() && !this.isBottleThrown) {
       let bottle = new ThrowbaleObject(
         this.character.x + 100,
@@ -123,20 +126,23 @@ class World {
     if (!this.isThrown()) {
       this.isBottleThrown = false;
     }
-
     this.throwableObjects.forEach((bottle) => {
       this.level.enemies.forEach((enemy, index) => {
         if (this.isCollidingWith(bottle, enemy) && !bottle.hasHit) {
           if (enemy instanceof Endboss) {
-            if (enemy.bossEnergy > 0 && enemy.angry == true) {
+            if (
+              enemy.bossEnergy > 0 &&
+              enemy.angry == true &&
+              currentTime - this.LastBossHitTime >= 1000
+            ) {
               enemy.bossEnergy -= 20;
               this.bossBar.setBosshBar(enemy.bossEnergy);
               enemy.endbossHurt();
+              this.LastBossHitTime = currentTime;
             } else if (enemy.angry == false) {
               enemy.angry = true;
               enemy.endbossAngry();
               console.log(enemy.angry);
-              
             }
             if (enemy.bossEnergy <= 0 && enemy.bossKilled == false) {
               this.bossKilled = true;
