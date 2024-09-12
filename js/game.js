@@ -49,6 +49,16 @@ function restartGameByGameOver() {
 /**
  * back to the start page
  */
+functionfinishGameByVitctory() {
+  document.getElementById("victory").classList.add("d-none");
+  document.getElementById("victory").classList.remove("victoryPage")
+  document.getElementById("startPage").classList.remove("d-none");
+  document.getElementById("canvas").classList.add("d-none");
+}
+
+/**
+ * back to the start page
+ */
 function finishGameByGameOver() {
   document.getElementById("lost").classList.add("d-none");
   document.getElementById("lost").classList.remove("lostPage")
