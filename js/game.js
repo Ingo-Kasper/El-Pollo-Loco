@@ -27,6 +27,23 @@ function startGame() {
 }
 
 /**
+ * Restart the game
+ */
+function restartGameByVitctory() {
+  document.getElementById("victory").classList.add("d-none");
+  document.getElementById("victory").classList.remove("victoryPage")
+  inetLevel();
+  initGame();
+}
+
+function restartGameByGameOver() {
+  document.getElementById("lost").classList.add("d-none");
+  document.getElementById("lost").classList.remove("lostPage")
+  inetLevel();
+  initGame();
+}
+
+/**
  * This method inits the game by creating a new World Onject and define the canvas.
  */
 function initGame() {
