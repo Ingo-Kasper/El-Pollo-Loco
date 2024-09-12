@@ -142,6 +142,7 @@ class Character extends MovableObject {
       this.playAnimation(this.IMAGES_DEAD); // Dead animation
       clearAllIntervals();
       document.getElementById("lost").classList.remove("d-none");
+      document.getElementById("lost").classList.add("lostPage");
     } else if (this.isHurt()) {
       this.playAnimation(this.IMAGE_HURT); // Hurt animation muss noch beim schaden ein ruckwurf geben
     } else if (this.isAboveGround()) {

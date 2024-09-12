@@ -55,9 +55,7 @@ class World {
           this.character.hit();
           this.healBar.setHealthBar(this.character.energy);
           allSounds[7].play();
-          this.lastHitTime = currentTime;
-          console.log(this.lastHitTime);
-          
+          this.lastHitTime = currentTime;          
         }
       }
       return enemy.energy > 0;
@@ -143,6 +141,7 @@ class World {
               enemy.endbossDead();
               clearAllIntervals();
               document.getElementById("victory").classList.remove("d-none");
+              document.getElementById("victory").classList.add("victoryPage")
             }
           }
           if (enemy instanceof Chicken || enemy instanceof SmallChicken) {

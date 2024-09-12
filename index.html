@@ -44,8 +44,14 @@
             </div>
             <img class="overlayObjectIcon" onclick="fullscreen()" src="img/11_icons/fullscreen.png" alt="Fullscreen">
         </div>
-        <div id="victory" class="victoryPage d-none"></div>
-        <div id="lost" class="lostPage d-none"></div>
+        <div id="victory" class="d-none">
+            <span class="restartButton">Restart</span>
+            <span class="finishGame">Finish Game</span>
+        </div>
+        <div id="lost" class="d-none">
+            <span class="restartButton">Restart</span>
+            <span class="finishGame">Finish Game</span>
+        </div>
         <div id="startPage" class="startPage" onclick="startGame()">
             <div class="startButton">Start Game</div>
         </div>

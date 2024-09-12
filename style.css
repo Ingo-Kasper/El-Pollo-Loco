@@ -39,6 +39,8 @@ h1 {
   position: absolute;
   top: 0;
   left: 0;
+  display: flex;
+  justify-content: space-around;
 }
 
 .lostPage {
@@ -49,16 +51,32 @@ h1 {
   position: absolute;
   top: 0;
   left: 0;
+  display: flex;
+  justify-content: space-around;
 }
 
 .startButton {
   font-size: 3em;
-  margin-top: 60px;
-  text-align: center;
+  padding-top: 60px;
+  color: #ffd70b;
+  text-shadow: 5px 2px 2px #9f3b18;
+  display: flex;
+  justify-content: center;
+}
+
+.restartButton{
+  font-size: 3em;
+  padding-top: 70px;
   color: #ffd70b;
   text-shadow: 5px 2px 2px #9f3b18;
 }
 
+.finishGame {
+  font-size: 3em;
+  padding-top: 70px;
+  color: #ffd70b;
+  text-shadow: 5px 2px 2px #9f3b18;
+}
 .helpBox {
   display: flex;
   margin-top: 12px;
