@@ -105,74 +105,95 @@ class World {
     return this.character.isColliding(Item);
   }
 
-  /**
-   * Query the collision of the bottle throw
-   * 1. this.isThrown() - throw button
-   * 2. this.isThroingThere() - whether there are enough bottles
-   * 3. bottle.isColliding(enemy) - check if the bottle hits the enemy
-   * 4. bottle.throwHits() - bottle hit animation
-   */
   checkThrowableObjects() {
     const currentTime = new Date().getTime();
-    if (this.isThrown() && this.isThroingThere() && !this.isBottleThrown) {
-      let bottle = new ThrowbaleObject(
-        this.character.x + 100,
-        this.character.y + 100
-      );
-      this.bottleBar.throwPullOff();
-      this.throwableObjects.push(bottle);
-      this.isBottleThrown = true;
+    if (this.canThrowBottle()) {
+        this.createBottle();
     }
+    this.resetBottleThrow();
+    this.checkCollisionsWithEnemies(currentTime);
+}
+
+canThrowBottle() {
+    return this.isThrown() && this.isThroingThere() && !this.isBottleThrown;
+}
+
+createBottle() {
+    let bottle = new ThrowbaleObject(
+        this.character.x + 80,
+        this.character.y + 200
+    );
+    this.setBottleDirection(bottle);
+    this.bottleBar.throwPullOff();
+    this.throwableObjects.push(bottle);
+    this.isBottleThrown = true;
+}
+
+setBottleDirection(bottle) {
+    if (this.keyboard.RIGHT) {
+      this.otherDirection = false
+    } else if (this.keyboard.LEFT) {
+    }
+}
+
+resetBottleThrow() {
     if (!this.isThrown()) {
-      this.isBottleThrown = false;
+        this.isBottleThrown = false;
     }
+}
+
+checkCollisionsWithEnemies(currentTime) {
     this.throwableObjects.forEach((bottle) => {
-      this.level.enemies.forEach((enemy, index) => {
-        if (this.isCollidingWith(bottle, enemy) && !bottle.hasHit) {
-          if (enemy instanceof Endboss) {
-            if (
-              enemy.bossEnergy > 0 &&
-              enemy.angry == true &&
-              currentTime - this.LastBossHitTime >= 1000
-            ) {
-              enemy.bossEnergy -= 20;
-              this.bossBar.setBosshBar(enemy.bossEnergy);
-              enemy.endbossHurt();
-              this.LastBossHitTime = currentTime;
-            } else if (
-              enemy.angry == false &&
-              currentTime - this.LastBossHitTime >= 1000
-            ) {
-              enemy.angry = true;
-              enemy.endbossAngry();
-              this.LastBossHitTime = currentTime;
-            }
-            if (
-              enemy.bossEnergy <= 0 &&
-              enemy.bossKilled == false &&
-              currentTime - this.LastBossHitTime >= 1000
-            ) {
-              this.bossKilled = true;
-              bottle.throwHits();
-              enemy.endbossDead();
-              console.log(enemy.endbossDead());
-              this.LastBossHitTime = currentTime;
-            }
-          }
-          if (enemy instanceof Chicken || enemy instanceof SmallChicken) {
-            if (enemy.energy > 0) {
-              enemy.energy -= 100;
-              if (enemy.energy <= 0) {
-                bottle.throwHits();
-                this.level.enemies.splice(index, 1);
-                enemy.playDeathAnimation();
-              }
-            }
-          }
-        }
-      });
+        this.level.enemies.forEach((enemy, index) => {
+            this.handleEnemyCollision(bottle, enemy, index, currentTime);
+        });
     });
-  }
+}
+
+handleEnemyCollision(bottle, enemy, index, currentTime) {
+    if (this.isCollidingWith(bottle, enemy) && !bottle.hasHit) {
+        this.processEnemyHit(bottle, enemy, index, currentTime);
+    }
+}
+
+processEnemyHit(bottle, enemy, index, currentTime) {
+    if (enemy instanceof Endboss) {
+        this.handleEndbossHit(bottle, enemy, currentTime);
+    } else if (enemy instanceof Chicken || enemy instanceof SmallChicken) {
+        this.handleChickenHit(bottle, enemy, index);
+    }
+}
+
+handleEndbossHit(bottle, enemy, currentTime) {
+    if (enemy.bossEnergy > 0 && enemy.angry == true && currentTime - this.LastBossHitTime >= 1000) {
+        enemy.bossEnergy -= 20;
+        this.bossBar.setBosshBar(enemy.bossEnergy);
+        enemy.endbossHurt();
+        this.LastBossHitTime = currentTime;
+    } else if (enemy.angry == false && currentTime - this.LastBossHitTime >= 1000) {
+        enemy.angry = true;
+        enemy.endbossAngry();
+        this.LastBossHitTime = currentTime;
+    }
+    if (enemy.bossEnergy <= 0 && enemy.bossKilled == false && currentTime - this.LastBossHitTime >= 1000) {
+        this.bossKilled = true;
+        bottle.throwHits();
+        enemy.endbossDead();
+        console.log(enemy.endbossDead());
+        this.LastBossHitTime = currentTime;
+    }
+}
+
+handleChickenHit(bottle, enemy, index) {
+    if (enemy.energy > 0) {
+        enemy.energy -= 100;
+        if (enemy.energy <= 0) {
+            bottle.throwHits();
+            this.level.enemies.splice(index, 1);
+            enemy.playDeathAnimation();
+        }
+    }
+}
 
   /**
    * Prüft die Kollision zwischen einem Wurfobjekt und einem Feind.
