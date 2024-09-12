@@ -31,7 +31,7 @@ function startGame() {
  */
 function restartGameByVitctory() {
   document.getElementById("victory").classList.add("d-none");
-  document.getElementById("victory").classList.remove("victoryPage")
+  document.getElementById("victory").classList.remove("victoryPage");
   inetLevel();
   initGame();
 }
@@ -41,7 +41,7 @@ function restartGameByVitctory() {
  */
 function restartGameByGameOver() {
   document.getElementById("lost").classList.add("d-none");
-  document.getElementById("lost").classList.remove("lostPage")
+  document.getElementById("lost").classList.remove("lostPage");
   inetLevel();
   initGame();
 }
@@ -49,9 +49,9 @@ function restartGameByGameOver() {
 /**
  * back to the start page
  */
-functionfinishGameByVitctory() {
+function finishGameByVitctory() {
   document.getElementById("victory").classList.add("d-none");
-  document.getElementById("victory").classList.remove("victoryPage")
+  document.getElementById("victory").classList.remove("victoryPage");
   document.getElementById("startPage").classList.remove("d-none");
   document.getElementById("canvas").classList.add("d-none");
 }

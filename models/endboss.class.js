@@ -134,6 +134,8 @@ class Endboss extends MovableObject {
       allSounds[6].play();
     }
     this.speed = 0;
-    this.playAnimation(this.IMAGES_DEAD);
+    this.deadAnimation = setInterval(() => {
+      this.playAnimation(this.IMAGES_DEAD);
+    }, 1000 / 2);
   }
 }

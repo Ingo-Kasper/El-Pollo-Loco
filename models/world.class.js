@@ -139,9 +139,11 @@ class World {
             if (enemy.bossEnergy <= 0) {
               bottle.throwHits();
               enemy.endbossDead();
-              clearAllIntervals();
-              document.getElementById("victory").classList.remove("d-none");
-              document.getElementById("victory").classList.add("victoryPage")
+              setTimeout(() => {
+                clearAllIntervals();
+                document.getElementById("victory").classList.remove("d-none");
+                document.getElementById("victory").classList.add("victoryPage")
+              }, 10000);
             }
           }
           if (enemy instanceof Chicken || enemy instanceof SmallChicken) {

@@ -3,15 +3,7 @@ let level1;
 function inetLevel() {
   level1 = new Level(
     [
-      new SmallChicken(200),
-      new SmallChicken(400),
-      new SmallChicken(600),
-
-      new Chicken(300),
-      new Chicken(500),
-      new Chicken(700),
-
-      new Endboss(1400),
+      new Endboss(400),
     ],
 
     [
