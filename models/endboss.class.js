@@ -137,5 +137,11 @@ class Endboss extends MovableObject {
     this.deadAnimation = setInterval(() => {
       this.playAnimation(this.IMAGES_DEAD);
     }, 1000 / 3);
+    
+    setTimeout(() => {
+      clearAllIntervals();
+      document.getElementById("victory").classList.remove("d-none");
+      document.getElementById("victory").classList.add("victoryPage")
+    }, 10000);
   }
 }

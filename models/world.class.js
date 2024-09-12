@@ -132,18 +132,17 @@ class World {
               enemy.bossEnergy -= 20;
               this.bossBar.setBosshBar(enemy.bossEnergy);
               enemy.endbossHurt();
-            }
-            if (enemy.angry == false) {
+            } else if (enemy.angry == false) {
+              enemy.angry = true;
               enemy.endbossAngry();
+              console.log(enemy.angry);
+              
             }
-            if (enemy.bossEnergy <= 0) {
+            if (enemy.bossEnergy <= 0 && enemy.bossKilled == false) {
+              this.bossKilled = true;
               bottle.throwHits();
               enemy.endbossDead();
-              setTimeout(() => {
-                clearAllIntervals();
-                document.getElementById("victory").classList.remove("d-none");
-                document.getElementById("victory").classList.add("victoryPage")
-              }, 10000);
+              console.log(enemy.endbossDead());
             }
           }
           if (enemy instanceof Chicken || enemy instanceof SmallChicken) {
@@ -244,5 +243,4 @@ class World {
     mo.x = mo.x * -1;
     this.ctx.restore();
   }
-  
 }

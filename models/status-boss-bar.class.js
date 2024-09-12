@@ -24,6 +24,8 @@ class BossBar extends DrawableObject {
     this.BossBar = BossBar;
     let path = this.IMAGES_BossBar[this.resolveBarIndex()];
     this.img = this.imageCache[path];
+    console.log(this.BossBar);
+    
   }
 
   resolveBarIndex() {
