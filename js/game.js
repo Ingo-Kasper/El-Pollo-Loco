@@ -27,7 +27,7 @@ function startGame() {
 }
 
 /**
- * Restart the game
+ * Restart the game by victory
  */
 function restartGameByVitctory() {
   document.getElementById("victory").classList.add("d-none");
@@ -36,11 +36,24 @@ function restartGameByVitctory() {
   initGame();
 }
 
+/**
+ * Restart the game by game over
+ */
 function restartGameByGameOver() {
   document.getElementById("lost").classList.add("d-none");
   document.getElementById("lost").classList.remove("lostPage")
   inetLevel();
   initGame();
+}
+
+/**
+ * back to the start page
+ */
+function finishGameByGameOver() {
+  document.getElementById("lost").classList.add("d-none");
+  document.getElementById("lost").classList.remove("lostPage")
+  document.getElementById("startPage").classList.remove("d-none");
+  document.getElementById("canvas").classList.add("d-none");
 }
 
 /**
