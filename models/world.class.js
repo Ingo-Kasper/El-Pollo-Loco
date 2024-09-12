@@ -139,10 +139,10 @@ class World {
               this.bossBar.setBosshBar(enemy.bossEnergy);
               enemy.endbossHurt();
               this.LastBossHitTime = currentTime;
-            } else if (enemy.angry == false) {
+            } else if (enemy.angry == false && currentTime - this.LastBossHitTime >= 1000) {
               enemy.angry = true;
               enemy.endbossAngry();
-              console.log(enemy.angry);
+              this.LastBossHitTime = currentTime;
             }
             if (enemy.bossEnergy <= 0 && enemy.bossKilled == false) {
               this.bossKilled = true;
