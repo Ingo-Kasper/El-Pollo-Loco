@@ -13,8 +13,15 @@ let allSounds = [
   new Audio("audio/el-Pollo-Koco-Classig/win.mp3"), // Win
   new Audio("audio/el-Pollo-Koco-Classig/male-hurt.mp3"), // Hurt
   new Audio("audio/el-Pollo-Koco-Classig/Background_Musik(Desert-City).mp3"), // Background Musik
-  new Audio("audio/el-Pollo-Koco-Classig/thump.mp3"), // Landen
 ];
+
+function backgrundMusik(){
+  if (isMuted == true) {
+    allSounds[8].play();
+  } else {
+    allSounds[8].pause();
+  }
+}
 
 /**
  * Start the game
@@ -89,6 +96,7 @@ function toggleMute() {
     document.getElementById("volumeOff").classList.remove("d-none");
     document.getElementById("volumeOn").classList.add("d-none");
   }
+  this.backgrundMusik();
 }
 
 function fullscreen() {

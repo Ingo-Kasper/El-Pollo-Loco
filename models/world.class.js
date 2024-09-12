@@ -124,7 +124,7 @@ class World {
       this.isBottleThrown = false;
     }
 
-    this.throwableObjects.forEach((bottle, bottleIndex) => {
+    this.throwableObjects.forEach((bottle) => {
       this.level.enemies.forEach((enemy, index) => {
         if (this.isCollidingWith(bottle, enemy) && !bottle.hasHit) {
           if (enemy instanceof Endboss) {
@@ -244,4 +244,5 @@ class World {
     mo.x = mo.x * -1;
     this.ctx.restore();
   }
+  
 }
