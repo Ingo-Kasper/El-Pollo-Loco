@@ -46,6 +46,7 @@ class Chicken extends MovableObject {
   playDeathAnimation() {
     clearInterval(this.moveInterval);
     clearInterval(this.moveAnimtionInterval);
+    this.loadImage("img/3_enemies_chicken/chicken_normal/2_dead/dead.png")
     this.y = 400;
     if (this.isMuteOn()) {
       allSounds[2].play();

@@ -139,16 +139,24 @@ class World {
               this.bossBar.setBosshBar(enemy.bossEnergy);
               enemy.endbossHurt();
               this.LastBossHitTime = currentTime;
-            } else if (enemy.angry == false && currentTime - this.LastBossHitTime >= 1000) {
+            } else if (
+              enemy.angry == false &&
+              currentTime - this.LastBossHitTime >= 1000
+            ) {
               enemy.angry = true;
               enemy.endbossAngry();
               this.LastBossHitTime = currentTime;
             }
-            if (enemy.bossEnergy <= 0 && enemy.bossKilled == false) {
+            if (
+              enemy.bossEnergy <= 0 &&
+              enemy.bossKilled == false &&
+              currentTime - this.LastBossHitTime >= 1000
+            ) {
               this.bossKilled = true;
               bottle.throwHits();
               enemy.endbossDead();
               console.log(enemy.endbossDead());
+              this.LastBossHitTime = currentTime;
             }
           }
           if (enemy instanceof Chicken || enemy instanceof SmallChicken) {
