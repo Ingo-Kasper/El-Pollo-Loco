@@ -70,8 +70,7 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEAD);
 
-    this.x = x; // die Startposition des Endbosses
-    this.speed = 0.1;
+    this.x = x; // die Startposition des Endbossesa 
 
     this.endbossWalk();
     this.hurtAnimationPlaying = false;
@@ -99,7 +98,7 @@ class Endboss extends MovableObject {
       this.hurtAnimationPlaying = true;
       this.hurtAnimationInterval = setInterval(() => {
         this.playAnimation(this.IMAGES_HURT);
-      }, 1000 / 6);
+      }, 1000 / 200);
 
       setTimeout(() => {
         clearInterval(this.hurtAnimationInterval);
@@ -119,7 +118,7 @@ class Endboss extends MovableObject {
       this.alertAnimationPlaying = true;
       this.alertAnimationPlaying = setInterval(() => {
         this.playAnimation(this.IMAGES_ALERT);
-      }, 1000 / 6);
+      }, 200);
 
       setTimeout(() => {
         clearInterval(this.alertAnimationPlaying);
@@ -138,7 +137,7 @@ class Endboss extends MovableObject {
     this.speed = 0;
     this.deadAnimation = setInterval(() => {
       this.playAnimation(this.IMAGES_DEAD);
-    }, 1000 / 6);
+    }, 75);
 
     setTimeout(() => {
       clearAllIntervals();
