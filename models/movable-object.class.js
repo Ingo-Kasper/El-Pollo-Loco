@@ -69,6 +69,10 @@ class MovableObject extends DrawableObject {
     return timepassed < 1;
   }
 
+  isBossHurt() {
+    return this.bossHurt == true;
+  }
+
   isDead() {
     return this.energy == 0;
   }

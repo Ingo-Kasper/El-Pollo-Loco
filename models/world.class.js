@@ -137,8 +137,10 @@ class World {
               this.bossBar.setBosshBar(enemy.bossEnergy);
               enemy.isHurt();
               this.LastBossHitTime = currentTime;
+              enemy.bossHurt = true;
             } else if (enemy.angry == false && currentTime - this.LastBossHitTime >= 1000) {
               enemy.angry = true;
+              enemy.bossHurt = true;
               // enemy.endbossAngry();
               this.LastBossHitTime = currentTime;
             }

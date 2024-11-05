@@ -5,6 +5,7 @@ class Endboss extends MovableObject {
 
   alerted = false;
   angry = false;
+  bossHurt = false
 
   offset = {
     top: 80,
@@ -99,11 +100,14 @@ class Endboss extends MovableObject {
         document.getElementById("victory").classList.remove("d-none");
         document.getElementById("victory").classList.add("victoryPage");
       }, 400);
-    } else if (this.isHurt()) {
+    } else if (this.isBossHurt()) {
         if (this.isMuteOn()) {
         allSounds[2].play();
       }
       this.playAnimation(this.IMAGES_HURT);
+      setTimeout(() => {
+        this.bossHurt = false;
+      }, 1000);
     } else {
       this.playAnimation(this.IMAGES_WALKING);
     }
