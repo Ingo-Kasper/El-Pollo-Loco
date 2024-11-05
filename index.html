@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html translate="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>El Pollo Loco</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/11_icons/favicon.ico">
+    <script src="js/intervalStop.js"></script>
+    <script src="models/drawable-object.class.js"></script>
+    <script src="models/movable-object.class.js"></script>
+    <script src="models/chicken.class.js"></script>
+    <script src="models/coin.class.js"></script>
+    <script src="models/salsaBottle.class.js"></script>
+    <script src="models/small-Chicken.class.js"></script>
+    <script src="models/character.class.js"></script>
+    <script src="models/cloud.class.js"></script>
+    <script src="models/status-heal-bar.class.js"></script>
+    <script src="models/status-coin-bar.class.js"></script>
+    <script src="models/status-bottle-bar.class.js"></script>
+    <script src="models/status-boss-bar.class.js"></script>
+    <script src="models/world.class.js"></script>
+    <script src="models/background-object.class.js"></script>
+    <script src="models/keyboard.class.js"></script>
+    <script src="models/level.class.js"></script>
+    <script src="models/throwable-object.class.js"></script>
+    <script src="models/endboss.class.js"></script>
+    <script src="levels/level1.js"></script>
+    <script src="js/game.js"></script>
+
+</head>
+
+<body onload="backgrundMusik()">
+
+    <h1>El Pollo Loco</h1>
+
+    <div id="fullscreen">
+        <canvas id="canvas" class="d-none" width="720px" height="480px"></canvas>
+        <div class="overlayObject">
+            <div id="muteValume" onclick="toggleMute()">
+                <img id="volumeOff" class="overlayObjectIcon" src="img/11_icons/volume_off.png" alt="Volume Off">
+                <img id="volumeOn" class="overlayObjectIcon d-none" src="img/11_icons/volume_up.png" alt="Volume Up">
+            </div>
+            <img class="overlayObjectIcon" onclick="fullscreen()" src="img/11_icons/fullscreen.png" alt="Fullscreen">
+        </div>
+        <div id="victory" class="d-none">
+            <span class="restartButton" onclick="restartGameByVitctory()" >Restart</span>
+            <span class="finishGame" onclick="functionfinishGameByVitctory()">Finish Game</span>
+        </div>
+        <div id="lost" class="d-none">
+            <span class="restartButton" onclick="restartGameByGameOver()">Restart</span>
+            <span class="finishGame" onclick="finishGameByGameOver()">Finish Game</span>
+        </div>
+        <div id="startPage" class="startPage" onclick="startGame()">
+            <div class="startButton">Start Game</div>
+        </div>
+
+        <div id="helpBox" class="helpBox">
+            <div class="keyContener">
+                <span class="keyDescription">Move Left</span>
+                <span class="key">A</span>
+            </div>
+            <div class="keyContener">
+                <span class="keyDescription">Move Right</span>
+                <span class="key">D</span>
+            </div>
+            <div class="keyContener">
+                <span class="keyDescription">Jump</span>
+                <span class="key">W</span>
+            </div>
+            <div class="keyContener">
+                <span class="keyDescription">Throw</span>
+                <span class="key">Space</span>
+            </div>
+        </div>
+
+        <div class="Mobile-Touch-Button">
+            <div>
+                <img id="touchLeft" class="Mobile-Touch-Button-Move" src="img/11_icons/arrow_back.png" alt="Move Back">
+                <img id="touchJump" class="Mobile-Touch-Button-Move" src="img/11_icons/arrow_upward.png" alt="Jump">
+                <img id="touchRight" class="Mobile-Touch-Button-Move" src="img/11_icons/arrow_forward.png" alt="Move Forward">
+            </div>
+            <img id="touchThrow" class="Mobile-Touch-Button-space" src="img/11_icons/space.png" alt="Throw">
+        </div>
+    </div>
+
+</body>
+
+</html>

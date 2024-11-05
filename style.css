@@ -1,0 +1,186 @@
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url("img/10_bodySyle/desert-day.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: "ambystomaMexicanum", Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  font-size: 5em;
+  color: hwb(0 25% 75% / 0.99);
+  text-align: center;
+  text-shadow: 7px 6px 9px #0000005e;
+}
+
+.d-none {
+  display: none;
+}
+
+.startPage {
+  width: 720px;
+  height: 480px;
+  background: url(img/9_intro_outro_screens/start/startscreen_1.png)
+    no-repeat 0 0 / 100% 100%;
+}
+
+.victoryPage {
+  width: 100vw;
+  height: 100vh;
+  background: url(../img/9_intro_outro_screens/win/win_2.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.lostPage {
+  width: 100vw;
+  height: 100vh;
+  background: url(../img/9_intro_outro_screens/game_over/you_lost.png);
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.startButton {
+  font-size: 3em;
+  padding-top: 60px;
+  color: #ffd70b;
+  text-shadow: 5px 2px 2px #9f3b18;
+  display: flex;
+  justify-content: center;
+}
+
+.restartButton{
+  font-size: 3em;
+  padding-top: 70px;
+  color: #ffd70b;
+  text-shadow: 5px 2px 2px #9f3b18;
+}
+
+.finishGame {
+  font-size: 3em;
+  padding-top: 70px;
+  color: #ffd70b;
+  text-shadow: 5px 2px 2px #9f3b18;
+}
+.helpBox {
+  display: flex;
+  margin-top: 12px;
+}
+
+.key {
+  font-size: 1.5em;
+  color: #3f3f3f;
+  text-shadow: 5px 2px 2px #9f3b18a8;
+}
+
+.keyDescription {
+  font-size: 1.5em;
+  color: #ffd70b;
+  text-shadow: 5px 2px 2px #9f3b18;
+}
+
+.overlayObject {
+  position: absolute;
+  right: 130px;
+  top: 54px;
+  display: flex;
+  gap: 16px;
+}
+
+.overlayObjectIcon {
+  height: 30px;
+  width: 30px;
+}
+
+.overlayObjectIcon:hover {
+  cursor: pointer;
+}
+
+.keyContener {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 4px 0 23px;
+}
+
+.Mobile-Touch-Button {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  padding-left: 32px;
+}
+
+.Mobile-Touch-Button-Move {
+  height: 6vh;
+  width: 4vw;
+  object-fit: cover;
+}
+
+.Mobile-Touch-Button-Move:hover {
+  cursor: pointer;
+}
+
+.Mobile-Touch-Button-space {
+  height: 6vh;
+  width: 4vw;
+  margin-left: 500px;
+  filter: invert(1);
+  object-fit: cover;
+}
+
+.Mobile-Touch-Button-space:hover {
+  cursor: pointer;
+}
+
+
+@font-face {
+  font-family: "ambystomaMexicanum";
+  src: url("fonts/ambystomaMexicanum-VR7V.ttf") format("truetype");
+}
+
+/* Smartphones ---------*/
+@media only screen and (max-width: 720px) {
+  canvas {
+    width: 100%;
+  }
+}
+
+/* Smartphones ---------*/
+@media only screen and (max-height: 480px) {
+  canvas {
+    height: 100vh;
+  }
+}
+
+@media (max-height: 810px) {
+  h1 {
+    display: none;
+  }
+}
+
+@media (max-height: 610px) {
+  .helpBox {
+    display: none;
+  }
+
+  .Mobile-Touch-Button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}
