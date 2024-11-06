@@ -2,6 +2,7 @@ class Endboss extends MovableObject {
   height = 350;
   width = 350;
   y = 100;
+  runningSpeed = 1000 / 100;
 
   alerted = false;
   angry = false;
@@ -113,37 +114,6 @@ class Endboss extends MovableObject {
     }
   }
 
-  /**
-   * This moves the endboss to the left closer to the character and plays images accordingly
-   */
-  // endbossWalk() {
-  //   setInterval(() => {
-  //     this.moveLeft();
-  //   }, 1000 / 100);
-
-  //   this.movingAnimations = setInterval(() => {
-  //     this.playAnimation(this.IMAGES_WALKING);
-  //   }, 1000 / 7);
-  // }
-
-  // endbossHurt() {
-  //   // Überprüfen, ob das Intervall bereits läuft
-  //   if (!this.hurtAnimationPlaying) {
-  //     if (this.isMuteOn()) {
-  //       allSounds[2].play();
-  //     }
-  //     this.hurtAnimationPlaying = true;
-  //     this.hurtAnimationInterval = setInterval(() => {
-  //       this.playAnimation(this.IMAGES_HURT);
-  //     }, 1000 / 7);
-
-  //     setTimeout(() => {
-  //       clearInterval(this.hurtAnimationInterval);
-  //       this.hurtAnimationPlaying = false;
-  //     }, 1000);
-  //   }
-  // }
-
   // /**
   //  * This method runs when endboss is angry, shows differnet images and increase the speed of the endboss
   //  */
@@ -164,22 +134,5 @@ class Endboss extends MovableObject {
   //       this.speed = 2;
   //     }, 700);
   //   }
-  // }
-
-  // endbossDead() {
-  //   if (this.isMuteOn()) {
-  //     allSounds[2].play();
-  //     allSounds[6].play();
-  //   }
-  //   this.speed = 0;
-  //   this.deadAnimation = setInterval(() => {
-  //     this.playAnimation(this.IMAGES_DEAD);
-  //   }, 1000 / 3);
-
-  //   setTimeout(() => {
-  //     clearAllIntervals();
-  //     document.getElementById("victory").classList.remove("d-none");
-  //     document.getElementById("victory").classList.add("victoryPage");
-  //   }, 10000);
   // }
 }

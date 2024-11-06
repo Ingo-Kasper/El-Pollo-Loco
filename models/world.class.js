@@ -147,18 +147,15 @@ class World {
             if (enemy.bossEnergy <= 0 && enemy.bossKilled == false) {
               this.bossKilled = true;
               bottle.throwHits();
-              enemy.endbossDead();
             }
           }
-          if (enemy instanceof Chicken || enemy instanceof SmallChicken) {
-            if (enemy.energy > 0) {
-              enemy.energy -= 100;
-              if (enemy.energy <= 0) {
-                bottle.throwHits();
-                this.level.enemies.splice(index, 1);
-                enemy.playDeathAnimation();
-              }
-            }
+          if (enemy instanceof SmallChicken || enemy instanceof Chicken) {
+            setTimeout(() => {
+              this.level.enemies = this.level.enemies.filter(
+                (e) => e !== enemy
+              );
+            }, 400);
+            enemy.playDeathAnimation();
           }
         }
       });
