@@ -27,8 +27,8 @@ class ThrowbaleObject extends MovableObject {
     this.loadImage("");
     this.loadImages(this.IMAGES_BOTTLE_ROTATION);
     this.loadImages(this.IMAGES_BOTTLE_SPLASH);
-    this.x = x - 60;
-    this.y = y;
+    this.x = x - 80;
+    this.y = y + 80;
     this.height = 60;
     this.width = 60;
     this.throw();

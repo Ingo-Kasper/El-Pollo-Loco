@@ -2,7 +2,6 @@ class Endboss extends MovableObject {
   height = 350;
   width = 350;
   y = 100;
-  runningSpeed = 1000 / 100;
 
   alerted = false;
   angry = false;
@@ -73,6 +72,7 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_DEAD);
 
     this.x = x; // die Startposition des Endbossesa 
+    this.speed = 0,1;
 
     this.boasAnimation();
     this.hurtAnimationPlaying = false;
@@ -108,31 +108,12 @@ class Endboss extends MovableObject {
       this.playAnimation(this.IMAGES_HURT);
       setTimeout(() => {
         this.bossHurt = false;
-      }, 1000);
+        this.speed += 0.12;
+        console.log(this.speed);
+          
+      }, 800);
     } else {
       this.playAnimation(this.IMAGES_WALKING);
     }
   }
-
-  // /**
-  //  * This method runs when endboss is angry, shows differnet images and increase the speed of the endboss
-  //  */
-  // endbossAngry() {
-  //   if (!this.alertAnimationPlaying) {
-  //     if (this.isMuteOn()) {
-  //       allSounds[2].play();
-  //     }
-  //     this.alertAnimationPlaying = true;
-  //     this.alertAnimationPlaying = setInterval(() => {
-  //       this.playAnimation(this.IMAGES_ALERT);
-  //     }, 1000 / 6);
-
-  //     setTimeout(() => {
-  //       clearInterval(this.alertAnimationPlaying);
-  //       this.alertAnimationPlaying = false;
-  //       this.angry = true;
-  //       this.speed = 2;
-  //     }, 700);
-  //   }
-  // }
 }

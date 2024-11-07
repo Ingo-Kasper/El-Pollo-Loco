@@ -35,7 +35,7 @@ class DrawableObject {
     ) {
       ctx.beginPath();
       ctx.lineWidth = "3";
-      ctx.strokeStyle = "transparent";
+      ctx.strokeStyle = "transparent"; // Hitbox Farbe
       ctx.rect(
         this.x + this.offset.left,
         this.y + this.offset.top,
