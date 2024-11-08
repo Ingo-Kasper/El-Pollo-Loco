@@ -34,6 +34,7 @@ class World {
 
   checkCollisions() {
     this.collidingWihtEnemy();
+    this.collidingWihtEndBoss();
     this.collidingWihtCion();
     this.collidingWihtBottle();
     this.checkThrowableObjects();
@@ -62,6 +63,23 @@ class World {
       return enemy.energy > 0;
     });
   }
+
+  collidingWihtEndBoss() {
+    const currentTime = new Date().getTime();
+    this.level.enemies = this.level.enemies.filter((enemy, index) => {
+      if (this.isCharacterCollidingWith(enemy, index)) {
+        if (this.isCharacterCollidingWithBoss(enemy, index)) {
+          if (currentTime - this.lastHitTime >= 1000) {
+            this.character.hit();
+            this.healBar.setHealthBar(this.character.energy);
+            allSounds[7].play();
+            this.lastHitTime = currentTime;
+          }
+        }
+      }
+      return enemy.energy > 0;
+    });
+  }
   
   /**
    * Prüfe, ob der Charakter über dem Gegner steht und nach unten fällt
@@ -72,6 +90,15 @@ class World {
       this.character.y + this.character.height >= enemy.y &&
       this.character.speedY < 0
     );
+  }
+
+  isCharacterCollidingWithBoss(enemy) {
+    return (
+      this.character.x + this.character.width - this.character.offset.right > enemy.x + enemy.offset.left &&
+      this.character.y + this.character.height - this.character.offset.bottom > enemy.y + enemy.offset.top &&
+      this.character.x + this.character.offset.left < enemy.x + enemy.width - enemy.offset.right &&
+      this.character.y + this.character.offset.top < enemy.y + enemy.height - enemy.offset.bottom
+    );    
   }
 
   /**
@@ -169,16 +196,12 @@ class World {
    * @returns {boolean} - True, wenn eine Kollision stattfindet, sonst false.
    */
   isCollidingWith(bottle, enemy) {
-    return (
-      bottle.x + bottle.width - bottle.offset.right >
-        enemy.x + enemy.offset.left &&
-      bottle.y + bottle.height - bottle.offset.bottom >
-        enemy.y + enemy.offset.top &&
-      bottle.x + bottle.offset.left <
-        enemy.x + enemy.width - enemy.offset.right &&
-      bottle.y + bottle.offset.top <
-        enemy.y + enemy.height - enemy.offset.bottom
-    );
+    return  (
+      bottle.x + bottle.width - bottle.offset.right > enemy.x + enemy.offset.left &&
+      bottle.y + bottle.height - bottle.offset.bottom > enemy.y + enemy.offset.top &&
+      bottle.x + bottle.offset.left < enemy.x + enemy.width - enemy.offset.right &&
+      bottle.y + bottle.offset.top < enemy.y + enemy.height - enemy.offset.bottom
+    );    
   }
 
   isThrown() {
