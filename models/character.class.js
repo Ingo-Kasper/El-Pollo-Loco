@@ -110,7 +110,8 @@ class Character extends MovableObject {
   animate() {
     setInterval(() => {
       allSounds[5].pause();
-      if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+      if (this.world.keyboard.RIGHT 
+        && this.x < this.world.level.level_end_x) {
         this.moveRight();
         if (this.isMuteOn()) {
           allSounds[5].play();
@@ -124,6 +125,7 @@ class Character extends MovableObject {
           allSounds[5].play();
         }
       }
+
       this.world.camera_x = -this.x + 100; // Horizontal camera wor
 
       if (this.world.keyboard.UP && !this.isAboveGround()) {

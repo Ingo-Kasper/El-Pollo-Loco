@@ -123,8 +123,6 @@ class World {
       if (this.isCharacterCollidingWith(bottle) && this.bottleBar.bottleBar < 100) {
         this.level.salsaBottles.splice(index, 1);
         this.bottleBar.collectBottle();
-        console.log(this.bottleBar.bottleBar);
-        
       }
     });
   }
@@ -144,8 +142,7 @@ class World {
     const currentTime = new Date().getTime();
     if (this.isThrown() && this.isThroingThere() && !this.isBottleThrown) {
       let bottle = new ThrowbaleObject(
-        this.character.x + 100,
-        this.character.y + 100
+        this.character.x + 100,this.character.y + 100
       );
       this.bottleBar.throwPullOff();
       this.throwableObjects.push(bottle);

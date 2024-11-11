@@ -79,27 +79,29 @@ h1 {
 }
 .helpBox {
   display: flex;
+  justify-content: center;
   margin-top: 12px;
 }
 
 .key {
   font-size: 1.5em;
   color: #3f3f3f;
-  text-shadow: 5px 2px 2px #9f3b18a8;
+  text-shadow: 2px 4px 2px #9f3b18a8;
 }
 
 .keyDescription {
   font-size: 1.5em;
   color: #ffd70b;
-  text-shadow: 5px 2px 2px #9f3b18;
+  text-shadow: 2px 4px 2px #9f3b18;
 }
 
 .overlayObject {
-  position: absolute;
-  right: 130px;
+  position: relative;
+  left: 620px;
   top: 54px;
   display: flex;
   gap: 16px;
+  width: 76px;
 }
 
 .overlayObjectIcon {
@@ -115,20 +117,17 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 4px 0 23px;
+  margin: 0 12px 0 12px;
 }
 
 .Mobile-Touch-Button {
   display: none;
-  position: absolute;
-  bottom: 0;
-  padding-left: 32px;
+  padding: 0 32px 0 32px;
+  justify-content: space-between;
 }
 
 .Mobile-Touch-Button-Move {
-  height: 6vh;
-  width: 4vw;
-  object-fit: cover;
+  height: 40px;
 }
 
 .Mobile-Touch-Button-Move:hover {
@@ -136,11 +135,10 @@ h1 {
 }
 
 .Mobile-Touch-Button-space {
-  height: 6vh;
-  width: 4vw;
-  margin-left: 500px;
-  filter: invert(1);
-  object-fit: cover;
+  color: white;
+  border: 2px solid white;
+  border-radius: 4px;
+  padding: 4px 6px 4px 6px;
 }
 
 .Mobile-Touch-Button-space:hover {
@@ -173,6 +171,16 @@ h1 {
   }
 }
 
+@media (max-width: 720px) {
+  .startPage {
+    width: 576px;
+    height: 384px;
+  }
+  .overlayObject {
+    left: 480px;
+  }
+}
+
 @media (max-height: 610px) {
   .helpBox {
     display: none;
@@ -182,5 +190,49 @@ h1 {
     display: flex;
     flex-direction: row;
     align-items: center;
+  }
+}
+
+@media (max-width: 580px) or (max-height: 580px) {
+  h1 {
+    font-size: 3em;
+  }
+  .startPage {
+    width: 432px;
+    height: 288px;
+  }
+  .overlayObject {
+    left: 334px;
+  }
+  .keyDescription {
+    font-size: 1.2em;
+  }
+  .key {
+    font-size: 1.2em;
+  }
+}
+
+@media (max-width: 450px) {
+  .overlayObject {
+    left: 200px;
+  }
+  .startPage {
+    width: 288px;
+    height: 192px;
+  }
+  .keyDescription {
+    font-size: 1em;
+  }
+  .key {
+    font-size: 1em;
+  }
+  .keyContener {
+    margin: 0 4px 0 4px;
+  }
+}
+
+@media (max-height: 400px) {
+  .Mobile-Touch-Button {
+    height: 46px;
   }
 }
