@@ -46,8 +46,10 @@ h1 {
 .lostPage {
   width: 100vw;
   height: 100vh;
-  background: url(../img/9_intro_outro_screens/game_over/you_lost.png);
-  background-size: cover;
+  background: url(../img/9_intro_outro_screens/game_over/game_over.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   position: absolute;
   top: 0;
   left: 0;
