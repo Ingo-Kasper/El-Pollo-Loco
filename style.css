@@ -174,7 +174,7 @@ h1 {
 }
 
 @media (max-width: 720px) {
-  .startPage {
+  .startPage, .lostPage, canvas {
     width: 576px;
     height: 384px;
   }
@@ -199,7 +199,7 @@ h1 {
   h1 {
     font-size: 3em;
   }
-  .startPage {
+  .startPage, .lostPage, canvas {
     width: 432px;
     height: 288px;
   }
@@ -218,7 +218,7 @@ h1 {
   .overlayObject {
     left: 200px;
   }
-  .startPage {
+  .startPage, .lostPage, canvas {
     width: 288px;
     height: 192px;
   }
