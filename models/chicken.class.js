@@ -2,7 +2,7 @@ class Chicken extends MovableObject {
   y = 350;
   width = 80;
   height = 80;
-  isDead = false; // Neue Variable, um den Zustand des Feindes zu verfolgen
+  isDead = false;
 
   offset = {
     top: 20,
@@ -51,10 +51,5 @@ class Chicken extends MovableObject {
     if (this.isMuteOn()) {
       allSounds[2].play();
     }
-  }
-
-  stopMoving() {
-    this.speed = 0;
-    this.acceleration = 0;
   }
 }

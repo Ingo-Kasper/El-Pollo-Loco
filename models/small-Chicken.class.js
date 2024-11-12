@@ -2,6 +2,7 @@ class SmallChicken extends MovableObject {
   y = 375;
   width = 60;
   height = 60;
+  isDead = false
 
   offset = {
     top: 0,
@@ -21,7 +22,7 @@ class SmallChicken extends MovableObject {
   constructor(x) {
     super().loadImage("img/3_enemies_chicken/chicken_small/1_walk/1_w.png");
     this.loadImages(this.IMAGES_WALKING);
-    this.x = x + Math.random() * 900;
+    this.x = x + Math.random() * 1000;
     this.speed = 0.1 + Math.random() * 0.25;
     this.animate();
     this.moveLeft();
@@ -41,7 +42,7 @@ class SmallChicken extends MovableObject {
     clearInterval(this.moveInterval);
     clearInterval(this.moveAnimtionInterval);
     this.loadImage("img/3_enemies_chicken/chicken_small/2_dead/dead.png");
-    this.y = 400;
+    this.y = 425;
     if (this.isMuteOn()) {
       allSounds[2].play();
     }
