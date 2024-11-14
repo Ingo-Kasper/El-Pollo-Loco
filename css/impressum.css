@@ -1,0 +1,48 @@
+body {
+    margin: 0 auto;
+    max-width: 1980px;
+    display: flex;
+    flex-direction: column;
+    background-image: url("../img/10_bodySyle/desert-day.png");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: "ambystomaMexicanum", Arial, Helvetica, sans-serif;
+}
+
+h2 {
+    font-size: 5em;
+    color: hwb(0 25% 75% / 0.99);
+    text-align: center;
+    text-shadow: 7px 6px 9px #0000005e;
+}
+
+p {
+    font-size: 1.5em;
+    color: #3f3f3f;
+    text-shadow: 2px 4px 2px #9f3b18a8;
+    margin: 0 24px 0 24px;
+}
+
+strong {
+    font-size: 1.5em;
+    color: #3f3f3f;
+    text-shadow: 2px 4px 2px #9f3b18a8;
+}
+
+a {
+    font-size: 1.5em;
+    color: #ffd70b;
+    text-shadow: 2px 4px 2px #9f3b18a8;
+    text-decoration: none;
+}
+
+span {
+    font-size: 1.5em;
+    color: #3f3f3f;
+    text-shadow: 2px 4px 2px #9f3b18a8;
+    margin: 0 24px 0 24px;
+    height: 2em;
+    display: block;
+}
