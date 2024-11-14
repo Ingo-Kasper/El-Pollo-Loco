@@ -22,12 +22,6 @@ h1 {
   display: none;
 }
 
-canvas {
-  width: 720px;
-  height: 480px;
-  
-}
-
 .startPage {
   width: 720px;
   height: 480px;
@@ -70,6 +64,7 @@ canvas {
   text-shadow: 5px 2px 2px #9f3b18;
   display: flex;
   justify-content: center;
+  cursor: pointer;
 }
 
 .restartButton{
@@ -77,6 +72,7 @@ canvas {
   padding-top: 70px;
   color: #ffd70b;
   text-shadow: 5px 2px 2px #9f3b18;
+  cursor: pointer;
 }
 
 .finishGame {
@@ -84,6 +80,7 @@ canvas {
   padding-top: 70px;
   color: #ffd70b;
   text-shadow: 5px 2px 2px #9f3b18;
+  cursor: pointer;
 }
 .helpBox {
   display: flex;
@@ -197,6 +194,10 @@ canvas {
   .overlayObject {
     left: 480px;
   }
+  .startButton {
+    font-size: 2.2em;
+    padding-top: 30px;
+  }
 }
 
 @media (max-height: 610px) {
@@ -227,6 +228,10 @@ canvas {
   }
   .key {
     font-size: 1.2em;
+  }
+  .startButton {
+    font-size: 1.8em;
+    padding-top: 15px;
   }
 }
 
