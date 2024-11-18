@@ -85,8 +85,8 @@ class MovableObject extends DrawableObject {
     return this.world.keyboard.RIGHT || this.world.keyboard.LEFT;
   }
 
-  isBossAlert() {
-    return
+  isBossEscape() {
+    return this.x <= -740;
   }
 
   moveRight() {

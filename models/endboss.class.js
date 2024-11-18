@@ -101,6 +101,13 @@ class Endboss extends MovableObject {
         document.getElementById("victory").classList.remove("d-none");
         document.getElementById("victory").classList.add("victoryPage");
       }, 400);
+    } else if (this.isBossEscape()) {
+      console.log(this.x);      
+      setTimeout(() => {
+        clearAllIntervals();
+        document.getElementById("victory").classList.remove("d-none");
+        document.getElementById("victory").classList.add("victoryPage");
+      }, 400);
     } else if (this.isBossHurt()) {
         if (this.isMuteOn()) {
         allSounds[2].play();
