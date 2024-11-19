@@ -59,7 +59,6 @@ class MovableObject extends DrawableObject {
       this.bossEnergy = 0;
     } else {
       this.lastHit = new Date().getTime();
-      console.log(this.bossEnergy);
     }
   }
 
@@ -87,6 +86,18 @@ class MovableObject extends DrawableObject {
 
   isBossEscape() {
     return this.x <= -740;
+  }
+
+  isJumping() {
+    return this.speedY > 0
+  }
+
+  isLanding() {
+    return this.y === 230;
+  }
+
+  isSleepTime() {
+    this.sleepTime === 0
   }
 
   moveRight() {

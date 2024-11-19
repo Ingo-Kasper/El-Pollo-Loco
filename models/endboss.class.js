@@ -101,8 +101,7 @@ class Endboss extends MovableObject {
         document.getElementById("victory").classList.remove("d-none");
         document.getElementById("victory").classList.add("victoryPage");
       }, 400);
-    } else if (this.isBossEscape()) {
-      console.log(this.x);      
+    } else if (this.isBossEscape()) {     
       setTimeout(() => {
         clearAllIntervals();
         document.getElementById("victory").classList.remove("d-none");
@@ -116,8 +115,6 @@ class Endboss extends MovableObject {
       setTimeout(() => {
         this.bossHurt = false;
         this.speed += 0.12;
-        console.log(this.speed);
-          
       }, 800);
     } else {
       this.playAnimation(this.IMAGES_WALKING);

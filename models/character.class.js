@@ -4,6 +4,7 @@ class Character extends MovableObject {
   width = 100;
   height = 200;
   speed = 10;
+  sleepTime = 0;
 
   offset = {
     top: 100,
@@ -139,25 +140,35 @@ class Character extends MovableObject {
   }
 
   whichAnimaton() {
+    const currentTime = new Date().getTime();
     if (this.isDead()) {
       this.playAnimation(this.IMAGES_DEAD); // Dead animation
       clearAllIntervals();
       document.getElementById("lost").classList.remove("d-none");
       document.getElementById("lost").classList.add("lostPage");
     } else if (this.isHurt()) {
-      this.playAnimation(this.IMAGE_HURT); // Hurt animation muss noch beim schaden ein ruckwurf geben
+      this.playAnimation(this.IMAGE_HURT);
+      this.sleepTime = currentTime;
     } else if (this.isAboveGround()) {
-      if (this.speedY > 0) {
+      if (this.isJumping()) {
         this.playAnimation(this.IMAGES_JUMPING_UP);
+        this.sleepTime = currentTime;
       } else {
         this.playAnimation(this.IMAGES_JUMPING_DOWN);
       }
-    } else if (this.y === 230) {
-      this.playAnimation(this.IMAGES_LANDING); // Landing animation
+    } else if (this.isLanding()) {
+      this.playAnimation(this.IMAGES_LANDING);
+      this.sleepTime = currentTime;
     } else if (this.isMovingHorizontal()) {
-      this.playAnimation(this.IMAGES_WALKING); // Walking animation
+      this.playAnimation(this.IMAGES_WALKING);
+      this.sleepTime = currentTime;
+    } else if (this.isSleepTime()) {
+      this.playAnimation(this.IMAGES_WAIT);
+      this.sleepTime = currentTime;
+    } else if (currentTime - this.sleepTime >= 6000) {
+      this.playAnimation(this.IMAGES_LONG_WAIT);
     } else {
-      this.playAnimation(this.IMAGES_WAIT); // Waiting animation
+      this.playAnimation(this.IMAGES_WAIT);
     }
   }
 

@@ -57,7 +57,7 @@ class World {
           this.character.hit();
           this.healBar.setHealthBar(this.character.energy);
           allSounds[7].play();
-          this.lastHitTime = currentTime;
+          this.lastHitTime = currentTime;          
         }
       }
       return enemy.energy > 0;
