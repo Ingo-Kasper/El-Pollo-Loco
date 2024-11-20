@@ -87,7 +87,7 @@ class Character extends MovableObject {
     "img/2_character_pepe/1_idle/idle/I-9.png",
     "img/2_character_pepe/1_idle/idle/I-10.png",
   ];
-  
+
   IMAGES_LONG_WAIT = [
     "img/2_character_pepe/1_idle/long_idle/I-11.png",
     "img/2_character_pepe/1_idle/long_idle/I-12.png",
@@ -115,65 +115,114 @@ class Character extends MovableObject {
     this.applyGravity();
   }
 
+  /**
+   * Animates the character's movements and states.
+   * Periodically calls functions for movement and animation.
+   */
   animate() {
     setInterval(() => {
-      allSounds[5].pause();
-      if (this.world.keyboard.RIGHT 
-        && this.x < this.world.level.level_end_x) {
-        this.moveRight();
-        if (this.isMuteOn()) {
-          allSounds[5].play();
-        }
-      }
-
-      if (this.world.keyboard.LEFT && this.x > -500) {
-        this.moveLeft();
-        this.otherDirection = true;
-        if (this.isMuteOn()) {
-          allSounds[5].play();
-        }
-      }
-
-      this.world.camera_x = -this.x + 100; // Horizontal camera wor
-
-      if (this.world.keyboard.UP && !this.isAboveGround()) {
-        this.jump();
-      }
+      this.handleMovement();
+      this.world.camera_x = -this.x + 100;
+      if (this.world.keyboard.UP && !this.isAboveGround()) this.jump();
     }, 1000 / 40);
 
-    setInterval(() => {
-      this.whichAnimaton();
-    }, 1000 / 10);
+    setInterval(() => this.whichAnimaton(), 1000 / 10);
   }
 
+  /**
+   * Processes the character's movements based on keyboard input.
+   * Moves the character right or left and plays corresponding sounds.
+   */
+  handleMovement() {
+    if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+      this.moveRight();
+      this.playSound(5);
+    } else if (this.world.keyboard.LEFT && this.x > -500) {
+      this.moveLeft();
+      this.otherDirection = true;
+      this.playSound(5);
+    }
+  }
+
+  /**
+   * Plays the sound for a given sound index number if the sound is not muted.
+   *
+   * @param {number} index - The index of the sound to play in the `allSounds` array.
+   */
+  playSound(index) {
+    if (this.isMuteOn()) 
+      allSounds[index].play();
+  }
+
+  /**
+   * Determines the current animation based on the character's state.
+   *
+   * This function decides which animation to play (e.g. death, injury, jumping)
+   * and calls the appropriate method to play the animation.
+   */
   whichAnimaton() {
     const currentTime = new Date().getTime();
-    if (this.isDead()) {
-      this.playAnimation(this.IMAGES_DEAD); // Dead animation
-      clearAllIntervals();
-      document.getElementById("lost").classList.remove("d-none");
-      document.getElementById("lost").classList.add("lostPage");
-    } else if (this.isHurt()) {
-      this.playAnimation(this.IMAGE_HURT);
-      this.sleepTime = currentTime;
-    } else if (this.isAboveGround()) {
-      if (this.isJumping()) {
-        this.playAnimation(this.IMAGES_JUMPING_UP);
-        this.sleepTime = currentTime;
-      } else {
-        this.playAnimation(this.IMAGES_JUMPING_DOWN);
-      }
-    } else if (this.isLanding()) {
-      this.playAnimation(this.IMAGES_LANDING);
-      this.sleepTime = currentTime;
-    } else if (this.isMovingHorizontal()) {
+    if (this.isDead()) this.handleDeadState();
+    else if (this.isHurt()) this.handleHurtState();
+    else if (this.isAboveGround()) this.handleJumpState();
+    else if (this.isLanding()) this.handleLandingState();
+    else this.handleMovementState(currentTime);
+  }
+
+  /**
+/**
+* Handles the case when the character is dead.
+* Plays the death animation and shows the lost page.
+*/
+  handleDeadState() {
+    this.playAnimation(this.IMAGES_DEAD);
+    clearAllIntervals();
+    document.getElementById("lost").classList.remove("d-none");
+    document.getElementById("lost").classList.add("lostPage");
+  }
+
+  /**
+   * Handles the case when the character is injured.
+   */
+  handleHurtState() {
+    this.playAnimation(this.IMAGE_HURT);
+    this.playSound(7);
+  }
+
+  /**
+   * Handles the case when the character is in the air and jumps.
+   * Plays the appropriate jumping animation.
+   */
+  handleJumpState() {
+    const animation = this.isJumping()
+      ? this.IMAGES_JUMPING_UP
+      : this.IMAGES_JUMPING_DOWN;
+    this.playAnimation(animation);
+  }
+
+  /**
+   * Handles the case when the character lands.
+   */
+  handleLandingState() {
+    this.playAnimation(this.IMAGES_LANDING);
+  }
+
+  /**
+   * Handles the case when the character moves horizontally.
+   * Plays the walking animation or another one depending on the state.
+   *
+   * @param {number} currentTime - The current timestamp used to set `sleepTime`.
+   */
+  handleMovementState(currentTime) {
+    if (this.isMovingHorizontal()) {
       this.playAnimation(this.IMAGES_WALKING);
       this.sleepTime = currentTime;
     } else if (this.isSleepTime()) {
       this.playAnimation(this.IMAGES_WAIT);
       this.sleepTime = currentTime;
-    } else if (currentTime - this.sleepTime >= 6000) {
+    } else if (currentTime - this.sleepTime >= 3000) {
       this.playAnimation(this.IMAGES_LONG_WAIT);
+      console.log(currentTime);
     } else {
       this.playAnimation(this.IMAGES_WAIT);
     }
@@ -181,8 +230,6 @@ class Character extends MovableObject {
 
   jump() {
     this.speedY = 25;
-    if (this.isMuteOn()) {
-      allSounds[4].play();
-    }
+    this.playSound(4);
   }
 }

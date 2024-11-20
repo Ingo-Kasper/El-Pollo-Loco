@@ -117,7 +117,7 @@ class MovableObject extends DrawableObject {
   }
 
   isSleepTime() {
-    this.sleepTime === 0;
+    return this.sleepTime === 0;
   }
 
   moveRight() {

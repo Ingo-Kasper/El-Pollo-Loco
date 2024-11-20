@@ -71,7 +71,6 @@ class World {
   handleCharacterHit() {
     this.character.hit();
     this.healBar.setHealthBar(this.character.energy);
-    allSounds[7].play();
   }
   /**
    * Checks collisions between the character and the end boss, and updates the enemy list.
