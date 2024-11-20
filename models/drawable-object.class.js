@@ -10,19 +10,34 @@ class DrawableObject {
   bossEnergy = 100;
   bossKilled = false;
 
+  /**
+   * Loads an image from the specified path and sets it to the `img` property.
+   *
+   * @param {string} path - The path to the image file to be loaded.
+   */
   loadImage(path) {
     this.img = new Image();
     this.img.src = path;
   }
 
   /**
-   * In der Draw Methode wird das Bild auf den Canvas gezeichnet
+   * Draws the image of the object on the canvas using the provided context.
+   * The image is drawn at the position `(x, y)` with the given `width` and `height`.
+   *
+   * @param {CanvasRenderingContext2D} ctx - The 2D rendering context of the canvas where the image will be drawn.
    */
   draw(ctx) {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 
-  // Um die Hitbox anzuzeigen
+  /**
+   * Draws the hitbox of the object on the canvas, if the object is of a specific type.
+   * The hitbox is drawn based on the object's `x`, `y`, `width`, and `height` properties, adjusted by the `offset` values.
+   *
+   * This method is used to visualize the collision area of objects.
+   *
+   * @param {CanvasRenderingContext2D} ctx - The 2D rendering context of the canvas where the hitbox will be drawn.
+   */
   drawFrame(ctx) {
     if (
       this instanceof Character ||
@@ -47,8 +62,9 @@ class DrawableObject {
   }
 
   /**
+   * Loads an array of images into the `imageCache`. Each image is created and stored by its path.
    *
-   * @param {Array} arr - IMG/Image1.png ...
+   * @param {Array<string>} arr - An array of image paths to be loaded, e.g., ["IMG/Image1.png", "IMG/Image2.png"].
    */
   loadImages(arr) {
     arr.forEach((path) => {
@@ -58,6 +74,11 @@ class DrawableObject {
     });
   }
 
+  /**
+   * Checks whether the mute setting is active.
+   *
+   * @returns {boolean} - `true` if mute is enabled, `false` otherwise.
+   */
   isMuteOn() {
     return isMuted == true;
   }

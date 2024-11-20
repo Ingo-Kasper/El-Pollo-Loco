@@ -5,7 +5,7 @@ class Endboss extends MovableObject {
 
   alerted = false;
   angry = false;
-  bossHurt = false
+  bossHurt = false;
 
   offset = {
     top: 80,
@@ -62,6 +62,12 @@ class Endboss extends MovableObject {
     "img/4_enemie_boss_chicken/5_dead/G26.png",
   ];
 
+  /**
+   * Creates an instance of the Endboss class.
+   * Initializes the Endboss with the specified position and loads the necessary images.
+   * 
+   * @param {number} x - The starting x position of the Endboss.
+   */
   constructor(x) {
     super();
     this.loadImage(this.IMAGES_WAIT[0]);
@@ -70,14 +76,16 @@ class Endboss extends MovableObject {
     this.loadImages(this.IMAGES_ALERT);
     this.loadImages(this.IMAGES_HURT);
     this.loadImages(this.IMAGES_DEAD);
-
-    this.x = x; // die Startposition des Endbossesa 
-    this.speed = 0,1;
-
+    this.x = x;
+    this.speed = 0.1;
     this.boasAnimation();
     this.hurtAnimationPlaying = false;
   }
 
+  /**
+   * Starts the animation cycles for the Endboss, including movement and animation updates.
+   * This method controls the movement and the animation state of the Endboss.
+   */
   boasAnimation() {
     setInterval(() => {
       this.moveLeft();
@@ -88,6 +96,10 @@ class Endboss extends MovableObject {
     }, 1000 / 10);
   }
 
+  /**
+   * Determines and plays the appropriate animation based on the Endboss's current state.
+   * It checks whether the boss is dead, hurt, or performing other actions and plays the corresponding animation.
+   */
   wichBossAnimation() {
     if (this.isBossDead()) {
       if (this.isMuteOn()) {
@@ -121,3 +133,4 @@ class Endboss extends MovableObject {
     }
   }
 }
+
