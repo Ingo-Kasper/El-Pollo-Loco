@@ -65,7 +65,7 @@ class Endboss extends MovableObject {
   /**
    * Creates an instance of the Endboss class.
    * Initializes the Endboss with the specified position and loads the necessary images.
-   * 
+   *
    * @param {number} x - The starting x position of the Endboss.
    */
   constructor(x) {
@@ -97,40 +97,70 @@ class Endboss extends MovableObject {
   }
 
   /**
-   * Determines and plays the appropriate animation based on the Endboss's current state.
-   * It checks whether the boss is dead, hurt, or performing other actions and plays the corresponding animation.
+   * Decides which animation to play based on the current state of the Endboss.
+   * Calls different helper functions depending on whether the boss is dead, escaping, hurt, or walking.
    */
   wichBossAnimation() {
     if (this.isBossDead()) {
-      if (this.isMuteOn()) {
-        allSounds[2].play();
-        allSounds[6].play();
-      }
-      this.speed = 0;
-      this.playAnimation(this.IMAGES_DEAD);
-      setTimeout(() => {
-        clearAllIntervals();
-        document.getElementById("victory").classList.remove("d-none");
-        document.getElementById("victory").classList.add("victoryPage");
-      }, 400);
-    } else if (this.isBossEscape()) {     
-      setTimeout(() => {
-        clearAllIntervals();
-        document.getElementById("victory").classList.remove("d-none");
-        document.getElementById("victory").classList.add("victoryPage");
-      }, 400);
+      this.handleBossDeath();
+    } else if (this.isBossEscape()) {
+      this.handleBossEscape();
     } else if (this.isBossHurt()) {
-        if (this.isMuteOn()) {
-        allSounds[2].play();
-      }
-      this.playAnimation(this.IMAGES_HURT);
-      setTimeout(() => {
-        this.bossHurt = false;
-        this.speed += 0.12;
-      }, 800);
+      this.handleBossHurt();
     } else {
-      this.playAnimation(this.IMAGES_WALKING);
+      this.playWalkingAnimation();
     }
   }
-}
 
+  /**
+   * Handles the animation and actions when the boss is dead.
+   * Stops the boss and displays the victory screen.
+   */
+  handleBossDeath() {
+    if (this.isMuteOn()) {
+      allSounds[2].play();
+      allSounds[6].play();
+    }
+    this.speed = 0;
+    this.playAnimation(this.IMAGES_DEAD);
+    setTimeout(() => {
+      clearAllIntervals();
+      document.getElementById("victory").classList.remove("d-none");
+      document.getElementById("victory").classList.add("victoryPage");
+    }, 400);
+  }
+
+  /**
+   * Handles the actions when the boss escapes.
+   * Displays the victory screen.
+   */
+  handleBossEscape() {
+    setTimeout(() => {
+      clearAllIntervals();
+      document.getElementById("victory").classList.remove("d-none");
+      document.getElementById("victory").classList.add("victoryPage");
+    }, 400);
+  }
+
+  /**
+   * Handles the animation and actions when the boss is hurt.
+   * Plays the hurt animation and increases the boss's speed after the animation finishes.
+   */
+  handleBossHurt() {
+    if (this.isMuteOn()) {
+      allSounds[2].play();
+    }
+    this.playAnimation(this.IMAGES_HURT);
+    setTimeout(() => {
+      this.bossHurt = false;
+      this.speed += 0.12;
+    }, 800);
+  }
+
+  /**
+   * Plays the walking animation for the Endboss.
+   */
+  playWalkingAnimation() {
+    this.playAnimation(this.IMAGES_WALKING);
+  }
+}
