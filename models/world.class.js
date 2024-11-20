@@ -445,9 +445,9 @@ class World {
    */
   flipImage(mo) {
     this.ctx.save();
-    this.ctx.translate(mo.x + mo.width, mo.y); // Adjust translation based on the object's position
-    this.ctx.scale(-1, 1); // Flip horizontally
-    mo.x = -mo.x; // Invert the x position
+    this.ctx.translate(mo.width, 0);
+    this.ctx.scale(-1, 1);
+    mo.x = mo.x * -1;
   }
 
   /**
@@ -455,7 +455,7 @@ class World {
    * @param {Object} mo - The object to restore.
    */
   flipImageBack(mo) {
-    mo.x = -mo.x; // Revert the x position back to the original
-    this.ctx.restore(); // Restore the previous canvas state
+    mo.x = mo.x * -1;
+    this.ctx.restore();
   }
 }

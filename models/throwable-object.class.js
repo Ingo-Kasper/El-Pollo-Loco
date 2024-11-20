@@ -34,6 +34,9 @@ class ThrowbaleObject extends MovableObject {
     this.throw();
   }
 
+  /**
+   * Starts the bottle throw animation and movement.
+   */
   throw() {
     this.speedY = 30;
     this.applyGravity();
@@ -45,12 +48,14 @@ class ThrowbaleObject extends MovableObject {
     }, 1000 / 10);
   }
 
+  /**
+   * Stops the throw, plays splash animation, and clears intervals.
+   */
   throwHits() {
     clearInterval(this.bottleThrowing);
     clearInterval(this.bottleRotation);
     this.playAnimation(this.IMAGES_BOTTLE_SPLASH);
-    this.bottleSplash = setTimeout(() => {
-    }, 1000 / 10);
+    this.bottleSplash = setTimeout(() => {}, 1000 / 10);
     clearInterval(this.bottleSplash);
   }
 }
