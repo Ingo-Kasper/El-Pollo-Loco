@@ -44,45 +44,80 @@ class World {
     const currentTime = new Date().getTime();
     this.level.enemies = this.level.enemies.filter((enemy, index) => {
       if (this.isCharacterCollidingWith(enemy, index)) {
-        if (this.isCharacterLandingOnEnemy(enemy, index)) {
-          if (enemy instanceof SmallChicken || enemy instanceof Chicken) {
-            setTimeout(() => {
-              this.level.enemies = this.level.enemies.filter(
-                (e) => e !== enemy
-              );
-            }, 400);
-            enemy.playDeathAnimation();
-          }
-        } else if (currentTime - this.lastHitTime >= 1000) {
-          this.character.hit();
-          this.healBar.setHealthBar(this.character.energy);
-          allSounds[7].play();
-          this.lastHitTime = currentTime;          
-        }
+        this.handleCollisionWithEnemy(enemy, index, currentTime);
       }
       return enemy.energy > 0;
     });
   }
 
+  handleCollisionWithEnemy(enemy, index, currentTime) {
+    if (this.isCharacterLandingOnEnemy(enemy, index)) {
+      this.handleEnemyDeath(enemy);
+    } else if (currentTime - this.lastHitTime >= 1000) {
+      this.handleCharacterHit();
+      this.lastHitTime = currentTime;
+    }
+  }
+
+  handleEnemyDeath(enemy) {
+    if (enemy instanceof SmallChicken || enemy instanceof Chicken) {
+      setTimeout(() => {
+        this.level.enemies = this.level.enemies.filter((e) => e !== enemy);
+      }, 400);
+      enemy.playDeathAnimation();
+    }
+  }
+
+  handleCharacterHit() {
+    this.character.hit();
+    this.healBar.setHealthBar(this.character.energy);
+    allSounds[7].play();
+  }
+  /**
+   * Checks collisions between the character and the end boss, and updates the enemy list.
+   */
   collidingWihtEndBoss() {
     const currentTime = new Date().getTime();
     this.level.enemies = this.level.enemies.filter((enemy, index) => {
       if (this.isCharacterCollidingWith(enemy, index)) {
-        if (this.isCharacterCollidingWithBoss(enemy, index)) {
-          if (currentTime - this.lastHitTime >= 1000) {
-            this.character.hit();
-            this.healBar.setHealthBar(this.character.energy);
-            allSounds[7].play();
-            this.lastHitTime = currentTime;
-          }
-        }
+        this.handleCollisionWithEndBoss(enemy, index, currentTime);
       }
       return enemy.energy > 0;
     });
   }
-  
+
   /**
-   * Prüfe, ob der Charakter über dem Gegner steht und nach unten fällt
+   * Handles the logic for a collision with the end boss.
+   *
+   * @param {Object} enemy - The colliding end boss.
+   * @param {number} index - The index of the enemy in the list.
+   * @param {number} currentTime - The current timestamp in milliseconds.
+   */
+  handleCollisionWithEndBoss(enemy, index, currentTime) {
+    if (this.isCharacterCollidingWithBoss(enemy, index)) {
+      this.handleBossHit(currentTime);
+    }
+  }
+
+  /**
+   * Handles the logic when the character is hit by the end boss.
+   *
+   * @param {number} currentTime - The current timestamp in milliseconds.
+   */
+  handleBossHit(currentTime) {
+    if (currentTime - this.lastHitTime >= 1000) {
+      this.character.hit();
+      this.healBar.setHealthBar(this.character.energy);
+      allSounds[7].play();
+      this.lastHitTime = currentTime;
+    }
+  }
+
+  /**
+   * Checks if the character is above the enemy and moving downward.
+   *
+   * @param {Object} enemy - The enemy object to check against.
+   * @returns {boolean} - Returns `true` if the character is landing on the enemy, otherwise `false`.
    */
   isCharacterLandingOnEnemy(enemy) {
     return (
@@ -92,18 +127,30 @@ class World {
     );
   }
 
+  /**
+   * Checks if the character is colliding with the end boss.
+   *
+   * @param {Object} enemy - The enemy object representing the end boss.
+   * @returns {boolean} - Returns `true` if the character is colliding with the boss, otherwise `false`.
+   */
   isCharacterCollidingWithBoss(enemy) {
     return (
-      this.character.x + this.character.width - this.character.offset.right > enemy.x + enemy.offset.left &&
-      this.character.y + this.character.height - this.character.offset.bottom > enemy.y + enemy.offset.top &&
-      this.character.x + this.character.offset.left < enemy.x + enemy.width - enemy.offset.right &&
-      this.character.y + this.character.offset.top < enemy.y + enemy.height - enemy.offset.bottom
-    );    
+      this.character.x + this.character.width - this.character.offset.right >
+        enemy.x + enemy.offset.left &&
+      this.character.y + this.character.height - this.character.offset.bottom >
+        enemy.y + enemy.offset.top &&
+      this.character.x + this.character.offset.left <
+        enemy.x + enemy.width - enemy.offset.right &&
+      this.character.y + this.character.offset.top <
+        enemy.y + enemy.height - enemy.offset.bottom
+    );
   }
 
   /**
-   * 1. Check collision with coins
-   * 2. with collect Coin the coin counter will increase
+   * Checks for collisions with coins and increases the coin counter when a coin is collected.
+   *
+   * 1. Iterates over all coins in the level.
+   * 2. If the character collides with a coin, the coin is removed from the level and the coin counter is updated.
    */
   collidingWihtCion() {
     this.level.coins.forEach((coin, index) => {
@@ -115,12 +162,18 @@ class World {
   }
 
   /**
-   * 1. Check collision with salsa bottles
-   * 2. with collect Bottle the bottle counter will increase
+   * Checks for collisions with salsa bottles and increases the bottle counter when a bottle is collected.
+   *
+   * 1. Iterates over all salsa bottles in the level.
+   * 2. If the character collides with a bottle and the bottle bar is not full,
+   *    the bottle is removed from the level, and the bottle counter is updated.
    */
   collidingWihtBottle() {
     this.level.salsaBottles.forEach((bottle, index) => {
-      if (this.isCharacterCollidingWith(bottle) && this.bottleBar.bottleBar < 100) {
+      if (
+        this.isCharacterCollidingWith(bottle) &&
+        this.bottleBar.bottleBar < 100
+      ) {
         this.level.salsaBottles.splice(index, 1);
         this.bottleBar.collectBottle();
       }
@@ -131,63 +184,82 @@ class World {
     return this.character.isColliding(Item);
   }
 
-  /**
-  * Kollision des Flaschenwurfs abfragen
-  * 1. this.isThrown() - Wurftaste
-  * 2. this.isThroingThere() - ob genügend Flaschen vorhanden sind
-  * 3. bottle.isColliding(enemy) - prüfen, ob die Flasche den Gegner trifft
-  * 4. bottle.throwHits() - Flaschentreffer-Animation
-  */
-  checkThrowableObjects() {
-    const currentTime = new Date().getTime();
-    if (this.isThrown() && this.isThroingThere() && !this.isBottleThrown) {
-      let bottle = new ThrowbaleObject(
-        this.character.x + 100,this.character.y + 100
+/**
+ * Handles the logic for throwable objects (e.g., bottles) and their interactions with enemies.
+ *
+ * Steps:
+ * 1. Checks if the throw action is triggered (`this.isThrown()`).
+ * 2. Verifies if there are enough bottles available (`this.isThroingThere()`).
+ * 3. Creates and adds a new throwable object if the cooldown period has passed.
+ * 4. Prevents multiple throws at the same time until the cooldown expires.
+ * 5. Processes collision between thrown bottles and enemies:
+ *    - Reduces energy for the end boss if hit.
+ *    - Triggers the boss's angry or hurt states based on energy levels.
+ *    - Plays a death animation for small chickens or regular chickens when hit.
+ * 6. Updates the state of the bottle bar and enemy objects accordingly.
+ */
+checkThrowableObjects() {
+  const currentTime = new Date().getTime();
+
+  // Handle throwing logic
+  if (this.isThrown() && this.isThroingThere()) {
+    if (currentTime - this.lastThrowTime >= 500) {
+      const bottle = new ThrowbaleObject(
+        this.character.x + 100,
+        this.character.y + 100
       );
       this.bottleBar.throwPullOff();
       this.throwableObjects.push(bottle);
-      this.isBottleThrown = true; // Mehrfach Wurf verhindern
+      this.lastThrowTime = currentTime; // Reset cooldown
     }
-    if (!this.isThrown()) { // wieder Wurf erlauben
-      this.isBottleThrown = false;
-    }
-    this.throwableObjects.forEach((bottle) => {
-      this.level.enemies.forEach((enemy, index) => {
-        if (this.isCollidingWith(bottle, enemy) && !bottle.hasHit) {
-          if (enemy instanceof Endboss) {
-            if (
-              enemy.bossEnergy > 0 &&
-              enemy.angry == true &&
-              currentTime - this.LastBossHitTime >= 1000
-            ) {
-              enemy.bossEnergy -= 20;
-              this.bossBar.setBosshBar(enemy.bossEnergy);
-              enemy.isHurt();
-              this.LastBossHitTime = currentTime;
-              enemy.bossHurt = true;
-            } else if (enemy.angry == false && currentTime - this.LastBossHitTime >= 1000) {
-              enemy.angry = true;
-              enemy.bossHurt = true;
-              // enemy.endbossAngry();
-              this.LastBossHitTime = currentTime;
-            }
-            if (enemy.bossEnergy <= 0 && enemy.bossKilled == false) {
-              this.bossKilled = true;
-              bottle.throwHits();
-            }
-          }
-          if (enemy instanceof SmallChicken || enemy instanceof Chicken) {
-            setTimeout(() => {
-              this.level.enemies = this.level.enemies.filter(
-                (e) => e !== enemy
-              );
-            }, 400);
-            enemy.playDeathAnimation();
-          }
-        }
-      });
-    });
   }
+
+  // Process collisions for thrown bottles
+  this.throwableObjects.forEach((bottle) => {
+    this.level.enemies.forEach((enemy) => {
+      if (this.isCollidingWith(bottle, enemy) && !bottle.hasHit) {
+        if (enemy instanceof Endboss) {
+          this.handleBossCollision(enemy, bottle, currentTime);
+        }
+        if (enemy instanceof SmallChicken || enemy instanceof Chicken) {
+          setTimeout(() => {
+            this.level.enemies = this.level.enemies.filter((e) => e !== enemy);
+          }, 400);
+          enemy.playDeathAnimation();
+        }
+      }
+    });
+  });
+}
+
+
+/**
+ * Handles collision logic when a thrown object hits the end boss.
+ *
+ * @param {Object} enemy - The end boss object.
+ * @param {Object} bottle - The throwable object that hit the boss.
+ * @param {number} currentTime - The current time to enforce hit cooldowns.
+ */
+handleBossCollision(enemy, bottle, currentTime) {
+  if (enemy.bossEnergy > 0 && enemy.angry && currentTime - this.LastBossHitTime >= 1000) {
+    enemy.bossEnergy -= 20;
+    this.bossBar.setBosshBar(enemy.bossEnergy);
+    enemy.isHurt();
+    this.LastBossHitTime = currentTime;
+    enemy.bossHurt = true;
+  } else if (!enemy.angry && currentTime - this.LastBossHitTime >= 1000) {
+    enemy.angry = true;
+    enemy.bossHurt = true;
+    this.LastBossHitTime = currentTime;
+  }
+  if (enemy.bossEnergy <= 0 && !enemy.bossKilled) {
+    this.bossKilled = true;
+    bottle.throwHits();
+  }
+}
+
+
+
 
   /**
    * Prüft die Kollision zwischen einem Wurfobjekt und einem Feind.
@@ -196,12 +268,16 @@ class World {
    * @returns {boolean} - True, wenn eine Kollision stattfindet, sonst false.
    */
   isCollidingWith(bottle, enemy) {
-    return  (
-      bottle.x + bottle.width - bottle.offset.right > enemy.x + enemy.offset.left &&
-      bottle.y + bottle.height - bottle.offset.bottom > enemy.y + enemy.offset.top &&
-      bottle.x + bottle.offset.left < enemy.x + enemy.width - enemy.offset.right &&
-      bottle.y + bottle.offset.top < enemy.y + enemy.height - enemy.offset.bottom
-    );    
+    return (
+      bottle.x + bottle.width - bottle.offset.right >
+        enemy.x + enemy.offset.left &&
+      bottle.y + bottle.height - bottle.offset.bottom >
+        enemy.y + enemy.offset.top &&
+      bottle.x + bottle.offset.left <
+        enemy.x + enemy.width - enemy.offset.right &&
+      bottle.y + bottle.offset.top <
+        enemy.y + enemy.height - enemy.offset.bottom
+    );
   }
 
   isThrown() {

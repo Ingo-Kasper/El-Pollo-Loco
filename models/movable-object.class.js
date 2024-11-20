@@ -32,7 +32,7 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   * 
+   *
    * @returns {boolean} - True if the character is above ground, otherwise false.
    */
   isAboveGround() {
@@ -65,10 +65,10 @@ class MovableObject extends DrawableObject {
     }
   }
 
- /**
-  * A query whether the character has more than 0 lives
-  * @param {new Date().getTime()} Asks if currentTime has expired to avoid multiple hits in a row
-  */
+  /**
+   * A query whether the character has more than 0 lives
+   * @param {new Date().getTime()} Asks if currentTime has expired to avoid multiple hits in a row
+   */
   hitBoss() {
     this.bossEnergy -= 20;
     if (this.bossEnergy < 0) {
@@ -79,7 +79,7 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   * 
+   *
    * @returns {boolean} - True if the character has been hit in the last second, otherwise false
    */
   isHurt() {
@@ -109,7 +109,7 @@ class MovableObject extends DrawableObject {
   }
 
   isJumping() {
-    return this.speedY > 0
+    return this.speedY > 0;
   }
 
   isLanding() {
@@ -117,7 +117,7 @@ class MovableObject extends DrawableObject {
   }
 
   isSleepTime() {
-    this.sleepTime === 0
+    this.sleepTime === 0;
   }
 
   moveRight() {
@@ -130,11 +130,11 @@ class MovableObject extends DrawableObject {
     this.otherDirection = false;
   }
 
-/**
-* The length of the animation is set to the images
-* is used for animate() method
-* @param {The images of the IMAGE} images
-*/
+  /**
+   * The length of the animation is set to the images
+   * is used for animate() method
+   * @param {The images of the IMAGE} images
+   */
   playAnimation(images) {
     let i = this.currentImage % images.length;
     let path = images[i];
@@ -144,5 +144,9 @@ class MovableObject extends DrawableObject {
 
   jump() {
     this.speedY = 30;
+  }
+
+  isCharacterCollidingWith(Item) {
+    return this.character.isColliding(Item);
   }
 }
