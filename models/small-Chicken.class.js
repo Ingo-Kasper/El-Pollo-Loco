@@ -2,7 +2,7 @@ class SmallChicken extends MovableObject {
   y = 375;
   width = 60;
   height = 60;
-  isDead = false
+  isDead = false;
 
   offset = {
     top: 0,
@@ -20,31 +20,52 @@ class SmallChicken extends MovableObject {
   IMAGE_DEAD = "img/3_enemies_chicken/chicken_small/2_dead/dead.png";
 
   constructor(x) {
-    super().loadImage("img/3_enemies_chicken/chicken_small/1_walk/1_w.png");
+    super().loadImage(this.IMAGES_WALKING[0]);
     this.loadImages(this.IMAGES_WALKING);
     this.x = x + Math.random() * 1000;
     this.speed = 0.1 + Math.random() * 0.25;
     this.animate();
-    this.moveLeft();
   }
 
+  /**
+   * Animates the movement and walking animation of the SmallChicken.
+   */
   animate() {
     this.moveInterval = setInterval(() => {
-      this.moveLeft();
+      if (!this.isDead) {
+        this.moveLeft();
+      }
     }, 1000 / 110);
 
-    this.moveAnimtionInterval = setInterval(() => {
-      this.playAnimation(this.IMAGES_WALKING);
+    this.animationInterval = setInterval(() => {
+      if (!this.isDead) {
+        this.playAnimation(this.IMAGES_WALKING);
+      }
     }, 1000 / 10);
   }
 
+  /**
+   * Plays the death animation for the SmallChicken and stops its movement.
+   */
   playDeathAnimation() {
+    if (this.isDead) return; // Avoid multiple calls
+
+    this.isDead = true;
     clearInterval(this.moveInterval);
-    clearInterval(this.moveAnimtionInterval);
-    this.loadImage("img/3_enemies_chicken/chicken_small/2_dead/dead.png");
-    this.y = 425;
+    clearInterval(this.animationInterval);
+
+    this.loadImage(this.IMAGE_DEAD);
+    this.y = 425; // Adjust position for dead image
+
     if (this.isMuteOn()) {
-      allSounds[2].play();
+      this.playDeathSound();
     }
+  }
+
+  /**
+   * Plays the death sound effect.
+   */
+  playDeathSound() {
+    allSounds[2]?.play(); // Play sound if it exists
   }
 }
