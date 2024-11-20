@@ -22,11 +22,13 @@ class Character extends MovableObject {
     "img/2_character_pepe/5_dead/D-56.png",
     "img/2_character_pepe/5_dead/D-57.png",
   ];
+
   IMAGE_HURT = [
     "img/2_character_pepe/4_hurt/H-41.png",
     "img/2_character_pepe/4_hurt/H-42.png",
     "img/2_character_pepe/4_hurt/H-43.png",
   ];
+
   IMAGES_WALKING = [
     "img/2_character_pepe/2_walk/W-21.png",
     "img/2_character_pepe/2_walk/W-22.png",
@@ -35,6 +37,7 @@ class Character extends MovableObject {
     "img/2_character_pepe/2_walk/W-25.png",
     "img/2_character_pepe/2_walk/W-26.png",
   ];
+
   IMAGES_JUMPING_UP = [
     "img/2_character_pepe/3_jump/J-31.png",
     "img/2_character_pepe/3_jump/J-31.png",
@@ -51,6 +54,7 @@ class Character extends MovableObject {
     "img/2_character_pepe/3_jump/J-34.png",
     "img/2_character_pepe/3_jump/J-34.png",
   ];
+
   IMAGES_JUMPING_DOWN = [
     "img/2_character_pepe/3_jump/J-35.png",
     "img/2_character_pepe/3_jump/J-35.png",
@@ -63,12 +67,14 @@ class Character extends MovableObject {
     "img/2_character_pepe/3_jump/J-37.png",
     "img/2_character_pepe/3_jump/J-37.png",
   ];
+
   IMAGES_LANDING = [
     "img/2_character_pepe/3_jump/J-38.png",
     "img/2_character_pepe/3_jump/J-38.png",
     "img/2_character_pepe/3_jump/J-39.png",
     "img/2_character_pepe/3_jump/J-39.png",
   ];
+
   IMAGES_WAIT = [
     "img/2_character_pepe/1_idle/idle/I-1.png",
     "img/2_character_pepe/1_idle/idle/I-2.png",
@@ -81,6 +87,7 @@ class Character extends MovableObject {
     "img/2_character_pepe/1_idle/idle/I-9.png",
     "img/2_character_pepe/1_idle/idle/I-10.png",
   ];
+  
   IMAGES_LONG_WAIT = [
     "img/2_character_pepe/1_idle/long_idle/I-11.png",
     "img/2_character_pepe/1_idle/long_idle/I-12.png",

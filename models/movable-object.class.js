@@ -16,8 +16,13 @@ class MovableObject extends DrawableObject {
     super();
   }
 
+  /**
+   * Reguliert die Schwerkraft
+   * @param {The speed} speedY
+   * @param {The acceleration} acceleration
+   * @param {The y position} y
+   */
   applyGravity() {
-    // Schwergraft
     setInterval(() => {
       if (this.isAboveGround() || this.speedY > 0) {
         this.y -= this.speedY;
@@ -26,6 +31,10 @@ class MovableObject extends DrawableObject {
     }, 1000 / 45);
   }
 
+  /**
+   * 
+   * @returns {boolean} - True if the character is above ground, otherwise false.
+   */
   isAboveGround() {
     if (this instanceof ThrowbaleObject) {
       return true;
@@ -34,7 +43,6 @@ class MovableObject extends DrawableObject {
     }
   }
 
-  // character.isColliding(chicken)
   isColliding(mo) {
     return (
       this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
@@ -44,6 +52,10 @@ class MovableObject extends DrawableObject {
     );
   }
 
+  /**
+   * A query whether the character has more than 0 lives
+   * @param {new Date().getTime()} Asks if currentTime has expired to avoid multiple hits in a row
+   */
   hit() {
     this.energy -= 20;
     if (this.energy < 0) {
@@ -53,6 +65,10 @@ class MovableObject extends DrawableObject {
     }
   }
 
+ /**
+  * A query whether the character has more than 0 lives
+  * @param {new Date().getTime()} Asks if currentTime has expired to avoid multiple hits in a row
+  */
   hitBoss() {
     this.bossEnergy -= 20;
     if (this.bossEnergy < 0) {
@@ -62,9 +78,13 @@ class MovableObject extends DrawableObject {
     }
   }
 
+  /**
+   * 
+   * @returns {boolean} - True if the character has been hit in the last second, otherwise false
+   */
   isHurt() {
-    let timepassed = new Date().getTime() - this.lastHit; // Difference in seconds
-    timepassed = timepassed / 1000; // Difference in seconds
+    let timepassed = new Date().getTime() - this.lastHit;
+    timepassed = timepassed / 1000;
     return timepassed < 1;
   }
 
@@ -110,11 +130,11 @@ class MovableObject extends DrawableObject {
     this.otherDirection = false;
   }
 
-  /**
-   * Die länge der Animation wird an den Bilder aus gelegt
-   * wird für animate() Methode benutzt
-   * @param {Die bilder der IMAGE} images 
-   */
+/**
+* The length of the animation is set to the images
+* is used for animate() method
+* @param {The images of the IMAGE} images
+*/
   playAnimation(images) {
     let i = this.currentImage % images.length;
     let path = images[i];
