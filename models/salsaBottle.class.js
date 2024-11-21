@@ -22,9 +22,28 @@ class SalsaBottle extends MovableObject {
     this.animate();
   }
 
+  /**
+   * Initializes the animation for the SalsaBottle.
+   */
   animate() {
+    this.startSalsaBottleAnimation();
+  }
+
+  /**
+   * Starts the interval to play the turning animation for the SalsaBottle.
+   * @private
+   */
+  startSalsaBottleAnimation() {
     this.salsaBottle = setInterval(() => {
-      this.playAnimation(this.IMAGES_TURN);
-    }, 1000/ 3);
+      this.playTurnAnimation();
+    }, 1000 / 3);
+  }
+
+  /**
+   * Plays the turning animation for the SalsaBottle.
+   * @private
+   */
+  playTurnAnimation() {
+    this.playAnimation(this.IMAGES_TURN);
   }
 }

@@ -222,7 +222,6 @@ class Character extends MovableObject {
       this.sleepTime = currentTime;
     } else if (currentTime - this.sleepTime >= 3000) {
       this.playAnimation(this.IMAGES_LONG_WAIT);
-      console.log(currentTime);
     } else {
       this.playAnimation(this.IMAGES_WAIT);
     }

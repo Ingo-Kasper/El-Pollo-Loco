@@ -10,8 +10,12 @@ class BottleBar extends DrawableObject {
     "img/7_statusbars/1_statusbar/3_statusbar_bottle/blue/100.png",
   ];
 
-  bottle_Break_sound = new Audio("../audio/el-Pollo-Koco-Classig/bottleBreak.mp3")
-  bottle_Throwing_sound = new Audio("../audio/el-Pollo-Koco-Classig/bottleThrowing.mp3")
+  bottle_Break_sound = new Audio(
+    "../audio/el-Pollo-Koco-Classig/bottleBreak.mp3"
+  );
+  bottle_Throwing_sound = new Audio(
+    "../audio/el-Pollo-Koco-Classig/bottleThrowing.mp3"
+  );
 
   constructor() {
     super();
@@ -23,12 +27,20 @@ class BottleBar extends DrawableObject {
     this.y = 60;
   }
 
+  /**
+   * Updates the bottle bar value and selects the appropriate image.
+   * @param {number} bottleBar - The current bottle level (0-100).
+   */
   setBottleBar(bottleBar) {
     this.bottleBar = bottleBar;
     let path = this.IMAGES_BOTTLE[this.resolveBarIndex()];
     this.img = this.imageCache[path];
   }
 
+  /**
+   * Calculates the index of the image to display based on the bottle level.
+   * @returns {number} The index of the image corresponding to the bottle level.
+   */
   resolveBarIndex() {
     if (this.isBottleBar() == 100) {
       return 5;

@@ -108,6 +108,8 @@ function fullscreen() {
 function enterFullscreen(element) {
   if (element.requestFullscreen) {
     element.requestFullscreen();
+    document.getElementById("startPage").classList.add("startPage");
+    document.getElementById("startPage").classList.remove("startPageFullScreen");
   } else if (element.msRequestFullscreen) {
     // for IE11 (remove June 15, 2022)
     element.msRequestFullscreen();
@@ -118,11 +120,9 @@ function enterFullscreen(element) {
 }
 
 function exitFullscreen() {
-  if (document.exitFullscreen) {
-    document.exitFullscreen();
-  } else if (document.webkitExitFullscreen) {
-    document.webkitExitFullscreen();
-  }
+  document.webkitExitFullscreen();
+  document.getElementById("startPage").classList.add("startPageFullScreen");
+  document.getElementById("startPage").classList.remove("startPage");
 }
 
 function toutchControl() {
