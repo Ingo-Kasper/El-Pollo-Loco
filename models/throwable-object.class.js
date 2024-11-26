@@ -41,7 +41,7 @@ class ThrowbaleObject extends MovableObject {
     this.speedY = 30;
     this.applyGravity();
     this.bottleThrowing = setInterval(() => {
-      this.x += 10;
+      this.x += 15;
     }, 1000 / 25);
     this.bottleRotation = setInterval(() => {
       this.playAnimation(this.IMAGES_BOTTLE_ROTATION);

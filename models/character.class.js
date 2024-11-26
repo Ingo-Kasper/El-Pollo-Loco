@@ -216,7 +216,7 @@ class Character extends MovableObject {
   handleMovementState(currentTime) {
     if (this.isMovingHorizontal()) {
       this.playAnimation(this.IMAGES_WALKING);
-      this.sleepTime = currentTime;
+      this.sleepTime = 0;
     } else if (this.isSleepTime()) {
       this.playAnimation(this.IMAGES_WAIT);
       this.sleepTime = currentTime;
@@ -230,5 +230,6 @@ class Character extends MovableObject {
   jump() {
     this.speedY = 25;
     this.playSound(4);
+    this.sleepTime = 0;
   }
 }

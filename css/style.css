@@ -283,6 +283,12 @@ h1 {
     font-size: 1.8em;
     padding-top: 15px;
   }
+  .restartButton {
+    font-size: 2em;
+  }
+  .finishGame {
+    font-size: 2em;
+  }
 }
 
 @media (max-width: 500px) {
