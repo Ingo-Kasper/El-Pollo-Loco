@@ -27,6 +27,7 @@ class World {
     this.character.world = this;
   }
 
+  // Abfrage der Collison mit den Feind
   run() {
     setInterval(() => {
       this.checkCollisions();
@@ -39,6 +40,25 @@ class World {
     this.collidingWihtCion();
     this.collidingWihtBottle();
     this.checkThrowableObjects();
+    this.checkBossProximity();
+  }
+
+  calculateDistance(object1, object2) {
+    const dx = object1.x - object2.x;
+    const dy = object1.y - object2.y;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+
+  checkBossProximity() {
+    const endboss = this.level.enemies.find(enemy => enemy instanceof Endboss);
+    if (endboss) {
+      const distance = this.calculateDistance(this.character, endboss);
+      if (distance < 600) {
+        this.bossBar.visible = true; 
+      } else {
+        this.bossBar.visible = false;
+      }
+    }
   }
 
   collidingWihtEnemy() {
@@ -199,7 +219,7 @@ class World {
    * @param {number} currentTime - The current timestamp.
    */
   handleThrowAction(currentTime) {
-    if (this.isThrown() && this.isThroingThere() && !this.isBottleThrown && currentTime - this.lastThrowTime >= this.throwCooldown) {
+    if (this.isThrown() && this.isThroingThere() && currentTime - this.lastThrowTime >= this.throwCooldown) {
       this.createAndThrowBottle();
       this.lastThrowTime = currentTime;
     }
@@ -319,7 +339,7 @@ class World {
   }
 
   isThroingThere() {
-    return this.bottleBar.isBottleBar() > 0;
+    return this.bottleBar.isPointsBar() > 0;
   }
 
   /**
@@ -377,7 +397,9 @@ class World {
     this.addToMap(this.healBar);
     this.addToMap(this.coinBar);
     this.addToMap(this.bottleBar);
-    this.addToMap(this.bossBar);
+    if (this.bossBar.visible) {
+      this.addToMap(this.bossBar);
+    }
   }
 
   /**

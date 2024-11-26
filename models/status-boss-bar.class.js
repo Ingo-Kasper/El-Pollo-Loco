@@ -26,7 +26,6 @@ class BossBar extends DrawableObject {
     this.img = this.imageCache[path];
   }
 
-
   isPointsBar() {
     return this.BossBar;
   }

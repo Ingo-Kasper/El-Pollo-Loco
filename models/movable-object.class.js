@@ -51,6 +51,8 @@ class MovableObject extends DrawableObject {
       this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom
     );
   }
+  
+
 
   /**
    * A query whether the character has more than 0 lives
