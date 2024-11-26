@@ -79,7 +79,7 @@ h1 {
   cursor: pointer;
 }
 
-.restartButton{
+.restartButton {
   font-size: 3em;
   padding-top: 70px;
   color: #ffd70b;
@@ -130,6 +130,33 @@ h1 {
   cursor: pointer;
 }
 
+.overlayObjectPlay {
+  position: relative;
+  left: 620px;
+  top: -430px;
+  display: flex;
+  gap: 16px;
+  width: 76px;
+}
+
+.overlayObjectFullscreen {
+  position: absolute;
+  right: 4vw;
+  top: 10vh;
+  display: flex;
+  gap: 16px;
+  width: 76px;
+}
+
+.overlayObjectFullscreenStart {
+  position: relative;
+  left: 86vw;
+  top: 10vh;
+  display: flex;
+  gap: 16px;
+  width: 76px;
+}
+
 .keyContener {
   display: flex;
   flex-direction: column;
@@ -141,6 +168,14 @@ h1 {
   display: none;
   padding: 0 32px 0 32px;
   justify-content: space-between;
+  margin-top: -46px;
+}
+
+.Mobile-Touch-Button-Fullscreen {
+  display: flex;
+  padding: 0 32px 0 32px;
+  justify-content: space-between;
+  margin-top: -138px;
 }
 
 .Mobile-Touch-Button-Move {
@@ -178,20 +213,6 @@ h1 {
   src: url("../fonts/ambystomaMexicanum-VR7V.ttf") format("truetype");
 }
 
-/* Smartphones ---------*/
-@media only screen and (max-width: 720px) {
-  canvas {
-    width: 100%;
-  }
-}
-
-/* Smartphones ---------*/
-@media only screen and (max-height: 480px) {
-  canvas {
-    height: 100vh;
-  }
-}
-
 @media (max-height: 810px) {
   h1 {
     display: none;
@@ -199,12 +220,16 @@ h1 {
 }
 
 @media (max-width: 720px) {
-  .startPage, .lostPage, canvas {
+  .startPage, .lostPage, .canvas-Responsive {
     width: 576px;
     height: 384px;
   }
   .overlayObject {
     left: 480px;
+  }
+  .overlayObjectPlay {
+    top: -350px;
+    left: 478px;
   }
   .startButton {
     font-size: 2.2em;
@@ -216,11 +241,13 @@ h1 {
   .helpBox {
     display: none;
   }
-
   .Mobile-Touch-Button {
     display: flex;
     flex-direction: row;
     align-items: center;
+  }
+  .Mobile-Touch-Button-Fullscreen {
+    margin-top: -56px;
   }
 }
 
@@ -228,12 +255,17 @@ h1 {
   h1 {
     font-size: 3em;
   }
-  .startPage, .lostPage, canvas {
+  .startPage, .lostPage, .canvas-Responsive {
     width: 432px;
     height: 288px;
   }
   .overlayObject {
-    left: 334px;
+    top: 50px;
+    left: 345px;
+  }
+  .overlayObjectPlay {
+    top: -262px;
+    left: 345px;
   }
   .keyDescription {
     font-size: 1.2em;
@@ -259,7 +291,11 @@ h1 {
   .overlayObject {
     left: 200px;
   }
-  .startPage, .lostPage, canvas {
+  .startPage, .lostPage, .canvas-Responsive {
+    width: 288px;
+    height: 192px;
+  }
+  .canvas-Fullscreen {
     width: 288px;
     height: 192px;
   }

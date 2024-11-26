@@ -15,7 +15,7 @@ let allSounds = [
   new Audio("audio/el-Pollo-Koco-Classig/Background_Musik(Desert-City).mp3"), // Background Musik
 ];
 
-function backgrundMusik(){
+function backgrundMusik() {
   if (isMuted == true) {
     allSounds[8].play();
   } else {
@@ -27,10 +27,25 @@ function backgrundMusik(){
  * Start the game
  */
 function startGame() {
-  document.getElementById("startPage").classList.add("d-none");
-  document.getElementById("canvas").classList.remove("d-none");
-  inetLevel();
-  initGame();
+  if (document.fullscreenElement) {
+    document.getElementById("startPage").classList.add("d-none");
+    document.getElementById("canvas").classList.remove("d-none");
+    document
+      .getElementById("overlayObject")
+      .classList.toggle("overlayObjectFullscreenStart");
+    document
+      .getElementById("overlayObject")
+      .classList.toggle("overlayObjectFullscreen");
+    inetLevel();
+    initGame();
+  } else {
+    document.getElementById("startPage").classList.add("d-none");
+    document.getElementById("canvas").classList.remove("d-none");
+    document.getElementById("overlayObject").classList.remove("overlayObject");
+    document.getElementById("overlayObject").classList.add("overlayObjectPlay");
+    inetLevel();
+    initGame();
+  }
 }
 
 /**
@@ -61,6 +76,10 @@ function finishGameByVitctory() {
   document.getElementById("victory").classList.remove("victoryPage");
   document.getElementById("startPage").classList.remove("d-none");
   document.getElementById("canvas").classList.add("d-none");
+  document
+    .getElementById("overlayObject")
+    .classList.remove("overlayObjectPlay");
+  document.getElementById("overlayObject").classList.add("overlayObject");
 }
 
 /**
@@ -68,7 +87,7 @@ function finishGameByVitctory() {
  */
 function finishGameByGameOver() {
   document.getElementById("lost").classList.add("d-none");
-  document.getElementById("lost").classList.remove("lostPage")
+  document.getElementById("lost").classList.remove("lostPage");
   document.getElementById("startPage").classList.remove("d-none");
   document.getElementById("canvas").classList.add("d-none");
 }
@@ -99,37 +118,85 @@ function toggleMute() {
   this.backgrundMusik();
 }
 
+/**
+ * Toggles the fullscreen mode for a specified element.
+ * Checks if fullscreen is active and either enters or exits fullscreen mode accordingly.
+ */
 function fullscreen() {
+  let fullscreenElement = document.fullscreenElement;
   let fullscreen = document.getElementById("fullscreen");
-  enterFullscreen(fullscreen);
-  exitFullscreen(fullscreen);
-}
 
-function enterFullscreen(element) {
-  if (element.requestFullscreen) {
-    element.requestFullscreen();
-    document.getElementById("startPage").classList.add("startPage");
-    document.getElementById("startPage").classList.remove("startPageFullScreen");
-  } else if (element.msRequestFullscreen) {
-    // for IE11 (remove June 15, 2022)
-    element.msRequestFullscreen();
-  } else if (element.webkitRequestFullscreen) {
-    // iOS Safari
-    element.webkitRequestFullscreen();
+  if (!fullscreenElement) {
+    enterFullscreen(fullscreen);
+  } else {
+    exitFullscreen();
   }
 }
 
+/**
+ * Enters fullscreen mode for the given element.
+ * Includes support for older browsers using vendor-prefixed methods.
+ * 
+ * @param {HTMLElement} element - The DOM element to display in fullscreen mode.
+ */
+function enterFullscreen(element) {
+  if (element.requestFullscreen) {
+    element.requestFullscreen();
+    if (!startPage.classList.contains("d-none")) {
+      this.enterFullscreenStartPage();
+    } else {
+      enterFullscreenCanvas();
+    }
+  } else if (element.msRequestFullscreen) {
+    element.msRequestFullscreen(); // For older versions of Internet Explorer
+    if (!startPage.classList.contains("d-none")) {
+      this.enterFullscreenStartPage();
+    } else {
+      enterFullscreenCanvas();
+    }
+  } else if (element.webkitRequestFullscreen) {
+    element.webkitRequestFullscreen(); // For Safari on iOS
+    if (!startPage.classList.contains("d-none")) {
+      this.enterFullscreenStartPage();
+    } else {
+      enterFullscreenCanvas();
+    }
+  }
+}
+
+/**
+ * Exits fullscreen mode if it is currently active.
+ * Includes support for older browsers using vendor-prefixed methods.
+ */
 function exitFullscreen() {
-  document.webkitExitFullscreen();
-  document.getElementById("startPage").classList.add("startPageFullScreen");
-  document.getElementById("startPage").classList.remove("startPage");
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+    if (!startPage.classList.contains("d-none")) {
+      this.disableFullscreenStartPage();
+    } else {
+      this.disableFullscreenCanvias();
+    }
+  } else if (document.msExitFullscreen) {
+    document.msExitFullscreen(); // For older versions of Internet Explorer
+    if (!startPage.classList.contains("d-none")) {
+      this.disableFullscreenStartPage();
+    } else {
+      this.disableFullscreenCanvias();
+    }
+  } else if (document.webkitExitFullscreen) {
+    document.webkitExitFullscreen(); // For Safari on iOS
+    if (!startPage.classList.contains("d-none")) {
+      this.disableFullscreenStartPage();
+    } else {
+      this.disableFullscreenCanvias();
+    }
+  }
 }
 
 function toutchControl() {
   document.getElementById("touchLeft").addEventListener("touchstart", (e) => {
     e.preventDefault();
     keyboard.LEFT = true;
-    console.log("touchLeft");
   });
 
   document.getElementById("touchLeft").addEventListener("touchend", (e) => {
@@ -197,3 +264,42 @@ window.addEventListener("keyup", (e) => {
     keyboard.SPACE = false;
   }
 });
+
+function enterFullscreenStartPage() {
+  document.getElementById("startPage").classList.remove("startPage");
+  document.getElementById("startPage").classList.add("startPageFullScreen");
+  document.getElementById("overlayObject").classList.add("overlayObjectFullscreenStart");
+  document.getElementById("overlayObject").classList.remove("overlayObject");
+  document.getElementById("canvas").classList.remove("canvas-Responsive");
+}
+
+function enterFullscreenCanvas() {
+  document.getElementById("startPage").classList.remove("startPage");
+  document.getElementById("overlayObject").classList.add("overlayObjectFullscreen");
+  document.getElementById("startPage").classList.add("startPageFullScreen");
+  document.getElementById("overlayObject").classList.remove("overlayObjectPlay");
+  document.getElementById("canvas").classList.add("canvasFullscreen");
+  document.getElementById("Mobile-Touch-Button").classList.remove("Mobile-Touch-Button");
+  document.getElementById("Mobile-Touch-Button").classList.add("Mobile-Touch-Button-Fullscreen");
+  document.getElementById("canvas").classList.remove("canvas-Responsive");
+}
+
+function disableFullscreenStartPage()  {
+  document.getElementById("startPage").classList.add("startPage");
+  document.getElementById("startPage").classList.remove("startPageFullScreen");
+  document.getElementById("overlayObject").classList.remove("overlayObjectFullscreenStart");
+  document.getElementById("overlayObject").classList.add("overlayObject");
+  document.getElementById("canvas").classList.add("canvas-Responsive");
+}
+
+function disableFullscreenCanvias() {
+  document.getElementById("startPage").classList.add("startPage");
+  document.getElementById("overlayObject").classList.remove("overlayObjectFullscreen");
+  document.getElementById("startPage").classList.remove("startPageFullScreen");
+  document.getElementById("overlayObject").classList.add("overlayObjectPlay");
+  document.getElementById("overlayObject").classList.remove("overlayObjectFullscreenStart");
+  document.getElementById("canvas").classList.remove("canvasFullscreen");
+  document.getElementById("Mobile-Touch-Button").classList.add("Mobile-Touch-Button");
+  document.getElementById("Mobile-Touch-Button").classList.remove("Mobile-Touch-Button-Fullscreen");
+  document.getElementById("canvas").classList.add("canvas-Responsive");
+}
