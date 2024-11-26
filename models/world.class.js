@@ -12,6 +12,8 @@ class World {
   throwableObjects = [];
   lastHitTime = 0;
   LastBossHitTime = 0;
+  throwCooldown = 1200;
+  lastThrowTime = 0;
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -25,7 +27,6 @@ class World {
     this.character.world = this;
   }
 
-  // Abfrage der Collison mit den Feind
   run() {
     setInterval(() => {
       this.checkCollisions();
@@ -198,7 +199,7 @@ class World {
    * @param {number} currentTime - The current timestamp.
    */
   handleThrowAction(currentTime) {
-    if (this.isThrown() && this.isThroingThere() && !this.isBottleThrown) {
+    if (this.isThrown() && this.isThroingThere() && !this.isBottleThrown && currentTime - this.lastThrowTime >= this.throwCooldown) {
       this.createAndThrowBottle();
       this.lastThrowTime = currentTime;
     }

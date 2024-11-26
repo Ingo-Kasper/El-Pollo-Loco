@@ -26,23 +26,7 @@ class CoinBar extends DrawableObject {
     this.img = this.imageCache[path];
   }
 
-  resolveBarIndex() {
-    if (this.isCoinBar() == 100) {
-      return 5;
-    } else if (this.isCoinBar() == 80) {
-      return 4;
-    } else if (this.isCoinBar() == 60) {
-      return 3;
-    } else if (this.isCoinBar() == 40) {
-      return 2;
-    } else if (this.isCoinBar() == 20) {
-      return 1;
-    } else {
-      return 0;
-    }
-  }
-
-  isCoinBar() {
+  isPointsBar() {
     return this.coinBar;
   }
 

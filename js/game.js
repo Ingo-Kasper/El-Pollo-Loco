@@ -4,15 +4,15 @@ let keyboard = new Keyboard();
 let isMuted = false;
 
 let allSounds = [
-  new Audio("audio/el-Pollo-Koco-Classig/bottleBreak.mp3"), // Flasche zerbricht
-  new Audio("audio/el-Pollo-Koco-Classig/bottleThrowing.mp3"), // Flaschen Wurf
-  new Audio("audio/el-Pollo-Koco-Classig/chickenHit.mp3"), // Chicken Hit
-  new Audio("audio/el-Pollo-Koco-Classig/collectCoin.mp3"), // Coin sammeln
-  new Audio("audio/el-Pollo-Koco-Classig/jump.mp3"), // Jump
-  new Audio("audio/el-Pollo-Koco-Classig/running.mp3"), // Running
-  new Audio("audio/el-Pollo-Koco-Classig/win.mp3"), // Win
-  new Audio("audio/el-Pollo-Koco-Classig/male-hurt.mp3"), // Hurt
-  new Audio("audio/el-Pollo-Koco-Classig/Background_Musik(Desert-City).mp3"), // Background Musik
+  new Audio("audio/el-Pollo-Koco-Classig/bottleBreak.mp3"),
+  new Audio("audio/el-Pollo-Koco-Classig/bottleThrowing.mp3"),
+  new Audio("audio/el-Pollo-Koco-Classig/chickenHit.mp3"),
+  new Audio("audio/el-Pollo-Koco-Classig/collectCoin.mp3"),
+  new Audio("audio/el-Pollo-Koco-Classig/jump.mp3"),
+  new Audio("audio/el-Pollo-Koco-Classig/running.mp3"),
+  new Audio("audio/el-Pollo-Koco-Classig/win.mp3"),
+  new Audio("audio/el-Pollo-Koco-Classig/male-hurt.mp3"),
+  new Audio("audio/el-Pollo-Koco-Classig/Background_Musik(Desert-City).mp3"),
 ];
 
 function backgrundMusik() {
@@ -134,65 +134,71 @@ function fullscreen() {
 }
 
 /**
- * Enters fullscreen mode for the given element.
- * Includes support for older browsers using vendor-prefixed methods.
+ * Enters fullscreen mode for the given element and handles start page visibility.
  * 
  * @param {HTMLElement} element - The DOM element to display in fullscreen mode.
  */
 function enterFullscreen(element) {
+  requestFullscreen(element);
+  toggleFullscreenState(true);
+}
+
+/**
+ * Exits fullscreen mode and handles start page visibility.
+ */
+function exitFullscreen() {
+  requestExitFullscreen();
+  toggleFullscreenState(false);
+}
+
+/**
+ * Requests fullscreen for the given element using vendor-prefixed methods.
+ * 
+ * @param {HTMLElement} element - The DOM element to display in fullscreen mode.
+ */
+function requestFullscreen(element) {
   if (element.requestFullscreen) {
     element.requestFullscreen();
-    if (!startPage.classList.contains("d-none")) {
-      this.enterFullscreenStartPage();
-    } else {
-      enterFullscreenCanvas();
-    }
   } else if (element.msRequestFullscreen) {
-    element.msRequestFullscreen(); // For older versions of Internet Explorer
-    if (!startPage.classList.contains("d-none")) {
-      this.enterFullscreenStartPage();
-    } else {
-      enterFullscreenCanvas();
-    }
+    element.msRequestFullscreen();
   } else if (element.webkitRequestFullscreen) {
-    element.webkitRequestFullscreen(); // For Safari on iOS
-    if (!startPage.classList.contains("d-none")) {
-      this.enterFullscreenStartPage();
-    } else {
-      enterFullscreenCanvas();
-    }
+    element.webkitRequestFullscreen();
   }
 }
 
 /**
- * Exits fullscreen mode if it is currently active.
- * Includes support for older browsers using vendor-prefixed methods.
+ * Exits fullscreen mode using vendor-prefixed methods.
  */
-function exitFullscreen() {
+function requestExitFullscreen() {
   if (document.exitFullscreen) {
     document.exitFullscreen();
-    if (!startPage.classList.contains("d-none")) {
-      this.disableFullscreenStartPage();
-    } else {
-      this.disableFullscreenCanvias();
-    }
   } else if (document.msExitFullscreen) {
-    document.msExitFullscreen(); // For older versions of Internet Explorer
-    if (!startPage.classList.contains("d-none")) {
-      this.disableFullscreenStartPage();
-    } else {
-      this.disableFullscreenCanvias();
-    }
+    document.msExitFullscreen();
   } else if (document.webkitExitFullscreen) {
-    document.webkitExitFullscreen(); // For Safari on iOS
-    if (!startPage.classList.contains("d-none")) {
+    document.webkitExitFullscreen();
+  }
+}
+
+/**
+ * Toggles fullscreen state and updates start page or canvas state.
+ * 
+ * @param {boolean} isEntering - `true` if entering fullscreen, `false` if exiting fullscreen.
+ */
+function toggleFullscreenState(isEntering) {
+  if (!startPage.classList.contains("d-none")) {
+    if (isEntering) {
+      this.enterFullscreenStartPage();
+    } else {
       this.disableFullscreenStartPage();
+    }
+  } else {
+    if (isEntering) {
+      enterFullscreenCanvas();
     } else {
       this.disableFullscreenCanvias();
     }
   }
 }
-
 function toutchControl() {
   document.getElementById("touchLeft").addEventListener("touchstart", (e) => {
     e.preventDefault();
@@ -279,8 +285,8 @@ function enterFullscreenCanvas() {
   document.getElementById("startPage").classList.add("startPageFullScreen");
   document.getElementById("overlayObject").classList.remove("overlayObjectPlay");
   document.getElementById("canvas").classList.add("canvasFullscreen");
-  document.getElementById("Mobile-Touch-Button").classList.remove("Mobile-Touch-Button");
-  document.getElementById("Mobile-Touch-Button").classList.add("Mobile-Touch-Button-Fullscreen");
+  document.getElementById("mobile-Touch-Button").classList.remove("mobile-Touch-Button");
+  document.getElementById("mobile-Touch-Button").classList.add("mobile-Touch-Button-Fullscreen");
   document.getElementById("canvas").classList.remove("canvas-Responsive");
 }
 
@@ -299,7 +305,7 @@ function disableFullscreenCanvias() {
   document.getElementById("overlayObject").classList.add("overlayObjectPlay");
   document.getElementById("overlayObject").classList.remove("overlayObjectFullscreenStart");
   document.getElementById("canvas").classList.remove("canvasFullscreen");
-  document.getElementById("Mobile-Touch-Button").classList.add("Mobile-Touch-Button");
-  document.getElementById("Mobile-Touch-Button").classList.remove("Mobile-Touch-Button-Fullscreen");
+  document.getElementById("mobile-Touch-Button").classList.add("mobile-Touch-Button");
+  document.getElementById("mobile-Touch-Button").classList.remove("mobile-Touch-Button-Fullscreen");
   document.getElementById("canvas").classList.add("canvas-Responsive");
 }

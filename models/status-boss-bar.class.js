@@ -26,27 +26,8 @@ class BossBar extends DrawableObject {
     this.img = this.imageCache[path];
   }
 
-  /**
-   * Determines the index of the image to display based on the boss's energy.
-   * @returns {number} The index of the image corresponding to the current energy.
-   */
-  resolveBarIndex() {
-    if (this.isBossBar() >= 100) {
-      return 5;
-    } else if (this.isBossBar() == 80) {
-      return 4;
-    } else if (this.isBossBar() == 60) {
-      return 3;
-    } else if (this.isBossBar() == 40) {
-      return 2;
-    } else if (this.isBossBar() == 20) {
-      return 1;
-    } else {
-      return 0;
-    }
-  }
 
-  isBossBar() {
+  isPointsBar() {
     return this.BossBar;
   }
 }

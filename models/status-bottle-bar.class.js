@@ -37,27 +37,7 @@ class BottleBar extends DrawableObject {
     this.img = this.imageCache[path];
   }
 
-  /**
-   * Calculates the index of the image to display based on the bottle level.
-   * @returns {number} The index of the image corresponding to the bottle level.
-   */
-  resolveBarIndex() {
-    if (this.isBottleBar() == 100) {
-      return 5;
-    } else if (this.isBottleBar() == 80) {
-      return 4;
-    } else if (this.isBottleBar() == 60) {
-      return 3;
-    } else if (this.isBottleBar() == 40) {
-      return 2;
-    } else if (this.isBottleBar() == 20) {
-      return 1;
-    } else {
-      return 0;
-    }
-  }
-
-  isBottleBar() {
+  isPointsBar() {
     return this.bottleBar;
   }
 

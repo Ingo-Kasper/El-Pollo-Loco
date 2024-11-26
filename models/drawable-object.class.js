@@ -82,4 +82,24 @@ class DrawableObject {
   isMuteOn() {
     return isMuted == true;
   }
+
+    /**
+   * Calculates the index of the image to display based on the level.
+   * @returns {number} The index of the image corresponding to the level.
+   */
+  resolveBarIndex() {
+    if (this.isPointsBar() == 100) {
+      return 5;
+    } else if (this.isPointsBar() == 80) {
+      return 4;
+    } else if (this.isPointsBar() == 60) {
+      return 3;
+    } else if (this.isPointsBar() == 40) {
+      return 2;
+    } else if (this.isPointsBar() == 20) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
 }

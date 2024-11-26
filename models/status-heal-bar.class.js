@@ -25,24 +25,8 @@ class HealBar extends DrawableObject {
     let path = this.IMAGES_HEALTH[this.resolveBarIndex()];
     this.img = this.imageCache[path];
   }
-
-  resolveBarIndex() {
-    if (this.isHealBar() == 100) {
-      return 5;
-    } else if (this.isHealBar() == 80) {
-      return 4;
-    } else if (this.isHealBar() == 60) {
-      return 3;
-    } else if (this.isHealBar() == 40) {
-      return 2;
-    } else if (this.isHealBar() == 20) {
-      return 1;
-    } else {
-      return 0;
-    }
-  }
   
-  isHealBar() {
+  isPointsBar() {
     return this.healthBar
   }
 }
