@@ -135,7 +135,7 @@ function fullscreen() {
 
 /**
  * Enters fullscreen mode for the given element and handles start page visibility.
- * 
+ *
  * @param {HTMLElement} element - The DOM element to display in fullscreen mode.
  */
 function enterFullscreen(element) {
@@ -153,7 +153,7 @@ function exitFullscreen() {
 
 /**
  * Requests fullscreen for the given element using vendor-prefixed methods.
- * 
+ *
  * @param {HTMLElement} element - The DOM element to display in fullscreen mode.
  */
 function requestFullscreen(element) {
@@ -181,7 +181,7 @@ function requestExitFullscreen() {
 
 /**
  * Toggles fullscreen state and updates start page or canvas state.
- * 
+ *
  * @param {boolean} isEntering - `true` if entering fullscreen, `false` if exiting fullscreen.
  */
 function toggleFullscreenState(isEntering) {
@@ -199,6 +199,7 @@ function toggleFullscreenState(isEntering) {
     }
   }
 }
+
 function toutchControl() {
   document.getElementById("touchLeft").addEventListener("touchstart", (e) => {
     e.preventDefault();
@@ -274,38 +275,58 @@ window.addEventListener("keyup", (e) => {
 function enterFullscreenStartPage() {
   document.getElementById("startPage").classList.remove("startPage");
   document.getElementById("startPage").classList.add("startPageFullScreen");
-  document.getElementById("overlayObject").classList.add("overlayObjectFullscreenStart");
+  document
+    .getElementById("overlayObject")
+    .classList.add("overlayObjectFullscreenStart");
   document.getElementById("overlayObject").classList.remove("overlayObject");
   document.getElementById("canvas").classList.remove("canvas-Responsive");
 }
 
 function enterFullscreenCanvas() {
   document.getElementById("startPage").classList.remove("startPage");
-  document.getElementById("overlayObject").classList.add("overlayObjectFullscreen");
+  document
+    .getElementById("overlayObject")
+    .classList.add("overlayObjectFullscreen");
   document.getElementById("startPage").classList.add("startPageFullScreen");
-  document.getElementById("overlayObject").classList.remove("overlayObjectPlay");
+  document
+    .getElementById("overlayObject")
+    .classList.remove("overlayObjectPlay");
   document.getElementById("canvas").classList.add("canvasFullscreen");
-  document.getElementById("mobile-Touch-Button").classList.remove("mobile-Touch-Button");
-  document.getElementById("mobile-Touch-Button").classList.add("mobile-Touch-Button-Fullscreen");
+  document
+    .getElementById("mobile-Touch-Button")
+    .classList.remove("mobile-Touch-Button");
+  document
+    .getElementById("mobile-Touch-Button")
+    .classList.add("mobile-Touch-Button-Fullscreen");
   document.getElementById("canvas").classList.remove("canvas-Responsive");
 }
 
-function disableFullscreenStartPage()  {
+function disableFullscreenStartPage() {
   document.getElementById("startPage").classList.add("startPage");
   document.getElementById("startPage").classList.remove("startPageFullScreen");
-  document.getElementById("overlayObject").classList.remove("overlayObjectFullscreenStart");
+  document
+    .getElementById("overlayObject")
+    .classList.remove("overlayObjectFullscreenStart");
   document.getElementById("overlayObject").classList.add("overlayObject");
   document.getElementById("canvas").classList.add("canvas-Responsive");
 }
 
 function disableFullscreenCanvias() {
   document.getElementById("startPage").classList.add("startPage");
-  document.getElementById("overlayObject").classList.remove("overlayObjectFullscreen");
+  document
+    .getElementById("overlayObject")
+    .classList.remove("overlayObjectFullscreen");
   document.getElementById("startPage").classList.remove("startPageFullScreen");
   document.getElementById("overlayObject").classList.add("overlayObjectPlay");
-  document.getElementById("overlayObject").classList.remove("overlayObjectFullscreenStart");
+  document
+    .getElementById("overlayObject")
+    .classList.remove("overlayObjectFullscreenStart");
   document.getElementById("canvas").classList.remove("canvasFullscreen");
-  document.getElementById("mobile-Touch-Button").classList.add("mobile-Touch-Button");
-  document.getElementById("mobile-Touch-Button").classList.remove("mobile-Touch-Button-Fullscreen");
+  document
+    .getElementById("mobile-Touch-Button")
+    .classList.add("mobile-Touch-Button");
+  document
+    .getElementById("mobile-Touch-Button")
+    .classList.remove("mobile-Touch-Button-Fullscreen");
   document.getElementById("canvas").classList.add("canvas-Responsive");
 }
