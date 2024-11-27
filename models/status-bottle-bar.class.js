@@ -41,6 +41,12 @@ class BottleBar extends DrawableObject {
     return this.bottleBar;
   }
 
+  /**
+ * Increases the bottle bar by 20 when a bottle is collected, up to a maximum of 100.
+ * - Updates the `bottleBar` property and ensures it does not exceed 100.
+ * - Calls the `setBottleBar` method to update the bottle bar display.
+ * - Plays a sound effect if the mute option is off.
+ */
   collectBottle() {
     if (this.bottleBar < 100) {
       this.bottleBar += 20;
@@ -51,6 +57,13 @@ class BottleBar extends DrawableObject {
     }
   }
 
+/**
+ * Decreases the bottle bar by 20 when a bottle is thrown, and plays a sound effect.
+ * - If the bottle bar is greater than or equal to 20, it decreases by 20.
+ * - If the bottle bar is less than 20, it is reset to 0.
+ * - Updates the bottle bar display using `setBottleBar`.
+ * - Plays a sound effect when a bottle is thrown if the mute option is off.
+ */
   throwPullOff() {
     if (this.bottleBar >= 20) {
       this.bottleBar -= 20;

@@ -20,6 +20,10 @@ class BossBar extends DrawableObject {
     this.y = 10;
   }
 
+  /**
+   * Updates the boss bar value and selects the appropriate image.
+   * @param {number} BossBar - The current boss level (0-100).
+   */
   setBosshBar(BossBar) {
     this.BossBar = BossBar;
     let path = this.IMAGES_BossBar[this.resolveBarIndex()];

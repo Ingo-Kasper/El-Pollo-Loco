@@ -20,6 +20,10 @@ class HealBar extends DrawableObject {
     this.y = 0;
   }
 
+  /**
+   * Updates the health bar value and selects the appropriate image.
+   * @param {number} healthBar - The current health level (0-100).
+   */
   setHealthBar(healthBar) {
     this.healthBar = healthBar;
     let path = this.IMAGES_HEALTH[this.resolveBarIndex()];

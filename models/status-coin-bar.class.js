@@ -20,6 +20,10 @@ class CoinBar extends DrawableObject {
     this.y = 30;
   }
 
+  /**
+   * Updates the coin bar value and selects the appropriate image.
+   * @param {number} coin - The current coin level (0-100).
+   */
   setCoinBar(coin) {
     this.coinBar = coin;
     let path = this.IMAGES_COIN[this.resolveBarIndex()];

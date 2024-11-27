@@ -227,6 +227,12 @@ class Character extends MovableObject {
     }
   }
 
+  /**
+ * Initiates a jump action for the character.
+ * - Sets the vertical speed (`speedY`) to a positive value to simulate upward motion.
+ * - Plays a sound effect associated with jumping.
+ * - Resets the `sleepTime` property to ensure immediate responsiveness.
+ */
   jump() {
     this.speedY = 25;
     this.playSound(4);

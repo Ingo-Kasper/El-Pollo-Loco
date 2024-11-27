@@ -272,6 +272,10 @@ window.addEventListener("keyup", (e) => {
   }
 });
 
+/**
+ * Switches the `startPage` to fullscreen mode for the start page view.
+ * Adjusts the associated CSS classes to enable fullscreen layout and styling.
+ */
 function enterFullscreenStartPage() {
   document.getElementById("startPage").classList.remove("startPage");
   document.getElementById("startPage").classList.add("startPageFullScreen");
@@ -282,6 +286,10 @@ function enterFullscreenStartPage() {
   document.getElementById("canvas").classList.remove("canvas-Responsive");
 }
 
+/**
+ * Switches the `startPage` and `canvas` to fullscreen mode for gameplay.
+ * Updates various elements' classes to reflect fullscreen game state.
+ */
 function enterFullscreenCanvas() {
   document.getElementById("startPage").classList.remove("startPage");
   document
@@ -301,6 +309,10 @@ function enterFullscreenCanvas() {
   document.getElementById("canvas").classList.remove("canvas-Responsive");
 }
 
+/**
+ * Reverts the `startPage` from fullscreen mode back to its default layout.
+ * Adjusts CSS classes to restore the initial styles of the elements.
+ */
 function disableFullscreenStartPage() {
   document.getElementById("startPage").classList.add("startPage");
   document.getElementById("startPage").classList.remove("startPageFullScreen");
@@ -311,6 +323,10 @@ function disableFullscreenStartPage() {
   document.getElementById("canvas").classList.add("canvas-Responsive");
 }
 
+/**
+ * Reverts the `startPage` and `canvas` from fullscreen gameplay mode.
+ * Restores the default layout and associated CSS classes of the elements.
+ */
 function disableFullscreenCanvias() {
   document.getElementById("startPage").classList.add("startPage");
   document
