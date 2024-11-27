@@ -137,8 +137,8 @@ class Endboss extends MovableObject {
   handleBossEscape() {
     setTimeout(() => {
       clearAllIntervals();
-      document.getElementById("victory").classList.remove("d-none");
-      document.getElementById("victory").classList.add("victoryPage");
+      document.getElementById("lost").classList.remove("d-none");
+      document.getElementById("lost").classList.add("lostPage");
     }, 400);
   }
 
