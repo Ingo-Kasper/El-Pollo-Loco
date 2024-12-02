@@ -36,8 +36,6 @@ class Chicken extends MovableObject {
   /**
    * Starts the chicken's movement by initiating an interval to move it left.
    * This function sets the movement speed and interval.
-   * 
-   * @private
    */
   startMoving() {
     this.moveInterval = setInterval(() => this.moveLeft(), 1000 / 110);
@@ -45,8 +43,6 @@ class Chicken extends MovableObject {
 
   /**
    * Starts the walking animation of the chicken by initiating an interval to cycle through the walking images.
-   * 
-   * @private
    */
   startWalkingAnimation() {
     this.moveAnimtionInterval = setInterval(() => this.playAnimation(this.IMAGES_WALKING), 1000 / 10);
@@ -55,8 +51,6 @@ class Chicken extends MovableObject {
   /**
    * Plays the death animation and handles the necessary state changes for the chicken when it dies.
    * Stops the movement intervals and plays the death sound.
-   * 
-   * @public
    */
   playDeathAnimation() {
     this.stopMovement();
@@ -67,8 +61,6 @@ class Chicken extends MovableObject {
 
   /**
    * Stops the movement and animation intervals to halt the chicken's movement when it dies.
-   * 
-   * @private
    */
   stopMovement() {
     clearInterval(this.moveInterval);
@@ -77,8 +69,6 @@ class Chicken extends MovableObject {
 
   /**
    * Starts the animation and movement process when the chicken is initialized.
-   * 
-   * @private
    */
   animate() {
     this.startMoving();

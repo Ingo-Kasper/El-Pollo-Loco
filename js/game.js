@@ -15,6 +15,9 @@ let allSounds = [
   new Audio("audio/el-Pollo-Koco-Classig/Background_Musik(Desert-City).mp3"),
 ];
 
+/**
+ * This method is called when the page is loaded.
+ */
 function backgrundMusik() {
   if (isMuted == true) {
     allSounds[8].play();
@@ -194,6 +197,9 @@ function toggleFullscreenState(isEntering) {
   }
 }
 
+/**
+ * This method is used for touch when performed on mobile.
+ */
 function toutchControl() {
   document.getElementById("touchLeft").addEventListener("touchstart", (e) => {e.preventDefault(); keyboard.LEFT = true;});
 

@@ -26,8 +26,6 @@ class Coin extends MovableObject {
 
   /**
    * Starts the coin's animation by initiating an interval to cycle through the turning images.
-   * 
-   * @private
    */
   animate() {
     this.coinAnimation = setInterval(() => {

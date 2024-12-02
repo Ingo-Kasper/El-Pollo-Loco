@@ -12,6 +12,9 @@ class Cloud extends MovableObject {
     this.animate();
   }
 
+  /**
+   * Starts the animation and movement process when the cloud is initialized.
+   */
   animate() {
     setInterval(() => {
       this.x -= 0.12;

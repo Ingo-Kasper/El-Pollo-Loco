@@ -27,13 +27,18 @@ class World {
     this.character.world = this;
   }
 
-  // Abfrage der Collison mit den Feind
+  /**
+   * Starts the game loop.
+   */
   run() {
     setInterval(() => {
       this.checkCollisions();
     }, 1000 / 120);
   }
 
+  /**
+   * Checks for collisions between the character and enemies, coins, bottles, and throwable objects.
+   */
   checkCollisions() {
     this.collidingWihtEnemy();
     this.collidingWihtEndBoss();
@@ -43,12 +48,23 @@ class World {
     this.checkBossProximity();
   }
 
+  /**
+   * Calculates the Euclidean distance between two objects based on their x and y coordinates.
+   * Uses the Pythagorean theorem to compute the straight-line distance.
+   * 
+   * @param {The first object} object1 
+   * @param {The second object} object2 
+   * @returns The calculated distance between the two objects
+   */
   calculateDistance(object1, object2) {
     const dx = object1.x - object2.x;
     const dy = object1.y - object2.y;
     return Math.sqrt(dx * dx + dy * dy);
   }
 
+  /**
+   * Checks how far the boss is from the character
+   */
   checkBossProximity() {
     const endboss = this.level.enemies.find(enemy => enemy instanceof Endboss);
     if (endboss) {
@@ -61,6 +77,11 @@ class World {
     }
   }
 
+  /**
+   * Check the collision with the enemy
+   * 
+   * return If you have no life points left
+   */
   collidingWihtEnemy() {
     const currentTime = new Date().getTime();
     this.level.enemies = this.level.enemies.filter((enemy, index) => {
@@ -71,6 +92,17 @@ class World {
     });
   }
 
+  /**
+   * Handles the collision between the character and an enemy.
+   * - Checks if the character lands on the enemy:
+   *   - If true, handles the enemy's death.
+   * - If the character does not land on the enemy and at least 1 second has passed since the last hit:
+   *   - Handles damage to the character and updates the last hit time.
+   *
+   * @param {Object} enemy - The enemy involved in the collision.
+   * @param {number} index - The index of the enemy in the enemies array.
+   * @param {number} currentTime - The current timestamp, typically in milliseconds.
+   */
   handleCollisionWithEnemy(enemy, index, currentTime) {
     if (this.isCharacterLandingOnEnemy(enemy, index)) {
       this.handleEnemyDeath(enemy);
@@ -80,6 +112,13 @@ class World {
     }
   }
 
+  /**
+   * Handles the death of an enemy when the character lands on it.
+   * -If the enemy is an instance of `SmallChicken` or `Chicken`:
+   * -Removes the enemy from the level's enemies array after a delay of 400ms.
+   * 
+   * @param {Object} enemy - The enemy object to be handled. 
+   */
   handleEnemyDeath(enemy) {
     if (enemy instanceof SmallChicken || enemy instanceof Chicken) {
       setTimeout(() => {
@@ -89,10 +128,14 @@ class World {
     }
   }
 
+  /**
+   * Handles the character being hit by an enemy.
+   */
   handleCharacterHit() {
     this.character.hit();
     this.healBar.setHealthBar(this.character.energy);
   }
+
   /**
    * Checks collisions between the character and the end boss, and updates the enemy list.
    */
@@ -200,6 +243,9 @@ class World {
     });
   }
 
+  /**
+   * Checks if the character is colliding with a given item.
+   */
   isCharacterCollidingWith(Item) {
     return this.character.isColliding(Item);
   }
@@ -331,10 +377,14 @@ class World {
     );
   }
 
+  /**
+   * Was SPACE pressed?
+   */
   isThrown() {
     return this.keyboard.SPACE;
   }
 
+  /** */
   isThroingThere() {
     return this.bottleBar.isPointsBar() > 0;
   }

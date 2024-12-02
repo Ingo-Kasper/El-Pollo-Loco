@@ -30,10 +30,20 @@ class CoinBar extends DrawableObject {
     this.img = this.imageCache[path];
   }
 
+  /**
+   * 
+   * @returns The coin bar value
+   */
   isPointsBar() {
     return this.coinBar;
   }
 
+  /**
+   * Increases the coin bar by 20 when a coin is collected, up to a maximum of 100.
+   * - Updates the `coinBar` property and ensures it does not exceed 100.
+   * - Calls the `setCoinBar` method to update the coin bar display.
+   * - Plays a sound effect if the mute option is off.
+   */
   collectCoin() {
     if (this.coinBar < 100) {
       this.coinBar += 20;

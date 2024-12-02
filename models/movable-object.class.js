@@ -43,6 +43,11 @@ class MovableObject extends DrawableObject {
     }
   }
 
+  /**
+   * Checks if the current object is colliding with another movable object.
+   * Collision is determined by comparing the bounding boxes of both objects,
+   * taking into account their offsets for precise collision detection.
+   */
   isColliding(mo) {
     return (
       this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
@@ -52,8 +57,6 @@ class MovableObject extends DrawableObject {
     );
   }
   
-
-
   /**
    * A query whether the character has more than 0 lives
    * @param {new Date().getTime()} Asks if currentTime has expired to avoid multiple hits in a row
@@ -81,7 +84,6 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   *
    * @returns {boolean} - True if the character has been hit in the last second, otherwise false
    */
   isHurt() {
@@ -90,43 +92,81 @@ class MovableObject extends DrawableObject {
     return timepassed < 1;
   }
 
+  /**
+   * 
+   * @returns {boolean} - True if the boss has been hit in the last second, otherwise false
+   */
   isBossHurt() {
     return this.bossHurt == true;
   }
 
+  /**
+   * 
+   * @returns {boolean} - True if the Charakter's life points are 0, otherwise false
+   */
   isDead() {
     return this.energy == 0;
   }
 
+  /**
+   * 
+   * @returns {boolean} - True if the boss's life points are 0, otherwise false
+   */
   isBossDead() {
     return this.bossEnergy == 0;
   }
 
+  /**
+   * 
+   * @returns {boolean} - is keyboard left or right
+   */
   isMovingHorizontal() {
     return this.world.keyboard.RIGHT || this.world.keyboard.LEFT;
   }
 
+  /**
+   * 
+   * @returns Has the boss run out of the playing field
+   */
   isBossEscape() {
     return this.x <= -740;
   }
 
+  /**
+   * 
+   * @returns If the character stands on the ground
+   */
   isJumping() {
     return this.speedY > 0;
   }
 
+  /**
+   * 
+   * @returns If the character has reached the maximum jump height
+   */
   isLanding() {
     return this.y === 230;
   }
 
+  /**
+   * 
+   * @returns The sleep timer 0
+   */
   isSleepTime() {
     return this.sleepTime === 0;
   }
 
+  /**
+   * movement to the right
+   */
   moveRight() {
     this.x += this.speed;
     this.otherDirection = false;
   }
 
+  /**
+   * movement to the left
+   */
   moveLeft() {
     this.x -= this.speed;
     this.otherDirection = false;
@@ -144,10 +184,17 @@ class MovableObject extends DrawableObject {
     this.currentImage++;
   }
 
+  /**
+   * jump speed
+   */
   jump() {
     this.speedY = 30;
   }
 
+  /**
+   * Checks if the current object is colliding with another movable object.
+   * Itme is the object that is checked for collision with the character.
+   */
   isCharacterCollidingWith(Item) {
     return this.character.isColliding(Item);
   }

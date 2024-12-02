@@ -83,7 +83,7 @@ class DrawableObject {
     return isMuted == true;
   }
 
-    /**
+  /**
    * Calculates the index of the image to display based on the level.
    * @returns {number} The index of the image corresponding to the level.
    */

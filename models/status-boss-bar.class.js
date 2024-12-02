@@ -30,6 +30,10 @@ class BossBar extends DrawableObject {
     this.img = this.imageCache[path];
   }
 
+  /**
+   * Determines the index of the current image based on the boss bar value.
+   * @returns {number} The index of the current image.
+   */
   isPointsBar() {
     return this.BossBar;
   }

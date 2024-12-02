@@ -30,6 +30,10 @@ class HealBar extends DrawableObject {
     this.img = this.imageCache[path];
   }
   
+  /**
+   * 
+   * @returns The health bar value
+   */
   isPointsBar() {
     return this.healthBar
   }
