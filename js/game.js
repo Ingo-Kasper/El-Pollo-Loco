@@ -30,12 +30,8 @@ function startGame() {
   if (document.fullscreenElement) {
     document.getElementById("startPage").classList.add("d-none");
     document.getElementById("canvas").classList.remove("d-none");
-    document
-      .getElementById("overlayObject")
-      .classList.toggle("overlayObjectFullscreenStart");
-    document
-      .getElementById("overlayObject")
-      .classList.toggle("overlayObjectFullscreen");
+    document.getElementById("overlayObject").classList.toggle("overlayObjectFullscreenStart");
+    document.getElementById("overlayObject").classList.toggle("overlayObjectFullscreen");
     inetLevel();
     initGame();
   } else {
@@ -76,9 +72,7 @@ function finishGameByVitctory() {
   document.getElementById("victory").classList.remove("victoryPage");
   document.getElementById("startPage").classList.remove("d-none");
   document.getElementById("canvas").classList.add("d-none");
-  document
-    .getElementById("overlayObject")
-    .classList.remove("overlayObjectPlay");
+  document.getElementById("overlayObject").classList.remove("overlayObjectPlay");
   document.getElementById("overlayObject").classList.add("overlayObject");
 }
 
@@ -201,75 +195,51 @@ function toggleFullscreenState(isEntering) {
 }
 
 function toutchControl() {
-  document.getElementById("touchLeft").addEventListener("touchstart", (e) => {
-    e.preventDefault();
-    keyboard.LEFT = true;
-  });
+  document.getElementById("touchLeft").addEventListener("touchstart", (e) => {e.preventDefault(); keyboard.LEFT = true;});
 
-  document.getElementById("touchLeft").addEventListener("touchend", (e) => {
-    e.preventDefault();
-    keyboard.LEFT = false;
-  });
+  document.getElementById("touchLeft-helpBox").addEventListener("touchstart", (e) => {e.preventDefault(); keyboard.LEFT = true;});
 
-  document.getElementById("touchRight").addEventListener("touchstart", (e) => {
-    e.preventDefault();
-    keyboard.RIGHT = true;
-  });
+  document.getElementById("touchLeft").addEventListener("touchend", (e) => {e.preventDefault();keyboard.LEFT = false;});
 
-  document.getElementById("touchRight").addEventListener("touchend", (e) => {
-    e.preventDefault();
-    keyboard.RIGHT = false;
-  });
+  document.getElementById("touchLeft-helpBox").addEventListener("touchend", (e) => {e.preventDefault();keyboard.LEFT = false;});
 
-  document.getElementById("touchJump").addEventListener("touchstart", (e) => {
-    e.preventDefault();
-    keyboard.UP = true;
-  });
+  document.getElementById("touchRight").addEventListener("touchstart", (e) => {e.preventDefault();keyboard.RIGHT = true;});
 
-  document.getElementById("touchJump").addEventListener("touchend", (e) => {
-    e.preventDefault();
-    keyboard.UP = false;
-  });
+  document.getElementById("touchRight-helpBox").addEventListener("touchstart", (e) => {e.preventDefault();keyboard.RIGHT = true;});
 
-  document.getElementById("touchThrow").addEventListener("touchstart", (e) => {
-    e.preventDefault();
-    keyboard.SPACE = true;
-  });
+  document.getElementById("touchRight").addEventListener("touchend", (e) => {e.preventDefault();keyboard.RIGHT = false;});
 
-  document.getElementById("touchThrow").addEventListener("touchend", (e) => {
-    e.preventDefault();
-    keyboard.SPACE = false;
-  });
+  document.getElementById("touchRight-helpBox").addEventListener("touchend", (e) => {e.preventDefault();keyboard.RIGHT = false;});
+
+  document.getElementById("touchJump").addEventListener("touchstart", (e) => {e.preventDefault();keyboard.UP = true;});
+
+  document.getElementById("touchJump-helpBox").addEventListener("touchstart", (e) => {e.preventDefault();keyboard.UP = true;});
+
+  document.getElementById("touchJump").addEventListener("touchend", (e) => {e.preventDefault();keyboard.UP = false;});
+
+  document.getElementById("touchJump-helpBox").addEventListener("touchend", (e) => {e.preventDefault();keyboard.UP = false;});
+
+  document.getElementById("touchThrow").addEventListener("touchstart", (e) => {e.preventDefault();keyboard.SPACE = true;});
+
+  document.getElementById("touchThrow-helpBox").addEventListener("touchstart", (e) => {e.preventDefault();keyboard.SPACE = true;});
+
+  document.getElementById("touchThrow").addEventListener("touchend", (e) => {e.preventDefault();keyboard.SPACE = false;});
+
+  document.getElementById("touchThrow-helpBox").addEventListener("touchend", (e) => {e.preventDefault();keyboard.SPACE = false;});
 }
 
 window.addEventListener("keydown", (e) => {
-  if (e.code === "ArrowRight" || e.keyCode === 68) {
-    keyboard.RIGHT = true;
-  }
-  if (e.code === "ArrowLeft" || e.keyCode === 65) {
-    keyboard.LEFT = true;
-  }
-  if (e.code === "ArrowUp" || e.keyCode === 87) {
-    keyboard.UP = true;
-  }
-  if (e.code === "Space") {
-    keyboard.SPACE = true;
-  }
+  if (e.code === "ArrowRight" || e.keyCode === 68) {keyboard.RIGHT = true;}
+  if (e.code === "ArrowLeft" || e.keyCode === 65) {keyboard.LEFT = true;}
+  if (e.code === "ArrowUp" || e.keyCode === 87) {keyboard.UP = true;}
+  if (e.code === "Space") {keyboard.SPACE = true;}
 });
 
 window.addEventListener("keyup", (e) => {
-  if (e.code === "ArrowRight" || e.keyCode === 68) {
-    keyboard.RIGHT = false;
-  }
-  if (e.code === "ArrowLeft" || e.keyCode === 65) {
-    keyboard.LEFT = false;
-  }
-  if (e.code === "ArrowUp" || e.keyCode === 87) {
-    keyboard.UP = false;
-  }
-  if (e.code === "Space") {
-    keyboard.SPACE = false;
-  }
+  if (e.code === "ArrowRight" || e.keyCode === 68) {keyboard.RIGHT = false;}
+  if (e.code === "ArrowLeft" || e.keyCode === 65) {keyboard.LEFT = false;}
+  if (e.code === "ArrowUp" || e.keyCode === 87) {keyboard.UP = false;}
+  if (e.code === "Space") {keyboard.SPACE = false;}
 });
 
 /**
@@ -279,9 +249,7 @@ window.addEventListener("keyup", (e) => {
 function enterFullscreenStartPage() {
   document.getElementById("startPage").classList.remove("startPage");
   document.getElementById("startPage").classList.add("startPageFullScreen");
-  document
-    .getElementById("overlayObject")
-    .classList.add("overlayObjectFullscreenStart");
+  document.getElementById("overlayObject").classList.add("overlayObjectFullscreenStart");
   document.getElementById("overlayObject").classList.remove("overlayObject");
   document.getElementById("canvas").classList.remove("canvas-Responsive");
 }
@@ -292,20 +260,12 @@ function enterFullscreenStartPage() {
  */
 function enterFullscreenCanvas() {
   document.getElementById("startPage").classList.remove("startPage");
-  document
-    .getElementById("overlayObject")
-    .classList.add("overlayObjectFullscreen");
+  document.getElementById("overlayObject").classList.add("overlayObjectFullscreen");
   document.getElementById("startPage").classList.add("startPageFullScreen");
-  document
-    .getElementById("overlayObject")
-    .classList.remove("overlayObjectPlay");
+  document.getElementById("overlayObject").classList.remove("overlayObjectPlay");
   document.getElementById("canvas").classList.add("canvasFullscreen");
-  document
-    .getElementById("mobile-Touch-Button")
-    .classList.remove("mobile-Touch-Button");
-  document
-    .getElementById("mobile-Touch-Button")
-    .classList.add("mobile-Touch-Button-Fullscreen");
+  document.getElementById("mobile-Touch-Button").classList.remove("mobile-Touch-Button");
+  document.getElementById("mobile-Touch-Button").classList.add("mobile-Touch-Button-Fullscreen");
   document.getElementById("canvas").classList.remove("canvas-Responsive");
 }
 
@@ -316,9 +276,7 @@ function enterFullscreenCanvas() {
 function disableFullscreenStartPage() {
   document.getElementById("startPage").classList.add("startPage");
   document.getElementById("startPage").classList.remove("startPageFullScreen");
-  document
-    .getElementById("overlayObject")
-    .classList.remove("overlayObjectFullscreenStart");
+  document.getElementById("overlayObject").classList.remove("overlayObjectFullscreenStart");
   document.getElementById("overlayObject").classList.add("overlayObject");
   document.getElementById("canvas").classList.add("canvas-Responsive");
 }
@@ -329,20 +287,12 @@ function disableFullscreenStartPage() {
  */
 function disableFullscreenCanvias() {
   document.getElementById("startPage").classList.add("startPage");
-  document
-    .getElementById("overlayObject")
-    .classList.remove("overlayObjectFullscreen");
+  document.getElementById("overlayObject").classList.remove("overlayObjectFullscreen");
   document.getElementById("startPage").classList.remove("startPageFullScreen");
   document.getElementById("overlayObject").classList.add("overlayObjectPlay");
-  document
-    .getElementById("overlayObject")
-    .classList.remove("overlayObjectFullscreenStart");
+  document.getElementById("overlayObject").classList.remove("overlayObjectFullscreenStart");
   document.getElementById("canvas").classList.remove("canvasFullscreen");
-  document
-    .getElementById("mobile-Touch-Button")
-    .classList.add("mobile-Touch-Button");
-  document
-    .getElementById("mobile-Touch-Button")
-    .classList.remove("mobile-Touch-Button-Fullscreen");
+  document.getElementById("mobile-Touch-Button").classList.add("mobile-Touch-Button");
+  document.getElementById("mobile-Touch-Button").classList.remove("mobile-Touch-Button-Fullscreen");
   document.getElementById("canvas").classList.add("canvas-Responsive");
 }
