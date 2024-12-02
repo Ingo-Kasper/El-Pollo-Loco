@@ -252,10 +252,7 @@ class World {
    * Handles the creation and initialization of a thrown bottle.
    */
   createAndThrowBottle() {
-    const bottle = new ThrowbaleObject(
-      this.character.x + 100,
-      this.character.y + 100
-    );
+    const bottle = new ThrowbaleObject(this.character.x + 100, this.character.y + 100);
     this.bottleBar.throwPullOff();
     this.throwableObjects.push(bottle);
     this.isBottleThrown = true;

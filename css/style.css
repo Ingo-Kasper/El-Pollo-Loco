@@ -112,6 +112,7 @@ h1 {
   font-size: 1.5em;
   color: #ffd70b;
   text-shadow: 2px 4px 2px #9f3b18;
+  text-decoration: none;
 }
 
 .overlayObject {
