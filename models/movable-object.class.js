@@ -1,6 +1,6 @@
 class MovableObject extends DrawableObject {
   speed = 0.15;
-  otherDirection = false;
+  otherDirection;
   speedY = 0;
   acceleration = 2;
   lastHit = 0;
@@ -15,7 +15,7 @@ class MovableObject extends DrawableObject {
   constructor() {
     super();
   }
-
+   
   /**
    * Reguliert die Schwerkraft
    * @param {The speed} speedY
@@ -169,7 +169,7 @@ class MovableObject extends DrawableObject {
    */
   moveLeft() {
     this.x -= this.speed;
-    this.otherDirection = false;
+    this.otherDirection = true;
   }
 
   /**

@@ -139,7 +139,6 @@ class Character extends MovableObject {
       this.playSound(5);
     } else if (this.world.keyboard.LEFT && this.x > -500) {
       this.moveLeft();
-      this.otherDirection = true;
       this.playSound(5);
     }
   }
