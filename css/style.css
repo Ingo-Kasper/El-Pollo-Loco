@@ -46,7 +46,7 @@ h1 {
   width: 100vw;
   height: 100vh;
   background: url(../img/9_intro_outro_screens/win/win_2.png);
-  background-color: #0000007a;
+  background-color: #000000a0;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -60,8 +60,8 @@ h1 {
 .lostPage {
   width: 100vw;
   height: 100vh;
-  background: url(../img/9_intro_outro_screens/game_over/game_over.png);
-  background-color: #0000007a;
+  background: url(../img/9_intro_outro_screens/game_over/game_over-test1.png);
+  background-color: #000000a0;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -326,5 +326,9 @@ h1 {
   }
   .keyContener {
     margin: 0 4px 0 4px;
+  }
+  .overlayObjectPlay {
+    top: -150px;
+    left: 200px;
   }
 }
