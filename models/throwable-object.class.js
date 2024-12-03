@@ -41,7 +41,7 @@ class ThrowbaleObject extends MovableObject {
   throw() {
     this.speedY = 30;
     this.applyGravity();
-    const throwSpeed = this.otherDirection ? -16 : 16;
+    const throwSpeed = this.otherDirection ? -18 : 18;
     this.bottleThrowing = setInterval(() => {
       this.x += throwSpeed;
     }, 1000 / 25);

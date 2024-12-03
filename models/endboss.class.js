@@ -88,7 +88,7 @@ class Endboss extends MovableObject {
    */
   boasAnimation() {
     setInterval(() => {
-      this.moveLeft();
+      this.moveLeftEnemy();
     }, 1000 / 100);
 
     setInterval(() => {

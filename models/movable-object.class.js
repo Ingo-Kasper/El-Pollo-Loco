@@ -1,6 +1,7 @@
 class MovableObject extends DrawableObject {
   speed = 0.15;
   otherDirection;
+  otherDirectionEnemy = false;
   speedY = 0;
   acceleration = 2;
   lastHit = 0;
@@ -170,6 +171,14 @@ class MovableObject extends DrawableObject {
   moveLeft() {
     this.x -= this.speed;
     this.otherDirection = true;
+  }
+
+  /**
+   * Enemy movement to the left
+   */
+  moveLeftEnemy() {
+    this.x -= this.speed;
+    this.otherDirectionEnemy = false;
   }
 
   /**

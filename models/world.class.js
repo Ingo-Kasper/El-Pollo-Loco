@@ -171,7 +171,6 @@ class World {
     if (currentTime - this.lastHitTime >= 1000) {
       this.character.hit();
       this.healBar.setHealthBar(this.character.energy);
-      allSounds[7].play();
       this.lastHitTime = currentTime;
     }
   }

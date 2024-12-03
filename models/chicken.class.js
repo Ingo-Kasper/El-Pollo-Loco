@@ -30,7 +30,7 @@ class Chicken extends MovableObject {
     this.x = x + Math.random() * 1000;
     this.speed = 0.1 + Math.random() * 0.25;
     this.animate();
-    this.moveLeft();
+    this.moveLeftEnemy();
   }
 
   /**
@@ -38,7 +38,7 @@ class Chicken extends MovableObject {
    * This function sets the movement speed and interval.
    */
   startMoving() {
-    this.moveInterval = setInterval(() => this.moveLeft(), 1000 / 110);
+    this.moveInterval = setInterval(() => this.moveLeftEnemy(), 1000 / 110);
   }
 
   /**

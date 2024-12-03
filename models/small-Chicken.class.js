@@ -33,7 +33,7 @@ class SmallChicken extends MovableObject {
   animate() {
     this.moveInterval = setInterval(() => {
       if (!this.isDead) {
-        this.moveLeft();
+        this.moveLeftEnemy();
       }
     }, 1000 / 110);
 
