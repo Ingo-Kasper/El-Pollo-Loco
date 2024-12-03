@@ -384,7 +384,9 @@ class World {
     return this.keyboard.SPACE;
   }
 
-  /** */
+  /**
+   * If the point bar is only
+   */
   isThroingThere() {
     return this.bottleBar.isPointsBar() > 0;
   }
@@ -470,6 +472,10 @@ class World {
     requestAnimationFrame(() => this.draw());
   }
 
+  /**
+   * Adds multiple objects to the map
+   * Iterates over an array of objects and adds each one to the map by calling the `addToMap` method.
+   */
   addObjectsToMap(objects) {
     objects.forEach((o) => {
       this.addToMap(o);
