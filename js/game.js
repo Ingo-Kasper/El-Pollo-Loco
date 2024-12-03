@@ -207,35 +207,20 @@ function toggleFullscreenState(isEntering) {
  */
 function toutchControl() {
   document.getElementById("touchLeft").addEventListener("touchstart", (e) => {e.preventDefault(); keyboard.LEFT = true;});
-
   document.getElementById("touchLeft-helpBox").addEventListener("touchstart", (e) => {e.preventDefault(); keyboard.LEFT = true;});
-
   document.getElementById("touchLeft").addEventListener("touchend", (e) => {e.preventDefault();keyboard.LEFT = false;});
-
   document.getElementById("touchLeft-helpBox").addEventListener("touchend", (e) => {e.preventDefault();keyboard.LEFT = false;});
-
   document.getElementById("touchRight").addEventListener("touchstart", (e) => {e.preventDefault();keyboard.RIGHT = true;});
-
   document.getElementById("touchRight-helpBox").addEventListener("touchstart", (e) => {e.preventDefault();keyboard.RIGHT = true;});
-
   document.getElementById("touchRight").addEventListener("touchend", (e) => {e.preventDefault();keyboard.RIGHT = false;});
-
   document.getElementById("touchRight-helpBox").addEventListener("touchend", (e) => {e.preventDefault();keyboard.RIGHT = false;});
-
   document.getElementById("touchJump").addEventListener("touchstart", (e) => {e.preventDefault();keyboard.UP = true;});
-
   document.getElementById("touchJump-helpBox").addEventListener("touchstart", (e) => {e.preventDefault();keyboard.UP = true;});
-
   document.getElementById("touchJump").addEventListener("touchend", (e) => {e.preventDefault();keyboard.UP = false;});
-
   document.getElementById("touchJump-helpBox").addEventListener("touchend", (e) => {e.preventDefault();keyboard.UP = false;});
-
   document.getElementById("touchThrow").addEventListener("touchstart", (e) => {e.preventDefault();keyboard.SPACE = true;});
-
   document.getElementById("touchThrow-helpBox").addEventListener("touchstart", (e) => {e.preventDefault();keyboard.SPACE = true;});
-
   document.getElementById("touchThrow").addEventListener("touchend", (e) => {e.preventDefault();keyboard.SPACE = false;});
-
   document.getElementById("touchThrow-helpBox").addEventListener("touchend", (e) => {e.preventDefault();keyboard.SPACE = false;});
 }
 

@@ -23,6 +23,9 @@ class World {
     this.setWorld();
   }
 
+  /**
+   * Sets the world for the character.
+   */
   setWorld() {
     this.character.world = this;
   }
