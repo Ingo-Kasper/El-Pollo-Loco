@@ -172,14 +172,14 @@ h1 {
   display: none;
   padding: 0 32px 0 32px;
   justify-content: space-between;
-  margin-top: -46px;
+  margin-top: -60px;
 }
 
 .mobile-Touch-Button-Fullscreen {
   display: flex;
   padding: 0 32px 0 32px;
   justify-content: space-between;
-  margin-top: -138px;
+  margin-top: -160px;
 }
 
 .mobile-Touch-Button-Move {

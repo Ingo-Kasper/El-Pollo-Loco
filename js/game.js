@@ -35,6 +35,7 @@ function startGame() {
     document.getElementById("canvas").classList.remove("d-none");
     document.getElementById("overlayObject").classList.toggle("overlayObjectFullscreenStart");
     document.getElementById("overlayObject").classList.toggle("overlayObjectFullscreen");
+    document.getElementById("impressum").classList.add("d-none");
     inetLevel();
     initGame();
   } else {
@@ -42,6 +43,9 @@ function startGame() {
     document.getElementById("canvas").classList.remove("d-none");
     document.getElementById("overlayObject").classList.remove("overlayObject");
     document.getElementById("overlayObject").classList.add("overlayObjectPlay");
+    document.getElementById("impressum").classList.add("d-none");
+    document.getElementById("mobile-Touch-Button").classList.add("mobile-Touch-Button");
+    document.getElementById("mobile-Touch-Button").classList.remove("d-none");
     inetLevel();
     initGame();
   }
@@ -87,6 +91,7 @@ function finishGameByGameOver() {
   document.getElementById("lost").classList.remove("lostPage");
   document.getElementById("startPage").classList.remove("d-none");
   document.getElementById("canvas").classList.add("d-none");
+  document.getElementById("impressum").classList.remove("d-none");
 }
 
 /**
