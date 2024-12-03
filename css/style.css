@@ -217,8 +217,6 @@ h1 {
   display: none;
 }
 
-.impressum {}
-
 @font-face {
   font-family: "ambystomaMexicanum";
   src: url("../fonts/ambystomaMexicanum-VR7V.ttf") format("truetype");
